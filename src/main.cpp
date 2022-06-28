@@ -4,6 +4,8 @@
 
 #include "config.h"
 
+#include "player.h"
+
 int main() {
     // Raylib initialization
     // Project name, screen size, fullscreen mode etc. can be specified in the config.h.in file
@@ -17,7 +19,7 @@ int main() {
     // Your own initialization code here
     // ...
     // ...
-    Texture2D myTexture = LoadTexture("assets/graphics/testimage.png");
+    player Test;
 
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
@@ -25,14 +27,16 @@ int main() {
         // Updates that are made by frame are coded here
         // ...
         // ...
+        Test.Update();
 
         BeginDrawing();
             // You can draw on the screen between BeginDrawing() and EndDrawing()
             // ...
             // ...
             ClearBackground(WHITE);
-            DrawText("Hello, world!", 10, 10, 30, LIGHTGRAY);
-            DrawTexture(myTexture, 10, 100, WHITE);
+            DrawText("TestScene", 10, 10, 30, LIGHTGRAY);
+            DrawRectangleRec(Rectangle{ 0, 500, static_cast<float>(GetScreenWidth()), 40 }, BROWN);
+            Test.Render();
 
         EndDrawing();
     } // Main game loop end
@@ -40,7 +44,6 @@ int main() {
     // De-initialization here
     // ...
     // ...
-    UnloadTexture(myTexture);
 
     // Close window and OpenGL context
     CloseWindow();
