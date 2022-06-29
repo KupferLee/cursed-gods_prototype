@@ -6,10 +6,13 @@ class player
 public:
 	void Update();
 	void Render();
+	void CheckCollision(Rectangle);
 private:
-	bool bIsInAir = false;
+	bool bIsJumping = false;
 	bool bIsOnGround = false;
 	bool bIsMoving = false;
+	bool bIsColliding = true;
+	bool bCollidable = true;
 	int iSpeed = 10;
 	int iGravity = 10;
 	int iTimeInAir = 0;

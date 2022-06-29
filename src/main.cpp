@@ -1,4 +1,5 @@
 ﻿#include <cstdlib>
+#include <vector>
 
 #include "raylib.h"
 
@@ -35,7 +36,15 @@ int main() {
             // ...
             ClearBackground(WHITE);
             DrawText("TestScene", 10, 10, 30, LIGHTGRAY);
-            DrawRectangleRec(Rectangle{ 0, 500, static_cast<float>(GetScreenWidth()), 40 }, BROWN);
+            std::vector<Rectangle> Ground;
+            Ground.push_back(Rectangle{ 0, 500, static_cast<float>(GetScreenWidth()), 40 });
+            Ground.push_back(Rectangle{ 230, 400, 150, 20 });
+            Ground.push_back(Rectangle{ 420, 300, 150, 20 });
+            for (const auto& index : Ground)
+            {
+                DrawRectangleRec(index, LIGHTGRAY);
+                Test.CheckCollision(index);
+            }
             Test.Render();
 
         EndDrawing();

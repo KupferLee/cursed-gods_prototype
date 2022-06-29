@@ -6,34 +6,34 @@ void player::Update()
 	vNewPos.x -= iSpeed * static_cast<float>(IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT));
 	vNewPos.x += iSpeed * static_cast<float>(IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT));
 	vNewPos.y += iGravity;
-	if (IsKeyDown(KEY_SPACE) && !bIsInAir)
+	// vNewPos.y -= 2 * Gravity * static_cast<float>(IsKeyReleased(KEY_SPACE) || IsKeyReleased(KEY_UP))
+	if (IsKeyDown(KEY_SPACE) || IsKeyDown(KEY_UP) && bIsOnGround)
 	{
-		bIsInAir = true;
+		bIsJumping = true;
+		bIsOnGround = false;
 	}
-	if (bIsInAir && iJumpHeight >= iTimeInAir)
+	if (bIsJumping && iJumpHeight >= iTimeInAir)
 	{
 		vNewPos.y -= iGravity * 2;
 		iTimeInAir++;
 	}
-	if (IsKeyReleased(KEY_SPACE))
+	else
+	{
+		bIsJumping = false;
+	}
+	if (IsKeyReleased(KEY_SPACE) || IsKeyReleased(KEY_UP))
 	{
 		iTimeInAir = iJumpHeight + 1;
 	}
 
 
-	if (vNewPos.y >= 500 - 50)
+	if (bIsOnGround)
 	{
 		vPosition.x = vNewPos.x; //Vorlage Collision
-		bIsInAir = false;
+		
 		iTimeInAir = 0;
+		bIsOnGround = false;
 	}
-	/* else if (vNewPos.y <= 500 - 50 && bIsInAir == true)
-	{
-		vPosition.x = vNewPos.x;
-		vNewPos.y = vPosition.y + 1;
-		vPosition.y = vNewPos.y;
-	}
-	*/
 	else
 	{
 		vPosition = vNewPos;
@@ -43,4 +43,12 @@ void player::Update()
 void player::Render()
 {
 	DrawRectangleV(vPosition, {25, 50}, GREEN);
+}
+
+void player::CheckCollision(Rectangle rec)
+{
+	if (CheckCollisionRecs(rec, Rectangle{ vPosition.x, vPosition.y, 25, 50 }))
+	{
+		bIsOnGround = true;
+	}
 }
