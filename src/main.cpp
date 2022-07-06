@@ -28,7 +28,7 @@ int main() {
         // Updates that are made by frame are coded here
         // ...
         // ...
-        Test.Update();
+        auto deltaTime = GetFrameTime();
 
         BeginDrawing();
             // You can draw on the screen between BeginDrawing() and EndDrawing()
@@ -40,11 +40,11 @@ int main() {
             Ground.push_back(Rectangle{ 0, 500, static_cast<float>(GetScreenWidth()), 40 });
             Ground.push_back(Rectangle{ 230, 400, 150, 20 });
             Ground.push_back(Rectangle{ 420, 300, 150, 20 });
-            for (const auto& index : Ground)
-            {
-                DrawRectangleRec(index, LIGHTGRAY);
-                Test.CheckCollision(index);
-            }
+        for (const auto& index : Ground)
+        {
+            DrawRectangleRec(index,LIGHTGRAY);
+        }
+        Test.Update(deltaTime, Ground);
             Test.Render();
 
         EndDrawing();
