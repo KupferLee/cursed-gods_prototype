@@ -1,4 +1,5 @@
 #include "player.h"
+#include <iostream>
 
 void player::UpdatePlayer(float delta, std::vector<Rectangle> &Ground)
 {
@@ -7,7 +8,7 @@ void player::UpdatePlayer(float delta, std::vector<Rectangle> &Ground)
 	vNewPos.x += delta * iSpeed * static_cast<float>(IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT));
 	vNewPos.y += delta * iGravity;
 	// vNewPos.y -= 2 * Gravity * static_cast<float>(IsKeyReleased(KEY_SPACE) || IsKeyReleased(KEY_UP))
-	if (IsKeyDown(KEY_SPACE) || IsKeyDown(KEY_UP) && bCanJump)
+	if ((IsKeyDown(KEY_SPACE) || IsKeyDown(KEY_UP)) && bCanJump)
 	{
 		bIsJumping = true;
         bCanJump = false;
@@ -21,26 +22,26 @@ void player::UpdatePlayer(float delta, std::vector<Rectangle> &Ground)
 	{
 		iTimeInAir = iJumpHeight + 1;
 	}
+    bIsFalling = true;
     for (const auto& index : Ground)
     {
         if(CheckCollisionRecs(index, Rectangle{vNewPos.x, vNewPos.y + 50, 25, 0}))
         {
             if(vNewPos.y >= vPosition.y)
-            {bCanJump = true; bIsJumping = false; iTimeInAir = 0; bIsOnGround = true;}
-            else
-            {bCanJump = false;}
+            {bCanJump = true; bIsJumping = false; iTimeInAir = 0; bIsOnGround = true; bIsFalling = false;}
         }
         else if (CheckCollisionRecs(index, Rectangle{vNewPos.x, vNewPos.y, 25, 0}))
         {
             if (vNewPos.y < vPosition.y)
-            {
-                iTimeInAir = iJumpHeight + 1;
-            }
+            {iTimeInAir = iJumpHeight + 1;}
         }
-    }
+     }
+    if(bIsFalling == true)
+    {bCanJump = false;}
     if(!bIsOnGround)
     {vPosition.y = vNewPos.y;}
-    vPosition.x = vNewPos.x;
+    if(true)
+    { vPosition.x = vNewPos.x;}
     bIsOnGround = false;
 }
 
@@ -53,8 +54,8 @@ void player::Render() {
     RenderPlayer();
 }
 
-void player::Update(float a, std::vector<Rectangle> &Ground) {
-    UpdatePlayer(a, Ground);
+void player::Update(float a, std::vector<Rectangle> &b) {
+    UpdatePlayer(a, b);
 }
 
 void player::HandleInput() {

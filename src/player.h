@@ -13,6 +13,7 @@ private:
 	bool bIsJumping = false;
 	bool bIsOnGround = true;
     bool bCanJump = true;
+    bool bIsFalling = false;
 	int iSpeed = 300;
 	int iGravity = 300;
 	int iTimeInAir = 0;
