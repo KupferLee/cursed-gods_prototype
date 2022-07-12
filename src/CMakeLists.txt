@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-add_executable(${PROJECT_NAME} main.cpp "player.h" "player.cpp" GameObject.h Actor.h)
+add_executable(${PROJECT_NAME} main.cpp "player.h" "player.cpp" GameObject.h Actor.h StateBase.h StateTitle.cpp StateTitle.h StateLevel_1.cpp StateLevel_1.h StateBase.cpp)
 
 # Add config.h.in file
 configure_file(config.h.in config.h)
