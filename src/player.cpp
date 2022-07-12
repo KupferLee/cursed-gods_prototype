@@ -1,54 +1,63 @@
 #include "player.h"
+#include <iostream>
 
-void player::Update()
+void player::UpdatePlayer(float delta, std::vector<Rectangle> &Ground)
 {
 	Vector2 vNewPos = vPosition;
-	vNewPos.x -= iSpeed * static_cast<float>(IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT));
-	vNewPos.x += iSpeed * static_cast<float>(IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT));
-	vNewPos.y += iGravity;
+	vNewPos.x -= delta * iSpeed * static_cast<float>(IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT));
+	vNewPos.x += delta * iSpeed * static_cast<float>(IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT));
+	vNewPos.y += delta * iGravity;
 	// vNewPos.y -= 2 * Gravity * static_cast<float>(IsKeyReleased(KEY_SPACE) || IsKeyReleased(KEY_UP))
-	if (IsKeyDown(KEY_SPACE) || IsKeyDown(KEY_UP) && bIsOnGround)
+	if ((IsKeyDown(KEY_SPACE) || IsKeyDown(KEY_UP)) && bCanJump)
 	{
 		bIsJumping = true;
-		bIsOnGround = false;
+        bCanJump = false;
 	}
 	if (bIsJumping && iJumpHeight >= iTimeInAir)
 	{
-		vNewPos.y -= iGravity * 2;
+		vNewPos.y -= delta * iGravity * 2;
 		iTimeInAir++;
-	}
-	else
-	{
-		bIsJumping = false;
 	}
 	if (IsKeyReleased(KEY_SPACE) || IsKeyReleased(KEY_UP))
 	{
 		iTimeInAir = iJumpHeight + 1;
 	}
-
-
-	if (bIsOnGround)
-	{
-		vPosition.x = vNewPos.x; //Vorlage Collision
-		
-		iTimeInAir = 0;
-		bIsOnGround = false;
-	}
-	else
-	{
-		vPosition = vNewPos;
-	}
+    bIsFalling = true;
+    for (const auto& index : Ground)
+    {
+        if(CheckCollisionRecs(index, Rectangle{vNewPos.x, vNewPos.y + 50, 25, 0}))
+        {
+            if(vNewPos.y >= vPosition.y)
+            {bCanJump = true; bIsJumping = false; iTimeInAir = 0; bIsOnGround = true; bIsFalling = false;}
+        }
+        else if (CheckCollisionRecs(index, Rectangle{vNewPos.x, vNewPos.y, 25, 0}))
+        {
+            if (vNewPos.y < vPosition.y)
+            {iTimeInAir = iJumpHeight + 1;}
+        }
+     }
+    if(bIsFalling == true)
+    {bCanJump = false;}
+    if(!bIsOnGround)
+    {vPosition.y = vNewPos.y;}
+    if(true)
+    { vPosition.x = vNewPos.x;}
+    bIsOnGround = false;
 }
 
-void player::Render()
+void player::RenderPlayer()
 {
 	DrawRectangleV(vPosition, {25, 50}, GREEN);
 }
 
-void player::CheckCollision(Rectangle rec)
-{
-	if (CheckCollisionRecs(rec, Rectangle{ vPosition.x, vPosition.y, 25, 50 }))
-	{
-		bIsOnGround = true;
-	}
+void player::Render() {
+    RenderPlayer();
+}
+
+void player::Update(float a, std::vector<Rectangle> &b) {
+    UpdatePlayer(a, b);
+}
+
+void player::HandleInput() {
+
 }

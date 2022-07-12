@@ -1,21 +1,22 @@
 #pragma once
-#include <raylib.h>
+#include "Actor.h"
 
-class player
+class player : public Actor
 {
 public:
-	void Update();
-	void Render();
-	void CheckCollision(Rectangle);
+    void HandleInput() override;
+    void Update(float, std::vector<Rectangle> &) override;
+	void Render() override;
+    void UpdatePlayer(float, std::vector<Rectangle> &);
+    void RenderPlayer();
 private:
 	bool bIsJumping = false;
-	bool bIsOnGround = false;
-	bool bIsMoving = false;
-	bool bIsColliding = true;
-	bool bCollidable = true;
-	int iSpeed = 10;
-	int iGravity = 10;
+	bool bIsOnGround = true;
+    bool bCanJump = true;
+    bool bIsFalling = false;
+	int iSpeed = 300;
+	int iGravity = 300;
 	int iTimeInAir = 0;
-	int iJumpHeight = 20;
-	Vector2 vPosition = { 0, 450};// Hrdcoded weil test TExture ein Raylib kreis ist
+	int iJumpHeight = 30;
+	Vector2 vPosition = { 0, 450};// Hardcoded weil test Texture ein Raylib Kreis ist
 };
