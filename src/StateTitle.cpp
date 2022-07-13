@@ -4,19 +4,26 @@
 
 #include "StateTitle.h"
 
-int StateTitle::handleInput()
+void StateTitle::handleInput()
 {
     // change to level 1
     if (IsKeyPressed(KEY_ENTER))
     {
-        return this->level_1;
+        return new StateTitle;
+    }
+    else
+    {
+        return NULL;
     }
 }
+/*
 void StateTitle::changeState(int i)
 {
+    // change state
     if (i == this->level_1)
     {
 
     }
 }
 
+ */

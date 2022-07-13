@@ -5,5 +5,17 @@
 
 void StateBase::update()
 {
-    this->changeState(this->handleInput());
+
+    // this->changeState(this->handleInput());
+}
+
+void StateBase::handleInput()
+{
+    // ???????????
+    StateBase* state = state_->handleInput();
+    if (state != NULL)
+    {
+        delete state_;
+        state_ = state;
+    }
 }

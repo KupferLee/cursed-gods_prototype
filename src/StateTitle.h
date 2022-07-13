@@ -6,16 +6,15 @@
 #define RAYLIBSTARTER_STATETITLE_H
 
 #include "StateBase.h"
-#include "StateLevel_1.h"
-#include <memory>
+
 
 class StateTitle : public StateBase {
 
 protected:
-    std::shared_ptr <StateBase> state;
+    // std::shared_ptr <StateBase> state_;
 
-    int handleInput() override;
-    void changeState(int i) override;
+    void handleInput() override;
+    // void changeState(int i) override;
 
 };
 

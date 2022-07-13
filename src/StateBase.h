@@ -8,19 +8,32 @@
 #pragma once
 
 #include "raylib.h"
+#include "StateTitle.h"
+#include "StateLevel_1.h"
+#include <memory>
 
 class StateBase
 {
-protected:
+public:
+    virtual ~StateBase() {};
+
     enum enumState { title, fight, level_1};
     enumState currentState = title;
 
-    virtual int handleInput(); // asks for user input
-    virtual void changeState(int i); // changes state to enum that is said
+    virtual void handleInput();
+
+    // virtual void changeState(int i); // changes state to enum that is said
 
     //virtual int returnCurrentState(); // return int for enum for current state
 
     virtual void update();
+
+    StateTitle stateTitle;
+    StateLevel_1 stateLevel1;
+
+private:
+    StateBase* state_;
+
 };
 
 #endif //RAYLIBSTARTER_STATEBASE_H
