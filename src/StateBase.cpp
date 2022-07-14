@@ -3,12 +3,6 @@
 //
 #include "StateBase.h"
 
-void StateBase::update()
-{
-
-    // this->changeState(this->handleInput());
-}
-
 void StateBase::handleInput()
 {
     // ???????????

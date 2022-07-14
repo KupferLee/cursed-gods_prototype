@@ -14,7 +14,7 @@ protected:
     // std::shared_ptr <StateBase> state_;
 
     void handleInput() override;
-    // void changeState(int i) override;
+    void update() override;
 
 };
 

@@ -9,21 +9,16 @@ void StateTitle::handleInput()
     // change to level 1
     if (IsKeyPressed(KEY_ENTER))
     {
-        return new StateTitle;
+        return new StateTitle();
     }
     else
     {
         return NULL;
     }
 }
-/*
-void StateTitle::changeState(int i)
+
+void StateTitle::update()
 {
-    // change state
-    if (i == this->level_1)
-    {
-
-    }
+    ClearBackground(GRAY);
+    DrawText("Title Screen", 10, 10, 20, DARKGRAY);
 }
-
- */

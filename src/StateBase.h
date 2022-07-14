@@ -21,11 +21,6 @@ public:
     enumState currentState = title;
 
     virtual void handleInput();
-
-    // virtual void changeState(int i); // changes state to enum that is said
-
-    //virtual int returnCurrentState(); // return int for enum for current state
-
     virtual void update();
 
     StateTitle stateTitle;
