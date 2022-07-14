@@ -21,6 +21,12 @@ int main() {
     // ...
     // ...
     player Test;
+    std::vector<Rectangle> Ground;
+
+    // enum for changing gamestates
+    // default for title
+    enum GameState {state_title, state_level1, state_fight};
+    GameState gameState = state_title;
 
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
@@ -30,22 +36,73 @@ int main() {
         // ...
         auto deltaTime = GetFrameTime();
 
+        switch (gameState)
+        {
+            case (state_title):
+                if (IsKeyPressed(KEY_ENTER))
+                {
+                    gameState = state_level1;
+                }
+                break;
+
+            case (state_level1):
+                if (IsKeyPressed(KEY_ENTER))
+                {
+                    gameState = state_title;
+                }
+                if (IsKeyPressed(KEY_F))
+                {
+                    gameState = state_fight;
+                }
+                break;
+
+            case (state_fight):
+                if (IsKeyPressed(KEY_F))
+                {
+                    gameState = state_level1;
+                }
+                break;
+            default:
+                break;
+        }
+
         BeginDrawing();
             // You can draw on the screen between BeginDrawing() and EndDrawing()
             // ...
             // ...
-            ClearBackground(WHITE);
-            DrawText("TestScene", 10, 10, 30, LIGHTGRAY);
-            std::vector<Rectangle> Ground;
-            Ground.push_back(Rectangle{ 0, 500, static_cast<float>(GetScreenWidth()), 40 });
-            Ground.push_back(Rectangle{ 230, 400, 150, 20 });
-            Ground.push_back(Rectangle{ 420, 300, 150, 20 });
-        for (const auto& index : Ground)
-        {
-            DrawRectangleRec(index,LIGHTGRAY);
-        }
-        Test.Update(deltaTime, Ground);
-            Test.Render();
+
+            switch(gameState)
+            {
+                case (state_title):
+                    ClearBackground(WHITE);
+                    DrawText("Title", 10, 10, 30, LIGHTGRAY);
+                    DrawText("Press Enter to start Level 1.", 10, 40, 30, LIGHTGRAY);
+                    break;
+
+                case (state_level1):
+                    ClearBackground(WHITE);
+                    DrawText("Level 1", 10, 10, 30, LIGHTGRAY);
+                    DrawText("Press F to start fight.", 10, 40, 30, LIGHTGRAY);
+                    Ground.push_back(Rectangle{0, 500, static_cast<float>(GetScreenWidth()), 40});
+                    Ground.push_back(Rectangle{230, 400, 150, 20});
+                    Ground.push_back(Rectangle{420, 300, 150, 20});
+                    for (const auto &index: Ground) {
+                        DrawRectangleRec(index, LIGHTGRAY);
+                    }
+                    Test.Update(deltaTime, Ground);
+                    Test.Render();
+                    break;
+
+                case (state_fight):
+                    ClearBackground(WHITE);
+                    DrawText("Fight", 10, 10, 30, LIGHTGRAY);
+                    DrawText("Press F to return to Level 1.", 10, 40, 30, LIGHTGRAY);
+                    break;
+
+                default:
+                    break;
+
+            }
 
         EndDrawing();
     } // Main game loop end
