@@ -2,13 +2,15 @@
 
 include(../cmake/raylib.cmake)
 
+include(../cmake/nlohmann_json.cmake)
+
 project(game VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-add_executable(${PROJECT_NAME} main.cpp "player.h" "player.cpp" GameObject.h Actor.h)
+add_executable(${PROJECT_NAME} main.cpp player.h player.cpp GameObject.h Actor.h ProtectedTexture.cpp ProtectedTexture.h ProtectedTileset.cpp ProtectedTileset.h)
 
 # Add config.h.in file
 configure_file(config.h.in config.h)
@@ -17,7 +19,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
         )
 
 #  Link to Raylib
-target_link_libraries(${PROJECT_NAME} raylib)
+target_link_libraries(${PROJECT_NAME} raylib nlohmann_json::nlohmann_json)
 
 # Copy assets to assets path
 add_custom_target(copy_assets
