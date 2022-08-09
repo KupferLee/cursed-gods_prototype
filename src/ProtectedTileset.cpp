@@ -14,8 +14,7 @@
 
 //explicit constructor to stream json data and getting the vectors for the mapdescription
 //default- and copy-constructor are deleted
-ProtectedTileset::ProtectedTileset(const char *filename):
-        file_(),tileAtlas_(),hitboxes_(), triggerboxes_(),description_()
+ProtectedTileset::ProtectedTileset(const char *filename)
 {
     this->file_.open(filename);
 
@@ -29,7 +28,7 @@ ProtectedTileset::ProtectedTileset(const char *filename):
     this->file_ >> this->description_;
     this->file_.close();
 
-    columns_ = description_["columns"];
+    columns_ = 17;
     tilesX_ = description_["width"];
     tilesY_ = description_["height"];
 
@@ -43,7 +42,7 @@ ProtectedTileset::ProtectedTileset(const char *filename):
                 this->tileAtlas_.push_back(static_cast<int>(tileId.get<int>()));
             }
         }
-        if (layer["type"] == "objectgroup" && layer["name"] == "Triggerbox_Treppe")
+       if (layer["type"] == "objectgroup" && layer["name"] == "Triggerbox_Treppe")
         {
             for (auto const &object: layer["objects"])
             {

@@ -6,6 +6,7 @@ class player : public Actor
 public:
     void HandleInput() override;
     void Update(float, std::vector<Rectangle> &) override;
+    void Update() override;
 	void Render() override;
     void UpdatePlayer(float, std::vector<Rectangle> &);
     void RenderPlayer();

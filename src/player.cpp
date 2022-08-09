@@ -61,3 +61,7 @@ void player::Update(float a, std::vector<Rectangle> &b) {
 void player::HandleInput() {
 
 }
+
+void player::Update() {
+
+}
