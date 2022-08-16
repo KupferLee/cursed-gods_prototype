@@ -9,6 +9,7 @@
 #include "InventoryTemplate.h"
 #include "item_base.h"
 #include "item_ring.h"
+#include "item_sword.h"
 
 
 class Inventory : public GameObject {
@@ -23,6 +24,7 @@ protected:
 
     // inventory container
     item_ring* itemRing = new item_ring;
+    item_sword* itemSword = new item_sword;
     Inventory_Template<item_base*, 4> inventoryContainer;
 
     int currentItem = 0;

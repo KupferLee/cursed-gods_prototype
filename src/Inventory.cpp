@@ -38,6 +38,11 @@ void Inventory::Update()
     {
         itemAdd(itemRing);
     }
+
+    if(IsKeyPressed(KEY_J))
+    {
+        itemAdd(itemSword);
+    }
 }
 
 void Inventory::Render()
