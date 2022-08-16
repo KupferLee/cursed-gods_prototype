@@ -2,6 +2,13 @@
 #include "Actor.h"
 #include "raymath.h"
 
+enum class Animation
+{
+    Idle,
+    RunRight,
+    RunLeft
+};
+
 class player : public Actor
 {
 public:
@@ -11,8 +18,17 @@ public:
 	void Render() override;
     void UpdatePlayer(float, std::vector<Rectangle> &);
     void RenderPlayer();
+    void SetNextFrame();
 
 private:
+    //animation shit
+    Texture2D Frames = LoadTexture("assets/graphics/Actors/katara_animations.png");
+    float TilecountX = 8;
+    float TilecountY = 4;
+    float FrameDuration = 0.11;
+    float Frametime = 0;
+    Animation Animation;
+    int frame;
 
     //states
     bool bIsWalking = false;
