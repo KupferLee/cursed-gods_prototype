@@ -48,6 +48,9 @@ int main() {
                 break;
 
             case (state_level1):
+                inventory->Update();
+
+                // State Wechsel
                 if (IsKeyPressed(KEY_ENTER))
                 {
                     gameState = state_title;

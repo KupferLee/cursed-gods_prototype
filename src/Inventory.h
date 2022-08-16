@@ -12,6 +12,8 @@ class Inventory : public GameObject {
 protected:
     Texture2D texture;
 
+    bool isOpen = false;
+
 public:
     void Update() override;
     void Update(float, std::vector<Rectangle> &) override;
