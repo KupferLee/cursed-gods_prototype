@@ -17,6 +17,8 @@ class item_base {
 protected:
     std::string name;
     std::string description;
+
+public:
     Texture2D texture;
     // things all items will have
 };
