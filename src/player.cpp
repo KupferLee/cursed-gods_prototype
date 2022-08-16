@@ -61,6 +61,7 @@ void player::UpdatePlayer(float delta, std::vector<Rectangle> &Ground)
 	{
 		Momentum = Vector2Add(Momentum, Vector2{0, fGravity});
     }
+    //Momentum für Animationswechsel benutzen
     vNewPos = Vector2Add(vPosition, Momentum);
 
     bIsInAir = true;
