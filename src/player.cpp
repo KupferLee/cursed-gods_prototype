@@ -118,5 +118,23 @@ void player::Update() {
 }
 
 void player::SetNextFrame() {
-frame = frame + 1 % static_cast<int>(TilecountX);
+switch(Animation) {
+    case(Animation::Idle):
+        frame = frame + 1 % static_cast<int>(TilecountX);
+        break;
+    case(Animation::RunRight):
+        frame = frame + 1 % static_cast<int>(TilecountX);
+        break;
+    case(Animation::RunLeft):
+        frame = frame + 1 % static_cast<int>(TilecountX);
+        break;
+    case(Animation::JumpRight):
+        frame = frame + 1 % static_cast<int>(3);
+        break;
+    case(Animation::JumpLeft):
+        frame = frame + 1 % static_cast<int>(3);
+        break;
+    default: frame = 0;
+        break;
+}
 }

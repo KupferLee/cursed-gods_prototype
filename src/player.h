@@ -6,7 +6,9 @@ enum class Animation
 {
     Idle,
     RunRight,
-    RunLeft
+    RunLeft,
+    JumpRight,
+    JumpLeft
 };
 
 class player : public Actor
