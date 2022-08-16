@@ -1,0 +1,14 @@
+{ "columns":14,
+ "image":"tilesets\/canyon-tileset.png",
+ "imageheight":160,
+ "imagewidth":224,
+ "margin":0,
+ "name":"canyon-tileset",
+ "spacing":0,
+ "tilecount":140,
+ "tiledversion":"1.8.5",
+ "tileheight":16,
+ "tilewidth":16,
+ "type":"tileset",
+ "version":"1.8"
+}
