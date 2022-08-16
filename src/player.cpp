@@ -3,41 +3,79 @@
 
 void player::UpdatePlayer(float delta, std::vector<Rectangle> &Ground)
 {
+    bIsWalking = false;
 	Vector2 vNewPos = vPosition;
-	vNewPos.x -= delta * iSpeed * static_cast<float>(IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT));
-	vNewPos.x += delta * iSpeed * static_cast<float>(IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT));
-	vNewPos.y += delta * iGravity;
+	//vNewPos.y += delta * fGravity;
 	// vNewPos.y -= 2 * Gravity * static_cast<float>(IsKeyReleased(KEY_SPACE) || IsKeyReleased(KEY_UP))
-	if ((IsKeyDown(KEY_SPACE) || IsKeyDown(KEY_UP)) && bCanJump)
+    if (IsKeyDown( KEY_A) || IsKeyDown( KEY_LEFT))
+    {
+        Momentum.x -= fSideAcc;
+        bIsWalking = true;
+    }
+    if (IsKeyDown( KEY_D) || IsKeyDown( KEY_RIGHT))
+    {
+        Momentum.x += fSideAcc;
+        bIsWalking = true;
+    }
+    if (bIsWalking)
+    {
+        if(Momentum.x > fMaxSpeed)
+        {
+            Momentum.x = fMaxSpeed;
+        }
+        if(Momentum.x < -fMaxSpeed)
+        {
+            Momentum.x = -fMaxSpeed;
+        }
+    }
+    else
+    {
+        Momentum.x *= fFriction;
+    }
+
+    if ((IsKeyDown(KEY_SPACE) || IsKeyDown(KEY_UP)) && !bIsInAir)
 	{
-		bIsJumping = true;
-        bCanJump = false;
+        Momentum = Vector2Add(Momentum, Vector2{0, fJumpAcc/2}); //Y-Achsenabschnitt ableitung 1 //floatcast important
+        iJumpFrames++;
 	}
-	if (bIsJumping && iJumpHeight >= iTimeInAir)
+    if(IsKeyDown(KEY_SPACE) || IsKeyDown(KEY_UP))
+    {
+        if(iJumpFrames < iMaxJumpFrames)
+        {
+            iJumpFrames++;
+        }
+        else if(iJumpFrames == iMaxJumpFrames)
+        {
+            Momentum = Vector2Add(Momentum, Vector2{0, fJumpAcc/2});
+            iJumpFrames++;
+        }
+    }
+    if(IsKeyReleased(KEY_SPACE) || IsKeyReleased(KEY_UP))
+    {
+        iJumpFrames = iMaxJumpFrames +1;
+    }
+	if (bIsInAir)
 	{
-		vNewPos.y -= delta * iGravity * 2;
-		iTimeInAir++;
+		Momentum = Vector2Add(Momentum, Vector2{0, fGravity});
 	}
-	if (IsKeyReleased(KEY_SPACE) || IsKeyReleased(KEY_UP))
-	{
-		iTimeInAir = iJumpHeight + 1;
-	}
-    bIsFalling = true;
+    vNewPos = Vector2Add(vPosition, Momentum);
+
+    bIsInAir = true;
+
     for (const auto& index : Ground)
     {
         if(CheckCollisionRecs(index, Rectangle{vNewPos.x, vNewPos.y + 50, 25, 0}))
         {
             if(vNewPos.y >= vPosition.y)
-            {bCanJump = true; bIsJumping = false; iTimeInAir = 0; bIsOnGround = true; bIsFalling = false;}
+            {bIsInAir = false; Momentum.y = 0; bIsOnGround = true; iJumpFrames = 0;}
         }
         else if (CheckCollisionRecs(index, Rectangle{vNewPos.x, vNewPos.y, 25, 0}))
         {
             if (vNewPos.y < vPosition.y)
-            {iTimeInAir = iJumpHeight + 1;}
+            {Momentum.y = 0;}
         }
      }
-    if(bIsFalling == true)
-    {bCanJump = false;}
+
     if(!bIsOnGround)
     {vPosition.y = vNewPos.y;}
     if(true)
@@ -59,5 +97,9 @@ void player::Update(float a, std::vector<Rectangle> &b) {
 }
 
 void player::HandleInput() {
+
+}
+
+void player::Update() {
 
 }
