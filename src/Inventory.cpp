@@ -38,6 +38,8 @@ void Inventory::Render()
 
 }
 
+// add any item to the inventory that is an array
+// then go one slot further in the array
 void Inventory::itemAdd(item_base *item)
 {
     if (this->currentItem < 4)
@@ -46,7 +48,12 @@ void Inventory::itemAdd(item_base *item)
 
         this->currentItem++;
     }
+    else
+    {
+        std::cout << "DEBUG: Inventory full." << std::endl;
+    }
 }
 
-void Inventory::HandleInput() {     }
-void Inventory::Update(float, std::vector<Rectangle> &) {   }
+void Inventory::HandleInput() { }
+
+void Inventory::Update(float, std::vector<Rectangle> &) { }
