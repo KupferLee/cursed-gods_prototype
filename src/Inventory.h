@@ -21,7 +21,7 @@ protected:
     item_ring* itemRing = new item_ring;
     Inventory_Template<item_base*, 4> inventoryContainer;
 
-    int currentItem;
+    int currentItem = 0;
     void itemAdd(item_base* item);
 
 
