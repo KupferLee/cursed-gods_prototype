@@ -6,6 +6,7 @@
 #include "config.h"
 
 #include "player.h"
+#include "Inventory.h"
 
 int main() {
     // Raylib initialization
@@ -20,6 +21,7 @@ int main() {
     // Your own initialization code here
     // ...
     // ...
+    Inventory* inventory = new Inventory;
     player Test;
     std::vector<Rectangle> Ground;
 
@@ -91,6 +93,8 @@ int main() {
                     }
                     Test.Update(deltaTime, Ground);
                     Test.Render();
+
+                    inventory->Render();
                     break;
 
                 case (state_fight):
