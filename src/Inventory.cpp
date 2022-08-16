@@ -56,9 +56,9 @@ void Inventory::Render()
     {
         if (this->currentItem > i)
         {
-            DrawTexturePro(this->inventoryContainer.getItem(i)->texture,
-                           {0, 0, (float)this->inventoryContainer.getItem(i)->texture.width, (float)this->inventoryContainer.getItem(i)->texture.height},
-                           {slotPosition[i].x, slotPosition[i].y, (float)this->inventoryContainer.getItem(i)->texture.width*this->scaleFactor, (float)this->inventoryContainer.getItem(i)->texture.height*this->scaleFactor},
+            DrawTexturePro(this->inventoryContainer.getItem(i)->GetTexture(),
+                           {0, 0, (float)this->inventoryContainer.getItem(i)->GetTexture().width, (float)this->inventoryContainer.getItem(i)->GetTexture().height},
+                           {slotPosition[i].x, slotPosition[i].y, (float)this->inventoryContainer.getItem(i)->GetTexture().width*this->scaleFactor, (float)this->inventoryContainer.getItem(i)->GetTexture().height*this->scaleFactor},
                            {0, 0}, 0, WHITE);
         }
         // this->slotOffset = this->slotOffset + textureRing.height;
