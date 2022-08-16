@@ -7,19 +7,18 @@ void player::UpdatePlayer(float delta, std::vector<Rectangle> &Ground)
     bIsWalking = false;
     Animation = Animation::Idle;
 	Vector2 vNewPos = vPosition;
-	//vNewPos.y += delta * fGravity;
-	// vNewPos.y -= 2 * Gravity * static_cast<float>(IsKeyReleased(KEY_SPACE) || IsKeyReleased(KEY_UP))
+
     if (IsKeyDown( KEY_A) || IsKeyDown( KEY_LEFT))
     {
         Momentum.x -= fSideAcc;
         bIsWalking = true;
-        Animation = Animation::RunLeft;
+        Animation= Animation::RunLeft;
     }
     if (IsKeyDown( KEY_D) || IsKeyDown( KEY_RIGHT))
     {
         Momentum.x += fSideAcc;
         bIsWalking = true;
-        Animation = Animation::RunRight;
+        Animation= Animation::RunRight;
     }
     if (bIsWalking)
     {
@@ -61,7 +60,7 @@ void player::UpdatePlayer(float delta, std::vector<Rectangle> &Ground)
 	if (bIsInAir)
 	{
 		Momentum = Vector2Add(Momentum, Vector2{0, fGravity});
-	}
+    }
     vNewPos = Vector2Add(vPosition, Momentum);
 
     bIsInAir = true;
@@ -81,9 +80,14 @@ void player::UpdatePlayer(float delta, std::vector<Rectangle> &Ground)
      }
 
     if(!bIsOnGround)
-    {vPosition.y = vNewPos.y;}
+    {
+        vPosition.y = vNewPos.y;
+    }
+
     if(true)
-    { vPosition.x = vNewPos.x;}
+    {
+        vPosition.x = vNewPos.x;
+    }
     bIsOnGround = false;
 
 //animation
@@ -121,18 +125,23 @@ void player::SetNextFrame() {
 switch(Animation) {
     case(Animation::Idle):
         frame = frame + 1 % static_cast<int>(TilecountX);
+        FrameDuration = 0.14;
         break;
     case(Animation::RunRight):
         frame = frame + 1 % static_cast<int>(TilecountX);
+        FrameDuration = 0.11;
         break;
     case(Animation::RunLeft):
         frame = frame + 1 % static_cast<int>(TilecountX);
+        FrameDuration = 0.11;
         break;
     case(Animation::JumpRight):
-        frame = frame + 1 % static_cast<int>(3);
+        frame = (frame + 1) % 3;
+        FrameDuration = 0.33;
         break;
     case(Animation::JumpLeft):
-        frame = frame + 1 % static_cast<int>(3);
+        frame = (frame + 1) % 3;
+        FrameDuration = 0.33;
         break;
     default: frame = 0;
         break;
