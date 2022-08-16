@@ -10,8 +10,9 @@ Inventory::Inventory()
     this->textureRing = LoadTexture("assets/graphics/UI/Slot_Ring.png");
 
     // assign x and y position for every slot
-    this->slotPosition[0].x = GetScreenWidth()/2 - this->textureRing.width * scaleFactor;
-    this->slotPosition[0].y = GetScreenHeight()/2 - this->textureRing.height * this->scaleFactor;
+    // currently putting -90 is a quick and dirty solution only for the Platzhalter
+    this->slotPosition[0].x = GetScreenWidth()/2 - this->textureRing.width * scaleFactor - 80;
+    this->slotPosition[0].y = GetScreenHeight()/2 - this->textureRing.height * this->scaleFactor - 90;
 
     this->slotPosition[1].x = this->slotPosition[0].x;
     this->slotPosition[1].y = this->slotPosition[0].y + this->textureRing.height * this->scaleFactor;
