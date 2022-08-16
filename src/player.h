@@ -26,7 +26,7 @@ private:
     //animation shit
     Texture2D Frames = LoadTexture("assets/graphics/Actors/katara_animations.png");
     float TilecountX = 8;
-    float TilecountY = 4;
+    float TilecountY = 9;
     float FrameDuration = 0.11;
     float Frametime = 0;
     Animation Animation;
