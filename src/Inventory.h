@@ -14,7 +14,11 @@
 class Inventory : public GameObject {
 protected:
     Texture2D texture;
+    Texture2D textureRing;
 
+    Vector2 slotPosition[4]; // to determine x and y value for the slots
+
+    int scaleFactor = 2;
     bool isOpen = false;
 
     // inventory container
