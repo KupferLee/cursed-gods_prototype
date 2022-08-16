@@ -101,5 +101,4 @@ void player::HandleInput() {
 }
 
 void player::Update() {
-
 }
