@@ -9,8 +9,6 @@ Inventory::Inventory()
     this->texture = LoadTexture("assets/graphics/UI/Inventory_Base_Platzhalter.png");
 }
 
-void Inventory::Update(float, std::vector<Rectangle> &) {   }
-
 void Inventory::Update()
 {
     if (IsKeyPressed(KEY_I) && isOpen == false)
@@ -20,6 +18,11 @@ void Inventory::Update()
     else if (IsKeyPressed(KEY_I) && isOpen == true)
     {
         isOpen = false;
+    }
+
+    if(IsKeyPressed(KEY_K))
+    {
+        itemAdd(itemRing);
     }
 }
 
@@ -35,4 +38,15 @@ void Inventory::Render()
 
 }
 
+void Inventory::itemAdd(item_base *item)
+{
+    if (this->currentItem < 4)
+    {
+        inventoryContainer.setItem(item, this->currentItem);
+
+        this->currentItem++;
+    }
+}
+
 void Inventory::HandleInput() {     }
+void Inventory::Update(float, std::vector<Rectangle> &) {   }
