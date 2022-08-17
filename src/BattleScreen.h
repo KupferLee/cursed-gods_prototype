@@ -28,7 +28,7 @@ public:
     BattleScreen();
 
     void Update() override;
-    void Update(float, std::vector<Rectangle> &) override;
+    void Update(float) override;
     void Render() override;
     void HandleInput() override;
 };

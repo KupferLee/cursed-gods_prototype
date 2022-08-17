@@ -88,6 +88,6 @@ void BattleScreen::SetSlots()
     this->buttonSlots[3].y = this->buttonSlots[2].y;
 }
 
-void BattleScreen::Update(float, std::vector<Rectangle> &) { }
+void BattleScreen::Update(float) { }
 
 void BattleScreen::HandleInput() { }
