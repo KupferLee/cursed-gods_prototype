@@ -11,6 +11,7 @@
 #include "ProtectedTexture.h"
 #include "ProtectedTileset.h"
 #include "Inventory.h"
+#include "BattleScreen.h"
 
 int main() {
     // Raylib initialization
@@ -26,12 +27,15 @@ int main() {
     // ...
     // ...
     Inventory inventory;
-
+    
+    BattleScreen fightScreen;
+    player Test;
+    std::vector<Rectangle> Ground;
+    
     const char* mapTexture = "assets/graphics/Map/Test-LevelGit.png"; //columns = 14
     const char* mapDescription = "assets/graphics/Map/THIS.json";
     std::shared_ptr<ProtectedTexture> mapTex = std::make_shared<ProtectedTexture>(mapTexture);
     std::shared_ptr<ProtectedTileset> description = std::make_shared<ProtectedTileset>(mapDescription);
-
 
 
     // enum for changing gamestates
@@ -62,11 +66,13 @@ int main() {
                 inventory.Update();
 
                 // State Wechsel
-                if (IsKeyPressed(KEY_ENTER))
+                // if in options und press enter
+                if (IsKeyPressed(KEY_ENTER) && inventory.GetCurrentState() == 2)
                 {
                     gameState = state_title;
                 }
-                if (IsKeyPressed(KEY_F))
+                // if inventory not open then change to fight on key
+                if (IsKeyPressed(KEY_F) && inventory.IsOpen() == false)
                 {
                     gameState = state_fight;
                 }
@@ -77,6 +83,9 @@ int main() {
                 {
                     gameState = state_level1;
                 }
+
+                fightScreen.Update();
+
                 break;
             default:
                 break;
@@ -112,6 +121,7 @@ int main() {
                     ClearBackground(WHITE);
                     DrawText("Fight", 10, 10, 30, LIGHTGRAY);
                     DrawText("Press F to return to Level 1.", 10, 40, 30, LIGHTGRAY);
+                    fightScreen.Render();
                     break;
 
                 default:
