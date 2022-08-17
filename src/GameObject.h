@@ -9,6 +9,7 @@
 
 
 class GameObject {
+
 public: virtual void HandleInput() = 0;
         virtual void Update(float, std::vector<Rectangle> &) = 0;
         virtual void Update() = 0;

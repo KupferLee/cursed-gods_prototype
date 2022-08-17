@@ -50,8 +50,10 @@ void Scene::HandleInputScene() {
         if (this->tileAtlas_->getTileAtlas().at(i) != 0)
         {
             this->recs_.push_back({this->tileAtlas_->getTileAtlas().at(i) - 1 %
-                                                                            this->tileAtlas_->getColumns()
-                                                                            * this->rec_.width,
+
+                                           this->tileAtlas_->getColumns()
+                                            * this->rec_.width,
+
                                    floor(static_cast<float> (this->tileAtlas_->getTileAtlas().at(i) - 1)
                                          / static_cast<float>(this->tileAtlas_->getColumns()))
                                    * this->rec_.width});
