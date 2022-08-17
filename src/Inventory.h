@@ -14,6 +14,9 @@
 
 class Inventory : public GameObject {
 protected:
+    enum MenuState {None, Items, Options, Character };
+    MenuState menuState = None;
+
     Texture2D texture;
     Texture2D textureRing;
 

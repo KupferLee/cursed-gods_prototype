@@ -26,13 +26,13 @@ Inventory::Inventory()
 
 void Inventory::Update()
 {
-    if (IsKeyPressed(KEY_I) && isOpen == false)
+    if (IsKeyPressed(KEY_I) && menuState == None)
     {
-        isOpen = true;
+        menuState = Items;
     }
-    else if (IsKeyPressed(KEY_I) && isOpen == true)
+    else if (IsKeyPressed(KEY_I) && menuState == Items || menuState == Character || menuState == Options)
     {
-        isOpen = false;
+        menuState = None;
     }
 
     if(IsKeyPressed(KEY_K))
@@ -49,7 +49,7 @@ void Inventory::Update()
 void Inventory::Render()
 {
     // draw Inventory
-    if (isOpen == true)
+    if (menuState == Items)
     {
         DrawTexturePro(this->texture,
                        {0, 0, (float)this->texture.width, (float)this->texture.height},
