@@ -3,8 +3,3 @@
 //
 
 #include "BattleActor.h"
-
-void BattleActor::Attack(attack currentAttack)
-{
-
-}

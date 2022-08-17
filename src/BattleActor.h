@@ -24,8 +24,8 @@ struct attack
 
 class BattleActor : public Actor {
 public:
-    virtual void GetCurrentAttack();
-    virtual void Attack(attack currentAttack);
+    // virtual void GetCurrentAttack();
+    // virtual void Attack(attack currentAttack);
 
 protected:
 
