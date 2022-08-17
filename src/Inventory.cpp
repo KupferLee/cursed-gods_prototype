@@ -6,7 +6,10 @@
 
 Inventory::Inventory()
 {
-    this->texture = LoadTexture("assets/graphics/UI/Inventory_Base_Platzhalter.png");
+    this->textureInventoryBase = LoadTexture("assets/graphics/UI/Inventory_Base_Platzhalter.png");
+    this->textureOptionsBase = LoadTexture("assets/graphics/UI/Options_Base_Platzhalter.png");
+    this->textureCharacterspriteBase = LoadTexture("assets/graphics/UI/Charactersprite_Base_Platzhalter.png");
+
     this->textureRing = LoadTexture("assets/graphics/UI/Slot_Ring.png");
 
     // assign x and y position for every slot
@@ -52,7 +55,7 @@ void Inventory::Update()
         menuState = Items;
     }
     // close
-    else if (IsKeyPressed(KEY_I) && menuState == Items || menuState == Character || menuState == Options)
+    else if (IsKeyPressed(KEY_I) && menuState == Items || IsKeyPressed(KEY_I) && menuState == Character || IsKeyPressed(KEY_I) && menuState == Options)
     {
         menuState = None;
     }
@@ -74,30 +77,44 @@ void Inventory::Update()
 void Inventory::Render()
 {
     // draw Inventory
-    if (menuState == Items)
+    switch (menuState)
     {
-        DrawTexturePro(this->texture,
-                       {0, 0, (float)this->texture.width, (float)this->texture.height},
-                       {(float)GetScreenWidth()/2 - this->texture.width, (float)GetScreenHeight()/2 - this->texture.height, (float)this->texture.width*this->scaleFactor, (float)this->texture.height*this->scaleFactor},
-                       {0, 0}, 0, WHITE);
+        case Items: // draw inventory
+            DrawTexturePro(this->textureInventoryBase,
+                           {0, 0, (float)this->textureInventoryBase.width, (float)this->textureInventoryBase.height},
+                           {(float)GetScreenWidth()/2 - this->textureInventoryBase.width, (float)GetScreenHeight() / 2 - this->textureInventoryBase.height, (float)this->textureInventoryBase.width * this->scaleFactor, (float)this->textureInventoryBase.height * this->scaleFactor},
+                           {0, 0}, 0, WHITE);
 
-        // draw items
-        for (int i = 0; i < 4; i++)
-        {
-            if (this->currentItem > i)
+            // draw items
+            for (int i = 0; i < 4; i++)
             {
-                DrawTexturePro(this->inventoryContainer.getItem(i)->GetTexture(),
-                               {0, 0, (float)this->inventoryContainer.getItem(i)->GetTexture().width, (float)this->inventoryContainer.getItem(i)->GetTexture().height},
-                               {slotPosition[i].x, slotPosition[i].y, (float)this->inventoryContainer.getItem(i)->GetTexture().width*this->scaleFactor, (float)this->inventoryContainer.getItem(i)->GetTexture().height*this->scaleFactor},
-                               {0, 0}, 0, WHITE);
+                if (this->currentItem > i)
+                {
+                    DrawTexturePro(this->inventoryContainer.getItem(i)->GetTexture(),
+                                   {0, 0, (float)this->inventoryContainer.getItem(i)->GetTexture().width, (float)this->inventoryContainer.getItem(i)->GetTexture().height},
+                                   {slotPosition[i].x, slotPosition[i].y, (float)this->inventoryContainer.getItem(i)->GetTexture().width*this->scaleFactor, (float)this->inventoryContainer.getItem(i)->GetTexture().height*this->scaleFactor},
+                                   {0, 0}, 0, WHITE);
+                }
+                // this->slotOffset = this->slotOffset + textureRing.height;
+
             }
-            // this->slotOffset = this->slotOffset + textureRing.height;
+            break;
 
-        }
+        case Options: // draw options
+            DrawTexturePro(this->textureOptionsBase,
+                           {0, 0, (float)this->textureOptionsBase.width, (float)this->textureOptionsBase.height},
+                           {(float)GetScreenWidth()/2 - this->textureOptionsBase.width, (float)GetScreenHeight() / 2 - this->textureOptionsBase.height, (float)this->textureOptionsBase.width * this->scaleFactor, (float)this->textureOptionsBase.height * this->scaleFactor},
+                           {0, 0}, 0, WHITE);
+            break;
+
+        case Character: // draw charactersprite
+            DrawTexturePro(this->textureCharacterspriteBase,
+                           {0, 0, (float)this->textureCharacterspriteBase.width, (float)this->textureCharacterspriteBase.height},
+                           {(float)GetScreenWidth()/2 - this->textureCharacterspriteBase.width, (float)GetScreenHeight() / 2 - this->textureCharacterspriteBase.height, (float)this->textureCharacterspriteBase.width * this->scaleFactor, (float)this->textureCharacterspriteBase.height * this->scaleFactor},
+                           {0, 0}, 0, WHITE);
+            break;
+
     }
-
-
-
 }
 
 // add any item to the inventory that is an array

@@ -17,7 +17,9 @@ protected:
     enum MenuState {None, Items, Options, Character };
     MenuState menuState = None;
 
-    Texture2D texture;
+    Texture2D textureInventoryBase;
+    Texture2D textureOptionsBase;
+    Texture2D textureCharacterspriteBase;
     Texture2D textureRing;
 
     Vector2 slotPosition[4]; // to determine x and y value for the slots
