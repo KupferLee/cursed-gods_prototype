@@ -1,11 +1,15 @@
 ﻿#include <cstdlib>
 #include <vector>
+#include <memory>
 
 #include "raylib.h"
 
 #include "config.h"
 
 #include "player.h"
+#include "Scene.h"
+#include "ProtectedTexture.h"
+#include "ProtectedTileset.h"
 #include "Inventory.h"
 
 int main() {
@@ -22,13 +26,22 @@ int main() {
     // ...
     // ...
     Inventory inventory;
-    player Test;
-    std::vector<Rectangle> Ground;
+
+    const char* mapTexture = "assets/graphics/Map/Test-LevelGit.png"; //columns = 14
+    const char* mapDescription = "assets/graphics/Map/THIS.json";
+    std::shared_ptr<ProtectedTexture> mapTex = std::make_shared<ProtectedTexture>(mapTexture);
+    std::shared_ptr<ProtectedTileset> description = std::make_shared<ProtectedTileset>(mapDescription);
+
+
 
     // enum for changing gamestates
     // default for title
     enum GameState {state_title, state_level1, state_fight};
     GameState gameState = state_title;
+
+    std::shared_ptr<Scene> TestScene = std::make_shared<Scene>((std::make_shared<player>()),
+                    mapTex,
+                    description);
 
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
@@ -36,8 +49,6 @@ int main() {
         // Updates that are made by frame are coded here
         // ...
         // ...
-        auto deltaTime = GetFrameTime();
-
         switch (gameState)
         {
             case (state_title):
@@ -87,16 +98,11 @@ int main() {
                 case (state_level1):
                     // playing screen
                     ClearBackground(WHITE);
+                    TestScene->Update();
+                    TestScene->Render();
                     DrawText("Level 1", 10, 10, 30, LIGHTGRAY);
                     DrawText("Press F to start fight.", 10, 40, 30, LIGHTGRAY);
-                    Ground.push_back(Rectangle{0, 500, static_cast<float>(GetScreenWidth()), 40});
-                    Ground.push_back(Rectangle{230, 400, 150, 20});
-                    Ground.push_back(Rectangle{420, 300, 150, 20});
-                    for (const auto &index: Ground) {
-                        DrawRectangleRec(index, LIGHTGRAY);
-                    }
-                    Test.Update(deltaTime, Ground);
-                    Test.Render();
+
 
                     // inventory
                     inventory.Render();

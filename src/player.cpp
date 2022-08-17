@@ -1,7 +1,7 @@
 #include "player.h"
 #include <iostream>
 
-void player::UpdatePlayer(float delta, std::vector<Rectangle> &Ground)
+void player::UpdatePlayer(float delta)
 {
 //Movement
     bIsWalking = false;
@@ -133,8 +133,8 @@ void player::Render() {
     RenderPlayer();
 }
 
-void player::Update(float a, std::vector<Rectangle> &b) {
-    UpdatePlayer(a, b);
+void player::Update(float a) {
+    UpdatePlayer(a);
 }
 
 void player::HandleInput() {
@@ -142,7 +142,6 @@ void player::HandleInput() {
 }
 
 void player::Update() {
-
 }
 
 void player::SetNextFrame() {
@@ -170,4 +169,8 @@ switch(Animation) {
     default: frame = 0;
         break;
 }
+}
+void player::SetGround(std::vector<Rectangle> a)
+{
+    Ground = a;
 }

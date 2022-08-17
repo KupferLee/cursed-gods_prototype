@@ -10,9 +10,9 @@ class Scene final : public GameObject
 {
 private:
 
-    std::shared_ptr <player> player_;
     std::shared_ptr <ProtectedTexture> map_;
     std::shared_ptr <ProtectedTileset> tileAtlas_;
+    std::shared_ptr <player> player_;
 
     int counter_;
     Vector2 vec_;
@@ -35,7 +35,7 @@ public:
     ~Scene();
 
     void HandleInput () final;
-    void Update(float, std::vector<Rectangle> &) final;
+    void Update(float) final;
     void Update() final;
     void Render() final;
 
