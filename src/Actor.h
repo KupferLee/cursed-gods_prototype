@@ -8,6 +8,8 @@
 
 
 class Actor : public GameObject{
+public:
+
 };
 
 

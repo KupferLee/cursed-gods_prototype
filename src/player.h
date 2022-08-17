@@ -1,6 +1,7 @@
 #pragma once
 #include "Actor.h"
 #include "raymath.h"
+#include "DRAW.h"
 
 enum class Animation
 {
@@ -11,16 +12,19 @@ enum class Animation
     JumpLeft
 };
 
-class player : public Actor
+class player : public Actor, public DRAW
 {
 public:
+    player(){};
     void HandleInput() override;
-    void Update(float, std::vector<Rectangle> &) override;
+    void Update(float) override;
     void Update() override;
 	void Render() override;
-    void UpdatePlayer(float, std::vector<Rectangle> &);
+    void UpdatePlayer(float);
     void RenderPlayer();
     void SetNextFrame();
+    void SetGround(std::vector<Rectangle> a);
+    void SetWalls(std::vector<Rectangle> a);
 
 private:
     //animation shit
@@ -36,6 +40,7 @@ private:
     bool bIsWalking = false;
 	bool bIsOnGround = true;
     bool bIsInAir = false;
+    bool WallCollide = false;
 
     //constants
     const float fJumpAcc = -20/2.3f;
@@ -44,8 +49,10 @@ private:
     const float fFriction = 0.6;
     const float fGravity = 1/ 3.f; //2te Ableitung der Jump kurve //floatcast important
 
+    std::vector<Rectangle> Ground;
+    std::vector<Rectangle> Walls;
     int iMaxJumpFrames = 6;
     int iJumpFrames = 0;
     Vector2 Momentum = {0 ,0};
-	Vector2 vPosition = { 0, 450}; // Hardcoded weil test Texture ein Raylib Rec ist
+	Vector2 vPosition = { 400, 450}; // Hardcoded weil test Texture ein Raylib Rec ist
 };

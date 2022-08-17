@@ -1,7 +1,7 @@
 #include "player.h"
 #include <iostream>
 
-void player::UpdatePlayer(float delta, std::vector<Rectangle> &Ground)
+void player::UpdatePlayer(float delta)
 {
 //Movement
     bIsWalking = false;
@@ -103,13 +103,21 @@ void player::UpdatePlayer(float delta, std::vector<Rectangle> &Ground)
             {Momentum.y = 0;}
         }
      }
+    WallCollide = false;
+    for (const auto& index : Walls)
+    {
+        if(CheckCollisionRecs(index, Rectangle{vNewPos.x, vNewPos.y, 50, 48}))
+        {
+            WallCollide = true;
+        }
+    }
 
     if(!bIsOnGround)
     {
         vPosition.y = vNewPos.y;
     }
 
-    if(true)
+    if(!WallCollide)
     {
         vPosition.x = vNewPos.x;
     }
@@ -133,8 +141,8 @@ void player::Render() {
     RenderPlayer();
 }
 
-void player::Update(float a, std::vector<Rectangle> &b) {
-    UpdatePlayer(a, b);
+void player::Update(float a) {
+    UpdatePlayer(a);
 }
 
 void player::HandleInput() {
@@ -142,7 +150,6 @@ void player::HandleInput() {
 }
 
 void player::Update() {
-
 }
 
 void player::SetNextFrame() {
@@ -170,4 +177,12 @@ switch(Animation) {
     default: frame = 0;
         break;
 }
+}
+void player::SetGround(std::vector<Rectangle> a)
+{
+    Ground = a;
+}
+void player::SetWalls(std::vector<Rectangle> a)
+{
+    Walls = a;
 }
