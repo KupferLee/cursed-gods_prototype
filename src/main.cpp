@@ -17,6 +17,7 @@ int main() {
     // Project name, screen size, fullscreen mode etc. can be specified in the config.h.in file
     InitWindow(Game::ScreenWidth, Game::ScreenHeight, Game::PROJECT_NAME);
     SetTargetFPS(60);
+    InitAudioDevice();
 
 #ifdef GAME_START_FULLSCREEN
     ToggleFullscreen();
@@ -86,8 +87,16 @@ int main() {
             // You can draw on the screen between BeginDrawing() and EndDrawing()
             // ...
             // ...
-
-            switch(gameState)
+        SetMasterVolume(1.f);
+        Music titletheme = LoadMusicStream();
+        Music leveltheme = LoadMusicStream();
+        UnloadMusicStream(titletheme);
+        UnloadMusicStream(leveltheme);
+        PlayMusicStream(titletheme);
+        PlayMusicStream(leveltheme);
+        StopMusicStream(titletheme);
+        StopMusicStream(leveltheme);
+        switch(gameState)
             {
                 case (state_title):
                     ClearBackground(WHITE);
@@ -129,6 +138,6 @@ int main() {
 
     // Close window and OpenGL context
     CloseWindow();
-
+    CloseAudioDevice();
     return EXIT_SUCCESS;
 }
