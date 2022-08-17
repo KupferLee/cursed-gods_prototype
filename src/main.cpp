@@ -19,6 +19,8 @@ int main() {
     InitWindow(Game::ScreenWidth, Game::ScreenHeight, Game::PROJECT_NAME);
     SetTargetFPS(60);
     InitAudioDevice();
+    SetMasterVolume(1.f);
+
 
 #ifdef GAME_START_FULLSCREEN
     ToggleFullscreen();
@@ -28,15 +30,23 @@ int main() {
     // ...
     // ...
     Inventory inventory;
-    
+
+
+    const char* titleTexture = "assets/graphics/UI/title_screen.png";
+    std::shared_ptr<ProtectedTexture> titleTex = std::make_shared<ProtectedTexture>(titleTexture);
+    Music titlemusic = LoadMusicStream("assets/audio/tracks/TitleTestMusic.wav");
+
     BattleScreen fightScreen;
-    player Test;
-    std::vector<Rectangle> Ground;
-    
+    player test;
+    std::vector <Rectangle> Ground;
+
+
     const char* mapTexture = "assets/graphics/Map/Test-LevelGit.png"; //columns = 14
     const char* mapDescription = "assets/graphics/Map/THIS.json";
     std::shared_ptr<ProtectedTexture> mapTex = std::make_shared<ProtectedTexture>(mapTexture);
     std::shared_ptr<ProtectedTileset> description = std::make_shared<ProtectedTileset>(mapDescription);
+    Music levelmusic = LoadMusicStream("assets/audio/tracks/TraumDerHellenen.wav");
+
 
 
     // enum for changing gamestates
@@ -46,7 +56,13 @@ int main() {
 
     std::shared_ptr<Scene> TestScene = std::make_shared<Scene>((std::make_shared<player>()),
                     mapTex,
-                    description);
+                    description,
+                    levelmusic);
+
+    std::shared_ptr<Scene> TestTitle = std::make_shared<Scene>(nullptr,
+                                                               titleTex,
+                                                               nullptr,
+                                                               titlemusic);
 
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
@@ -96,19 +112,21 @@ int main() {
             // You can draw on the screen between BeginDrawing() and EndDrawing()
             // ...
             // ...
-        SetMasterVolume(1.f);
-        Music titletheme = LoadMusicStream();
-        Music leveltheme = LoadMusicStream();
-        UnloadMusicStream(titletheme);
-        UnloadMusicStream(leveltheme);
-        PlayMusicStream(titletheme);
-        PlayMusicStream(leveltheme);
-        StopMusicStream(titletheme);
-        StopMusicStream(leveltheme);
+
+        //Music leveltheme = LoadMusicStream();
+
+        //UnloadMusicStream(leveltheme);
+
+        //PlayMusicStream(leveltheme);
+
+        //StopMusicStream(leveltheme);
+
         switch(gameState)
             {
                 case (state_title):
                     ClearBackground(WHITE);
+                    TestTitle->Update();
+                    TestTitle->Render();
                     DrawText("Title", 10, 10, 30, LIGHTGRAY);
                     DrawText("Press Enter to start Level 1.", 10, 40, 30, LIGHTGRAY);
                     break;
