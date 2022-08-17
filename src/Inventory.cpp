@@ -214,4 +214,4 @@ bool Inventory::IsOpen() { return isOpen; }
 
 void Inventory::HandleInput() { }
 
-void Inventory::Update(float, std::vector<Rectangle> &) { }
+void Inventory::Update(float) { }

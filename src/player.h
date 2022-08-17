@@ -14,13 +14,15 @@ enum class Animation
 class player : public Actor
 {
 public:
+    player(){};
     void HandleInput() override;
-    void Update(float, std::vector<Rectangle> &) override;
+    void Update(float) override;
     void Update() override;
 	void Render() override;
-    void UpdatePlayer(float, std::vector<Rectangle> &);
+    void UpdatePlayer(float);
     void RenderPlayer();
     void SetNextFrame();
+    void SetGround(std::vector<Rectangle> a);
 
 private:
     //animation shit
@@ -44,6 +46,7 @@ private:
     const float fFriction = 0.6;
     const float fGravity = 1/ 3.f; //2te Ableitung der Jump kurve //floatcast important
 
+    std::vector<Rectangle> Ground;
     int iMaxJumpFrames = 6;
     int iJumpFrames = 0;
     Vector2 Momentum = {0 ,0};
