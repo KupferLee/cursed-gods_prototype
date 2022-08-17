@@ -13,11 +13,15 @@ public:
     attack moves[1] = {Scratch};
 
     void Render();
+    void Update(float delta);
 
 protected:
     // animation
     Texture2D animation;
     float scaleFactor = 8;
+    int frame = 0;
+    float frameTime = 0.f;
+    float frameDuration = 0.22;
 
     // Atributes
     float LP = 50.f;

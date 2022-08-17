@@ -4,7 +4,10 @@
 
 #include "BattlePlayer.h"
 
-BattlePlayer::BattlePlayer()
-{
+/*
+BattlePlayer::BattlePlayer() {}
 
-}
+void BattlePlayer::Update(float delta) {}
+
+void BattlePlayer::Render() {}
+ */

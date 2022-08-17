@@ -29,6 +29,8 @@ void BattleScreen::Update()
     {
         this->currentSlot--;
     }
+
+    harpye.Update(GetFrameTime());
 }
 
 void BattleScreen::Render()

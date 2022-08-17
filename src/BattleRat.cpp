@@ -5,3 +5,7 @@
 #include "BattleRat.h"
 
 BattleRat::BattleRat() {}
+
+void BattleRat::Update(float delta) {}
+
+void BattleRat::Render() {}

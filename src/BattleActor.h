@@ -29,6 +29,8 @@ public:
     // virtual void GetCurrentAttack();
     // virtual void Attack(attack currentAttack);
 
+    //virtual void Render();
+    //virtual void Update(float delta);
 protected:
     Rectangle position;
 
