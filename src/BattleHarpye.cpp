@@ -7,7 +7,7 @@
 BattleHarpye::BattleHarpye()
 {
     this->animation = LoadTexture("assets/graphics/Actors/Battle_Harpye.png");
-    this->position = {0, 0};
+    this->position = {0, 0, 32 * scaleFactor, 32 * scaleFactor};
 }
 
 void BattleHarpye::Render()

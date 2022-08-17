@@ -15,7 +15,9 @@ public:
     void Render();
 
 protected:
+    // animation
     Texture2D animation;
+    float scaleFactor = 8;
 
     // Atributes
     float LP = 50.f;
@@ -23,7 +25,7 @@ protected:
 
     // Moves
     attack Scratch = {5, 1, 2, DamageType::Slash, true};
-    // attach Screech bricht andere Attacke ab
+    // attack Screech bricht andere Attacke ab
 };
 
 

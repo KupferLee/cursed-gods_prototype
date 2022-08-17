@@ -134,7 +134,7 @@ void player::UpdatePlayer(float delta)
 void player::RenderPlayer()
 {
 	DrawRectangleV(vPosition, {50, 50}, SKYBLUE);
-    DrawFrame(vPosition, frame, static_cast<int>(Animation), Frames, TilecountX , TilecountY);
+    DrawFrame(Rectangle{vPosition.x, vPosition.y, 50,50}, frame, static_cast<int>(Animation), Frames, TilecountX , TilecountY);
 }
 
 void player::Render() {

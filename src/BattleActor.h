@@ -30,7 +30,7 @@ public:
     // virtual void Attack(attack currentAttack);
 
 protected:
-    Vector2 position;
+    Rectangle position;
 
 };
 
