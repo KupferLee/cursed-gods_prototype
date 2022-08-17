@@ -5,10 +5,9 @@ void player::UpdatePlayer(float delta, std::vector<Rectangle> &Ground)
 {
 //Movement
     bIsWalking = false;
-    Animation = Animation::Idle;
-	Vector2 vNewPos = vPosition;
-	//vNewPos.y += delta * fGravity;
-	// vNewPos.y -= 2 * Gravity * static_cast<float>(IsKeyReleased(KEY_SPACE) || IsKeyReleased(KEY_UP))
+    if (bIsOnGround)Animation = Animation::Idle;
+    Vector2 vNewPos = vPosition;
+
     if (IsKeyDown( KEY_A) || IsKeyDown( KEY_LEFT))
     {
         Momentum.x -= fSideAcc;
@@ -19,7 +18,7 @@ void player::UpdatePlayer(float delta, std::vector<Rectangle> &Ground)
     {
         Momentum.x += fSideAcc;
         bIsWalking = true;
-        Animation = Animation::RunRight;
+        Animation= Animation::RunRight;
     }
     if (bIsWalking)
     {
@@ -40,6 +39,7 @@ void player::UpdatePlayer(float delta, std::vector<Rectangle> &Ground)
     if ((IsKeyDown(KEY_SPACE) || IsKeyDown(KEY_UP)) && !bIsInAir)
 	{
         Momentum = Vector2Add(Momentum, Vector2{0, fJumpAcc/2}); //Y-Achsenabschnitt ableitung 1 //floatcast important
+        frame = 0;
         iJumpFrames++;
 	}
     if(IsKeyDown(KEY_SPACE) || IsKeyDown(KEY_UP))
@@ -61,10 +61,34 @@ void player::UpdatePlayer(float delta, std::vector<Rectangle> &Ground)
 	if (bIsInAir)
 	{
 		Momentum = Vector2Add(Momentum, Vector2{0, fGravity});
-	}
+    }
+    if (Momentum.y < 0)
+    {
+        if(Momentum.x <= 0)
+        {
+            Animation = Animation::JumpLeft;
+        }
+        else if(Momentum.x > 0)
+        {
+            Animation = Animation::JumpRight;
+        }
+    }
+    else if(Momentum.y > fGravity)
+    {
+        frame = 2;
+        if(Momentum.x < 0)
+        {
+            Animation = Animation::JumpLeft;
+        }
+        else if(Momentum.x >= 0)
+        {
+            Animation = Animation::JumpRight;
+        }
+    }
     vNewPos = Vector2Add(vPosition, Momentum);
 
     bIsInAir = true;
+    bIsOnGround = false;
 
     for (const auto& index : Ground)
     {
@@ -81,17 +105,21 @@ void player::UpdatePlayer(float delta, std::vector<Rectangle> &Ground)
      }
 
     if(!bIsOnGround)
-    {vPosition.y = vNewPos.y;}
-    if(true)
-    { vPosition.x = vNewPos.x;}
-    bIsOnGround = false;
+    {
+        vPosition.y = vNewPos.y;
+    }
 
-//animation
+    if(true)
+    {
+        vPosition.x = vNewPos.x;
+    }
+
     Frametime += delta;
     if(Frametime >= FrameDuration)
     {
         Frametime -= FrameDuration;
-        SetNextFrame();
+        if (frame == 2 && Animation == Animation::JumpRight || Animation == Animation::JumpLeft){}
+        else SetNextFrame();
     }
 }
 
@@ -121,18 +149,23 @@ void player::SetNextFrame() {
 switch(Animation) {
     case(Animation::Idle):
         frame = frame + 1 % static_cast<int>(TilecountX);
+        FrameDuration = 0.14;
         break;
     case(Animation::RunRight):
         frame = frame + 1 % static_cast<int>(TilecountX);
+        FrameDuration = 0.11;
         break;
     case(Animation::RunLeft):
         frame = frame + 1 % static_cast<int>(TilecountX);
+        FrameDuration = 0.11;
         break;
     case(Animation::JumpRight):
-        frame = frame + 1 % static_cast<int>(3);
+        frame = (frame + 1) % 3;
+        FrameDuration = 0.22;
         break;
     case(Animation::JumpLeft):
-        frame = frame + 1 % static_cast<int>(3);
+        frame = (frame + 1) % 3;
+        FrameDuration = 0.22;
         break;
     default: frame = 0;
         break;
