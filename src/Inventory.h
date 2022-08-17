@@ -30,6 +30,7 @@ protected:
     Texture2D slotSelect;
     Vector2 slotPosition[4]; // to determine x and y value for the slots
     int currentSlot = 0;
+    // Vector2 infoPosition;
 
     // inventory container
     item_ring* itemRing = new item_ring;

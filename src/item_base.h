@@ -18,9 +18,11 @@ protected:
     std::string name;
     std::string description;
     Texture2D texture;
+    Texture2D infos;
 
 public:
     Texture2D GetTexture() { return texture; }
+    Texture2D GetInfos() {return infos; }
     std::string GetName() { return name; }
     std::string GetDescription() {return description; }
     // things all items will have
