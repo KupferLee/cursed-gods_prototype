@@ -41,9 +41,10 @@ void Inventory::Update()
         itemAdd(itemSword);
     }
 
+
     switch (menuState)
     {
-        case None:
+        case Closed:
             // open inventory
             if (IsKeyPressed(KEY_I))
             {
@@ -61,6 +62,10 @@ void Inventory::Update()
             {
                 menuState = Options;
             }
+            else if (IsKeyPressed(KEY_I))
+            {
+                menuState = Closed;
+            }
 
             // navigate items
             if (IsKeyPressed(KEY_S) && currentSlot < 3)
@@ -74,6 +79,7 @@ void Inventory::Update()
             break;
 
         case Character:
+            // switch menu state
             if (IsKeyPressed(KEY_Q))
             {
                 menuState = Items;
@@ -82,7 +88,12 @@ void Inventory::Update()
             {
                 menuState = Loredrops;
             }
+            else if (IsKeyPressed(KEY_I))
+            {
+                menuState = Closed;
+            }
 
+            // do other stuff here
             break;
 
         case Options:
@@ -91,7 +102,12 @@ void Inventory::Update()
             {
                 menuState = Items;
             }
+            else if (IsKeyPressed(KEY_I))
+            {
+                menuState = Closed;
+            }
 
+            // do other stuff here
             break;
 
         case Loredrops:
@@ -99,7 +115,12 @@ void Inventory::Update()
             {
                 menuState = Character;
             }
+            else if (IsKeyPressed(KEY_I))
+            {
+                menuState = Closed;
+            }
 
+            // do other stuff here
             break;
 
     }

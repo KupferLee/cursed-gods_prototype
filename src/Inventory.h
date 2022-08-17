@@ -17,8 +17,8 @@ protected:
     int scaleFactor = 2;
     bool isOpen = false;
 
-    enum MenuState {None, Items, Options, Character, Loredrops };
-    MenuState menuState = None;
+    enum MenuState {Closed, Items, Options, Character, Loredrops };
+    MenuState menuState = Closed;
 
     Texture2D textureInventoryBase;
     Texture2D textureOptionsBase;
