@@ -103,13 +103,21 @@ void player::UpdatePlayer(float delta)
             {Momentum.y = 0;}
         }
      }
+    WallCollide = false;
+    for (const auto& index : Walls)
+    {
+        if(CheckCollisionRecs(index, Rectangle{vNewPos.x, vNewPos.y, 50, 48}))
+        {
+            WallCollide = true;
+        }
+    }
 
     if(!bIsOnGround)
     {
         vPosition.y = vNewPos.y;
     }
 
-    if(true)
+    if(!WallCollide)
     {
         vPosition.x = vNewPos.x;
     }
@@ -173,4 +181,8 @@ switch(Animation) {
 void player::SetGround(std::vector<Rectangle> a)
 {
     Ground = a;
+}
+void player::SetWalls(std::vector<Rectangle> a)
+{
+    Walls = a;
 }

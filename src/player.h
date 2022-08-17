@@ -23,6 +23,7 @@ public:
     void RenderPlayer();
     void SetNextFrame();
     void SetGround(std::vector<Rectangle> a);
+    void SetWalls(std::vector<Rectangle> a);
 
 private:
     //animation shit
@@ -38,6 +39,7 @@ private:
     bool bIsWalking = false;
 	bool bIsOnGround = true;
     bool bIsInAir = false;
+    bool WallCollide = false;
 
     //constants
     const float fJumpAcc = -20/2.3f;
@@ -47,6 +49,7 @@ private:
     const float fGravity = 1/ 3.f; //2te Ableitung der Jump kurve //floatcast important
 
     std::vector<Rectangle> Ground;
+    std::vector<Rectangle> Walls;
     int iMaxJumpFrames = 6;
     int iJumpFrames = 0;
     Vector2 Momentum = {0 ,0};
