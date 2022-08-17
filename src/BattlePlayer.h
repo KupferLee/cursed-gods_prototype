@@ -13,7 +13,7 @@ public:
     BattlePlayer();
     attack moves[4] {Slash, Arrow,ArrowRain};
 
-private:
+protected:
     Texture2D Animations;
 
     //Attributes
