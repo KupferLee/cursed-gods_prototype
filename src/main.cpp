@@ -52,7 +52,7 @@ int main() {
     // enum for changing gamestates
     // default for title
     enum GameState {state_title, state_level1, state_fight};
-    GameState gameState = state_title;
+    GameState gameState = state_fight;
 
     std::shared_ptr<Scene> TestScene = std::make_shared<Scene>((std::make_shared<player>()),
                     mapTex,
