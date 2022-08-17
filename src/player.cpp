@@ -5,14 +5,14 @@ void player::UpdatePlayer(float delta, std::vector<Rectangle> &Ground)
 {
 //Movement
     bIsWalking = false;
-    Animation = Animation::Idle;
-	Vector2 vNewPos = vPosition;
+    if (bIsOnGround)Animation = Animation::Idle;
+    Vector2 vNewPos = vPosition;
 
     if (IsKeyDown( KEY_A) || IsKeyDown( KEY_LEFT))
     {
         Momentum.x -= fSideAcc;
         bIsWalking = true;
-        Animation= Animation::RunLeft;
+        Animation = Animation::RunLeft;
     }
     if (IsKeyDown( KEY_D) || IsKeyDown( KEY_RIGHT))
     {
@@ -39,6 +39,7 @@ void player::UpdatePlayer(float delta, std::vector<Rectangle> &Ground)
     if ((IsKeyDown(KEY_SPACE) || IsKeyDown(KEY_UP)) && !bIsInAir)
 	{
         Momentum = Vector2Add(Momentum, Vector2{0, fJumpAcc/2}); //Y-Achsenabschnitt ableitung 1 //floatcast important
+        frame = 0;
         iJumpFrames++;
 	}
     if(IsKeyDown(KEY_SPACE) || IsKeyDown(KEY_UP))
@@ -61,10 +62,32 @@ void player::UpdatePlayer(float delta, std::vector<Rectangle> &Ground)
 	{
 		Momentum = Vector2Add(Momentum, Vector2{0, fGravity});
     }
-    //Momentum für Animationswechsel benutzen
+    if (Momentum.y < 0)
+    {
+        if(Momentum.x <= 0)
+        {
+            Animation = Animation::JumpLeft;
+        }
+        else if(Momentum.x > 0)
+        {
+            Animation = Animation::JumpRight;
+        }
+    }
+    else if(Momentum.y > fGravity)
+    {
+        if(Momentum.x < 0)
+        {
+            Animation = Animation::JumpLeft;
+        }
+        else if(Momentum.x >= 0)
+        {
+            Animation = Animation::JumpRight;
+        }
+    }
     vNewPos = Vector2Add(vPosition, Momentum);
 
     bIsInAir = true;
+    bIsOnGround = false;
 
     for (const auto& index : Ground)
     {
@@ -89,9 +112,7 @@ void player::UpdatePlayer(float delta, std::vector<Rectangle> &Ground)
     {
         vPosition.x = vNewPos.x;
     }
-    bIsOnGround = false;
 
-//animation
     Frametime += delta;
     if(Frametime >= FrameDuration)
     {
@@ -138,11 +159,11 @@ switch(Animation) {
         break;
     case(Animation::JumpRight):
         frame = (frame + 1) % 3;
-        FrameDuration = 0.33;
+        FrameDuration = 0.22;
         break;
     case(Animation::JumpLeft):
         frame = (frame + 1) % 3;
-        FrameDuration = 0.33;
+        FrameDuration = 0.22;
         break;
     default: frame = 0;
         break;
