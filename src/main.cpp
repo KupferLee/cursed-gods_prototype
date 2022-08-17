@@ -72,7 +72,7 @@ int main() {
                 }
 
                 fightScreen.Update();
-                
+
                 break;
             default:
                 break;

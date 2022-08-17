@@ -21,7 +21,7 @@ BattleScreen::BattleScreen()
 void BattleScreen::Update()
 {
     // ask if key inputs or anything here
-    if (IsKeyPressed(KEY_D) && this->currentSlot < 4)
+    if (IsKeyPressed(KEY_D) && this->currentSlot < 3)
     {
         this->currentSlot++;
     }
