@@ -26,14 +26,39 @@ Inventory::Inventory()
 
 void Inventory::Update()
 {
+    // open inventory
     if (IsKeyPressed(KEY_I) && menuState == None)
     {
         menuState = Items;
     }
+    // switch from inventory to character
+    else if (IsKeyPressed(KEY_E) && menuState == Items)
+    {
+        menuState = Character;
+    }
+    // switch from character to items
+    else if (IsKeyPressed(KEY_Q) && menuState == Character)
+    {
+        menuState = Items;
+    }
+    // switch from items to options
+    else if (IsKeyPressed(KEY_Q) && menuState == Items)
+    {
+        menuState = Options;
+    }
+    // switch from options to items
+    else if (IsKeyPressed(KEY_E) && menuState == Options)
+    {
+        menuState = Items;
+    }
+    // close
     else if (IsKeyPressed(KEY_I) && menuState == Items || menuState == Character || menuState == Options)
     {
         menuState = None;
     }
+
+
+
 
     if(IsKeyPressed(KEY_K))
     {
