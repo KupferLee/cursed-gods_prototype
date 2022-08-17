@@ -10,6 +10,7 @@
 #include "Scene.h"
 #include "ProtectedTexture.h"
 #include "ProtectedTileset.h"
+#include "Inventory.h"
 
 int main() {
     // Raylib initialization
@@ -24,6 +25,7 @@ int main() {
     // Your own initialization code here
     // ...
     // ...
+    Inventory inventory;
     player Test;
     std::vector<Rectangle> Ground;
 
@@ -61,6 +63,9 @@ int main() {
                 break;
 
             case (state_level1):
+                inventory.Update();
+
+                // State Wechsel
                 if (IsKeyPressed(KEY_ENTER))
                 {
                     gameState = state_title;
@@ -90,12 +95,12 @@ int main() {
             {
                 case (state_title):
                     ClearBackground(WHITE);
-
                     DrawText("Title", 10, 10, 30, LIGHTGRAY);
                     DrawText("Press Enter to start Level 1.", 10, 40, 30, LIGHTGRAY);
                     break;
 
                 case (state_level1):
+                    // playing screen
                     ClearBackground(WHITE);
                     TestScene->Render();
                     DrawText("Level 1", 10, 10, 30, LIGHTGRAY);
@@ -108,6 +113,9 @@ int main() {
                     }
                     Test.Update(deltaTime, Ground);
                     Test.Render();
+
+                    // inventory
+                    inventory.Render();
                     break;
 
                 case (state_fight):

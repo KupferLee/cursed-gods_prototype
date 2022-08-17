@@ -13,19 +13,18 @@
 #include "config.h"
 #include <iostream>
 Scene::Scene(const std::shared_ptr<player> &player, const std::shared_ptr<ProtectedTexture> &map, const std::shared_ptr<ProtectedTileset> &tileAtlas)
-            : player_(player), map_(map), tileAtlas_(tileAtlas){
+            : player_(player), map_(map), tileAtlas_(tileAtlas) {
     this->rec_.x = 0.f;
     this->rec_.y = 0.f;
     this->rec_.width = 16.f;
     this->rec_.height = 16.f;
 
-    this->vec_ = {0.f,0.f};
+    this->vec_ = {0.f, 0.f};
 
     this->counter_ = 0;
-
     for (int i = 0; i < this->tileAtlas_->getTileAtlas().size(); i++)
     {
-        if (!(this->counter_% (this->tileAtlas_->getTilesX() * this->tileAtlas_->getTilesY()))
+        if (!(this->counter_ % (tileAtlas_->getTilesX()*tileAtlas_->getTilesY()))
             || this->counter_ == 0)
         {
             this->vec_.y = 0;
@@ -50,6 +49,11 @@ Scene::Scene(const std::shared_ptr<player> &player, const std::shared_ptr<Protec
     }
     TraceLog(LOG_INFO, "Scene constructor called");
 }
+void Scene::Render() {
+    return RenderScene();
+}
+
+void Scene::HandleInputScene() {}
 
 Scene::~Scene()
 {
