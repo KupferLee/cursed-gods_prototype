@@ -7,6 +7,7 @@
 
 #include "player.h"
 #include "Inventory.h"
+#include "BattleScreen.h"
 
 int main() {
     // Raylib initialization
@@ -22,6 +23,7 @@ int main() {
     // ...
     // ...
     Inventory inventory;
+    BattleScreen fightScreen;
     player Test;
     std::vector<Rectangle> Ground;
 
@@ -108,6 +110,7 @@ int main() {
                     ClearBackground(WHITE);
                     DrawText("Fight", 10, 10, 30, LIGHTGRAY);
                     DrawText("Press F to return to Level 1.", 10, 40, 30, LIGHTGRAY);
+                    fightScreen.Render();
                     break;
 
                 default:
