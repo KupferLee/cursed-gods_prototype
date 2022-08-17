@@ -11,6 +11,7 @@ BattleScreen::BattleScreen()
     this->attackButton_2 = LoadTexture("assets/graphics/UI/Buttons/AttackButton_2.png");
     this->attackButton_3 = LoadTexture("assets/graphics/UI/Buttons/AttackButton_3.png");
     this->attackButton_4 = LoadTexture("assets/graphics/UI/Buttons/AttackButton_4.png");
+    this->attackSelection = LoadTexture("assets/graphics/UI/Buttons/AttackSelect.png");
 
     // textures get used in set slots
     this->SetSlots();
@@ -20,6 +21,14 @@ BattleScreen::BattleScreen()
 void BattleScreen::Update()
 {
     // ask if key inputs or anything here
+    if (IsKeyPressed(KEY_D) && this->currentSlot < 4)
+    {
+        this->currentSlot++;
+    }
+    else if (IsKeyPressed(KEY_A) && this->currentSlot > 0)
+    {
+        this->currentSlot--;
+    }
 }
 
 void BattleScreen::Render()
@@ -49,6 +58,12 @@ void BattleScreen::Render()
     DrawTexturePro(this->attackButton_4,
                    {0.0, 0.0, (float)this->buttonDimensions.x, (float)this->buttonDimensions.y},
                    {buttonSlots[3].x, buttonSlots[3].y, (float)this->attackButton_1.width * this->scaleFactor, (float)this->attackButton_1.height * this->scaleFactor},
+                   {0, 0}, 0, WHITE);
+
+    // draw selection
+    DrawTexturePro(this->attackSelection,
+                   {0.0, 0.0, (float)this->attackSelection.width, (float)this->attackSelection.height},
+                   {buttonSlots[currentSlot].x - 10, buttonSlots[currentSlot].y - 10, (float)this->attackSelection.width * this->scaleFactor, (float)this->attackSelection.height * this->scaleFactor},
                    {0, 0}, 0, WHITE);
 }
 

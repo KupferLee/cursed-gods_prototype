@@ -70,6 +70,9 @@ int main() {
                 {
                     gameState = state_level1;
                 }
+
+                fightScreen.Update();
+                
                 break;
             default:
                 break;
