@@ -7,7 +7,11 @@
 BattleScreen::BattleScreen()
 {
     this->background = LoadTexture("assets/graphics/UI/BattleScreen_Background.png");
-    // this->attackButton_1 = LoadTexture("");
+    this->attackButton_1 = LoadTexture("assets/graphics/UI/Buttons/AttackButton_1.png");
+    this->attackButton_2 = LoadTexture("assets/graphics/UI/Buttons/AttackButton_2.png");
+    this->attackButton_3 = LoadTexture("assets/graphics/UI/Buttons/AttackButton_3.png");
+    this->attackButton_4 = LoadTexture("assets/graphics/UI/Buttons/AttackButton_4.png");
+
     // textures get used in set slots
     this->SetSlots();
 
@@ -56,17 +60,17 @@ void BattleScreen::SetSlots()
 
     // set slots right after each other
     // going width of texture to the right after setting new slot
-    this->buttonSlots[0].x = GetScreenWidth()/2 - this->buttonDimensions.x;
-    this->buttonSlots[0].y = GetScreenHeight()/2 - this->buttonDimensions.y;
+    this->buttonSlots[0].x = GetScreenWidth()/2 - this->buttonDimensions.x * scaleFactor * 2;
+    this->buttonSlots[0].y = GetScreenHeight()/2 - this->buttonDimensions.y + 230;
 
-    this->buttonSlots[1].x = this->buttonSlots[0].x + this->buttonDimensions.x;
-    this->buttonSlots[1].y = this->buttonSlots[0].y + this->buttonDimensions.y;
+    this->buttonSlots[1].x = this->buttonSlots[0].x + this->buttonDimensions.x * scaleFactor;
+    this->buttonSlots[1].y = this->buttonSlots[0].y;
 
-    this->buttonSlots[2].x = this->buttonSlots[1].x + this->buttonDimensions.x;
-    this->buttonSlots[2].y = this->buttonSlots[1].y + this->buttonDimensions.y;
+    this->buttonSlots[2].x = this->buttonSlots[1].x + this->buttonDimensions.x * scaleFactor;
+    this->buttonSlots[2].y = this->buttonSlots[1].y;
 
-    this->buttonSlots[3].x = this->buttonSlots[2].x + this->buttonDimensions.x;
-    this->buttonSlots[3].y = this->buttonSlots[2].y + this->buttonDimensions.y;
+    this->buttonSlots[3].x = this->buttonSlots[2].x + this->buttonDimensions.x * scaleFactor;
+    this->buttonSlots[3].y = this->buttonSlots[2].y;
 }
 
 void BattleScreen::Update(float, std::vector<Rectangle> &) { }

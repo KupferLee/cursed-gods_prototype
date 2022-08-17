@@ -20,7 +20,7 @@ protected:
     Vector2 buttonSlots[4];
     Vector2 buttonDimensions;
     int currentSlot = 0;
-    int scaleFactor = 3;
+    float scaleFactor = 3.5;
 
     void SetSlots();
 
