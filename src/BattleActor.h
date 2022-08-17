@@ -7,6 +7,8 @@
 
 #include "raylib.h"
 #include "Actor.h"
+#include "DRAW.h"
+
 enum class DamageType
 {
     Pierce,
@@ -22,13 +24,13 @@ struct attack
     bool state; //true active false passive
 };
 
-class BattleActor : public Actor {
+class BattleActor : public DRAW {
 public:
     // virtual void GetCurrentAttack();
     // virtual void Attack(attack currentAttack);
 
 protected:
-
+    Vector2 position;
 
 };
 

@@ -65,6 +65,9 @@ void BattleScreen::Render()
                    {0.0, 0.0, (float)this->attackSelection.width, (float)this->attackSelection.height},
                    {buttonSlots[currentSlot].x - 10, buttonSlots[currentSlot].y - 10, (float)this->attackSelection.width * this->scaleFactor, (float)this->attackSelection.height * this->scaleFactor},
                    {0, 0}, 0, WHITE);
+
+    // draw actors
+    harpye.Render();
 }
 
 void BattleScreen::SetSlots()

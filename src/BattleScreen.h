@@ -6,9 +6,13 @@
 #define RAYLIBSTARTER_BATTLESCREEN_H
 
 #include "GameObject.h"
+#include "BattleHarpye.h"
 
 class BattleScreen : public GameObject {
 protected:
+    // Actors
+    BattleHarpye harpye;
+
     // GUI
     Texture2D background;
     Texture2D attackButton_1;

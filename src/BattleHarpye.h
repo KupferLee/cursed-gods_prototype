@@ -7,13 +7,15 @@
 
 #include "BattleActor.h"
 
-class BattleHarpye final : public BattleActor{
+class BattleHarpye final : public BattleActor {
 public:
     BattleHarpye();
     attack moves[1] = {Scratch};
 
+    void Render();
+
 protected:
-    Texture2D Animations;
+    Texture2D animation;
 
     // Atributes
     float LP = 50.f;
