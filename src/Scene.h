@@ -19,6 +19,7 @@ private:
     Rectangle rec_;
     std::vector <Vector2> vecs_;
     std::vector <Rectangle> recs_;
+    Music theme_;
 
 public:
 
@@ -26,7 +27,8 @@ public:
 
     Scene(const std::shared_ptr<player> &player,
           const std::shared_ptr<ProtectedTexture> &map,
-          const std::shared_ptr <ProtectedTileset> &tileAtlas);
+          const std::shared_ptr <ProtectedTileset> &tileAtlas,
+          const Music &theme);
 
     Scene(const Scene &other) = delete;
 
