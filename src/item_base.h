@@ -21,6 +21,8 @@ protected:
 
 public:
     Texture2D GetTexture() { return texture; }
+    std::string GetName() { return name; }
+    std::string GetDescription() {return description; }
     // things all items will have
 };
 

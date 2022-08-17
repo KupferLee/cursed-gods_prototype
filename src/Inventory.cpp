@@ -121,12 +121,22 @@ void Inventory::Render()
             {
                 if (this->currentItem > i)
                 {
+                    // draw itemslot
                     DrawTexturePro(this->inventoryContainer.getItem(i)->GetTexture(),
                                    {0, 0, (float)this->inventoryContainer.getItem(i)->GetTexture().width, (float)this->inventoryContainer.getItem(i)->GetTexture().height},
                                    {slotPosition[i].x, slotPosition[i].y, (float)this->inventoryContainer.getItem(i)->GetTexture().width*this->scaleFactor, (float)this->inventoryContainer.getItem(i)->GetTexture().height*this->scaleFactor},
                                    {0, 0}, 0, WHITE);
+
+                    // draw infos if there is a item in the slot selected
+                    if (this->inventoryContainer.getItem(currentSlot) != NULL)
+                    {
+                        DrawTexturePro(this->inventoryContainer.getItem(currentSlot)->GetTexture(),
+                                       {0, 0, (float)this->inventoryContainer.getItem(i)->GetTexture().width, (float)this->inventoryContainer.getItem(i)->GetTexture().height},
+                                       {(float)GetScreenWidth()/2 + 60, (float)GetScreenHeight()/2, (float)this->inventoryContainer.getItem(i)->GetTexture().width*this->scaleFactor, (float)this->inventoryContainer.getItem(i)->GetTexture().height*this->scaleFactor},
+                                       {0, 0}, 0, WHITE);
+                    }
+
                 }
-                // this->slotOffset = this->slotOffset + textureRing.height;
 
             }
 
@@ -135,6 +145,7 @@ void Inventory::Render()
                            {0, 0, (float)this->slotSelect.width, (float)this->slotSelect.height},
                            {slotPosition[currentSlot].x, slotPosition[currentSlot].y, (float)this->slotSelect.width*this->scaleFactor, (float)this->slotSelect.height*this->scaleFactor},
                            {0, 0}, 0, WHITE);
+
 
             break;
 

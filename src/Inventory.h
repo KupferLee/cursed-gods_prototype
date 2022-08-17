@@ -14,6 +14,9 @@
 
 class Inventory : public GameObject {
 protected:
+    int scaleFactor = 2;
+    bool isOpen = false;
+
     enum MenuState {None, Items, Options, Character, Loredrops };
     MenuState menuState = None;
 
@@ -23,12 +26,10 @@ protected:
     Texture2D textureLoredropsBase;
     Texture2D textureRing;
 
+    // GUI Item select
     Texture2D slotSelect;
     Vector2 slotPosition[4]; // to determine x and y value for the slots
     int currentSlot = 0;
-
-    int scaleFactor = 2;
-    bool isOpen = false;
 
     // inventory container
     item_ring* itemRing = new item_ring;
