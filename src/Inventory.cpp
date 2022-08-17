@@ -10,6 +10,7 @@ Inventory::Inventory()
     this->textureOptionsBase = LoadTexture("assets/graphics/UI/Options_Base_Platzhalter.png");
     this->textureCharacterspriteBase = LoadTexture("assets/graphics/UI/Charactersprite_Base_Platzhalter.png");
     this->textureLoredropsBase = LoadTexture("assets/graphics/UI/Loredrops_Base_Platzhalter.png");
+    this->slotSelect = LoadTexture("assets/graphics/UI/Slot_Select.png");
 
     this->textureRing = LoadTexture("assets/graphics/UI/Slot_Ring.png");
 
@@ -30,48 +31,77 @@ Inventory::Inventory()
 
 void Inventory::Update()
 {
-    // open inventory
-    if (IsKeyPressed(KEY_I) && menuState == None)
-    {
-        menuState = Items;
-    }
-    // switch from inventory to character or from loredrops to character
-    else if (IsKeyPressed(KEY_E) && menuState == Items || IsKeyPressed(KEY_Q) && menuState == Loredrops)
-    {
-        menuState = Character;
-    }
-    // switch from character to items or switch from options to items
-    else if (IsKeyPressed(KEY_Q) && menuState == Character || IsKeyPressed(KEY_E) && menuState == Options)
-    {
-        menuState = Items;
-    }
-    // switch from items to options
-    else if (IsKeyPressed(KEY_Q) && menuState == Items)
-    {
-        menuState = Options;
-    }
-    // switch from character to loredrops
-    else if(IsKeyPressed(KEY_E) && menuState == Character)
-    {
-        menuState = Loredrops;
-    }
-    // close
-    else if (IsKeyPressed(KEY_I) && menuState == Items || IsKeyPressed(KEY_I) && menuState == Character || IsKeyPressed(KEY_I) && menuState == Options)
-    {
-        menuState = None;
-    }
-
-
-
-
+    // add items for debug
     if(IsKeyPressed(KEY_K))
     {
         itemAdd(itemRing);
     }
-
     if(IsKeyPressed(KEY_J))
     {
         itemAdd(itemSword);
+    }
+
+    switch (menuState)
+    {
+        case None:
+            // open inventory
+            if (IsKeyPressed(KEY_I))
+            {
+                menuState = Items;
+            }
+            break;
+
+        case Items:
+            // switch menu state
+            if(IsKeyPressed(KEY_E))
+            {
+                menuState = Character;
+            }
+            else if (IsKeyPressed(KEY_Q))
+            {
+                menuState = Options;
+            }
+
+            // navigate items
+            if (IsKeyPressed(KEY_S) && currentSlot < 3)
+            {
+                currentSlot++;
+            }
+            else if (IsKeyPressed(KEY_W) && currentSlot > 0)
+            {
+                currentSlot--;
+            }
+            break;
+
+        case Character:
+            if (IsKeyPressed(KEY_Q))
+            {
+                menuState = Items;
+            }
+            else if (IsKeyPressed(KEY_E))
+            {
+                menuState = Loredrops;
+            }
+
+            break;
+
+        case Options:
+
+            if(IsKeyPressed(KEY_E))
+            {
+                menuState = Items;
+            }
+
+            break;
+
+        case Loredrops:
+            if (IsKeyPressed(KEY_Q))
+            {
+                menuState = Character;
+            }
+
+            break;
+
     }
 }
 
@@ -99,6 +129,13 @@ void Inventory::Render()
                 // this->slotOffset = this->slotOffset + textureRing.height;
 
             }
+
+            // draw select
+            DrawTexturePro(this->slotSelect,
+                           {0, 0, (float)this->slotSelect.width, (float)this->slotSelect.height},
+                           {slotPosition[currentSlot].x, slotPosition[currentSlot].y, (float)this->slotSelect.width*this->scaleFactor, (float)this->slotSelect.height*this->scaleFactor},
+                           {0, 0}, 0, WHITE);
+
             break;
 
         case Options: // draw options

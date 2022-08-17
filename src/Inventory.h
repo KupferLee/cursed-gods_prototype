@@ -23,7 +23,9 @@ protected:
     Texture2D textureLoredropsBase;
     Texture2D textureRing;
 
+    Texture2D slotSelect;
     Vector2 slotPosition[4]; // to determine x and y value for the slots
+    int currentSlot = 0;
 
     int scaleFactor = 2;
     bool isOpen = false;
