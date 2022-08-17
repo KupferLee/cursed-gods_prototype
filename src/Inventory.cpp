@@ -9,6 +9,7 @@ Inventory::Inventory()
     this->textureInventoryBase = LoadTexture("assets/graphics/UI/Inventory_Base_Platzhalter.png");
     this->textureOptionsBase = LoadTexture("assets/graphics/UI/Options_Base_Platzhalter.png");
     this->textureCharacterspriteBase = LoadTexture("assets/graphics/UI/Charactersprite_Base_Platzhalter.png");
+    this->textureLoredropsBase = LoadTexture("assets/graphics/UI/Loredrops_Base_Platzhalter.png");
 
     this->textureRing = LoadTexture("assets/graphics/UI/Slot_Ring.png");
 
@@ -34,13 +35,13 @@ void Inventory::Update()
     {
         menuState = Items;
     }
-    // switch from inventory to character
-    else if (IsKeyPressed(KEY_E) && menuState == Items)
+    // switch from inventory to character or from loredrops to character
+    else if (IsKeyPressed(KEY_E) && menuState == Items || IsKeyPressed(KEY_Q) && menuState == Loredrops)
     {
         menuState = Character;
     }
-    // switch from character to items
-    else if (IsKeyPressed(KEY_Q) && menuState == Character)
+    // switch from character to items or switch from options to items
+    else if (IsKeyPressed(KEY_Q) && menuState == Character || IsKeyPressed(KEY_E) && menuState == Options)
     {
         menuState = Items;
     }
@@ -49,10 +50,10 @@ void Inventory::Update()
     {
         menuState = Options;
     }
-    // switch from options to items
-    else if (IsKeyPressed(KEY_E) && menuState == Options)
+    // switch from character to loredrops
+    else if(IsKeyPressed(KEY_E) && menuState == Character)
     {
-        menuState = Items;
+        menuState = Loredrops;
     }
     // close
     else if (IsKeyPressed(KEY_I) && menuState == Items || IsKeyPressed(KEY_I) && menuState == Character || IsKeyPressed(KEY_I) && menuState == Options)
@@ -114,6 +115,13 @@ void Inventory::Render()
                            {0, 0}, 0, WHITE);
             break;
 
+        case Loredrops:
+            DrawTexturePro(this->textureLoredropsBase,
+                           {0, 0, (float)this->textureLoredropsBase.width, (float)this->textureLoredropsBase.height},
+                           {(float)GetScreenWidth()/2 - this->textureLoredropsBase.width, (float)GetScreenHeight() / 2 - this->textureLoredropsBase.height, (float)this->textureLoredropsBase.width * this->scaleFactor, (float)this->textureLoredropsBase.height * this->scaleFactor},
+                           {0, 0}, 0, WHITE);
+            break;
+
     }
 }
 
@@ -132,6 +140,8 @@ void Inventory::itemAdd(item_base *item)
         std::cout << "DEBUG: Inventory full." << std::endl;
     }
 }
+
+bool Inventory::IsOpen() { return isOpen; }
 
 void Inventory::HandleInput() { }
 

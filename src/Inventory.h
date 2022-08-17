@@ -14,12 +14,13 @@
 
 class Inventory : public GameObject {
 protected:
-    enum MenuState {None, Items, Options, Character };
+    enum MenuState {None, Items, Options, Character, Loredrops };
     MenuState menuState = None;
 
     Texture2D textureInventoryBase;
     Texture2D textureOptionsBase;
     Texture2D textureCharacterspriteBase;
+    Texture2D textureLoredropsBase;
     Texture2D textureRing;
 
     Vector2 slotPosition[4]; // to determine x and y value for the slots
@@ -41,6 +42,8 @@ public:
     void Update(float, std::vector<Rectangle> &) override;
     void Render() override;
     void HandleInput() override;
+
+    bool IsOpen();
 
     Inventory();
 };
