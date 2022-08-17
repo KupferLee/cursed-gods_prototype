@@ -1,6 +1,7 @@
 #pragma once
 #include "Actor.h"
 #include "raymath.h"
+#include "DRAW.h"
 
 enum class Animation
 {
@@ -11,7 +12,7 @@ enum class Animation
     JumpLeft
 };
 
-class player : public Actor
+class player : public Actor, public DRAW
 {
 public:
     player(){};
