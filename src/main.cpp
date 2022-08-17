@@ -27,8 +27,8 @@ int main() {
     player Test;
     std::vector<Rectangle> Ground;
 
-    const char* mapTexture = "assets/graphics/testTiles/TileAtlasBase1.png";
-    const char* mapDescription = "assets/graphics/testTiles/hallway1.json";
+    const char* mapTexture = "assets/graphics/Map/Test-LevelGit.png"; //columns = 14
+    const char* mapDescription = "assets/graphics/Map/THIS.json";
     std::shared_ptr<ProtectedTexture> mapTex = std::make_shared<ProtectedTexture>(mapTexture);
     std::shared_ptr<ProtectedTileset> description = std::make_shared<ProtectedTileset>(mapDescription);
 
@@ -97,6 +97,7 @@ int main() {
 
                 case (state_level1):
                     ClearBackground(WHITE);
+                    TestScene->Render();
                     DrawText("Level 1", 10, 10, 30, LIGHTGRAY);
                     DrawText("Press F to start fight.", 10, 40, 30, LIGHTGRAY);
                     Ground.push_back(Rectangle{0, 500, static_cast<float>(GetScreenWidth()), 40});
@@ -107,7 +108,6 @@ int main() {
                     }
                     Test.Update(deltaTime, Ground);
                     Test.Render();
-                    TestScene->Render();
                     break;
 
                 case (state_fight):

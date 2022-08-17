@@ -10,7 +10,8 @@
 */
 
 #include "Scene.h"
-
+#include "config.h"
+#include <iostream>
 Scene::Scene(const std::shared_ptr<player> &player, const std::shared_ptr<ProtectedTexture> &map, const std::shared_ptr<ProtectedTileset> &tileAtlas)
             : player_(player), map_(map), tileAtlas_(tileAtlas){
     this->rec_.x = 0.f;
@@ -32,10 +33,10 @@ Scene::Scene(const std::shared_ptr<player> &player, const std::shared_ptr<Protec
         }
 
         if (this->tileAtlas_->getTileAtlas().at(i) != 0) {
-            this->recs_.push_back({static_cast<float> ((this->tileAtlas_->getTileAtlas().at(i) - 1)
+            this->recs_.push_back({static_cast<float> ((this->tileAtlas_->getTileAtlas().at(i)-1)
                                                        % this->tileAtlas_->getColumns())
                                    * this->rec_.width,
-                                   floor(static_cast<float> (this->tileAtlas_->getTileAtlas().at(i) - 1)
+                                   floor(static_cast<float> (this->tileAtlas_->getTileAtlas().at(i)-1)
                                          / static_cast<float> (this->tileAtlas_->getColumns()))
                                    * this->rec_.width});
             this->vecs_.push_back(vec_);
@@ -76,11 +77,12 @@ void Scene::HandleInputScene(){}
 void Scene::UpdateScene() {}
 
 void Scene::RenderScene() {
-    for (int i = 0; i < recs_.size(); ++i) {
-        this->rec_.x = this->recs_.at(i).x;
-        this->rec_.y = this->recs_.at(i).y;
-        this->vec_.x = this->vecs_.at(i).x;
-        this->vec_.y = this->vecs_.at(i).y;
-        DrawTextureRec(this->map_->getTexture(), this->rec_, this->vec_, WHITE);
+    DrawTexturePro(this->map_->getTexture(),{0,0,static_cast<float>(Game::ScreenWidth),static_cast<float>(Game::ScreenWidth)},{0,0,static_cast<float>(Game::ScreenWidth),static_cast<float>(Game::ScreenWidth)},{},{}, WHITE);
+    for (int i = 0; i < tileAtlas_->getHitboxes().size(); ++i){
+        DrawRectangle(tileAtlas_->getHitboxes().at(i).x,
+                      tileAtlas_->getHitboxes().at(i).y,
+                      tileAtlas_->getHitboxes().at(i).width,
+                      tileAtlas_->getHitboxes().at(i).height,
+                      RED);
     }
 }

@@ -28,63 +28,22 @@ ProtectedTileset::ProtectedTileset(const char *filename)
     this->file_ >> this->description_;
     this->file_.close();
 
-    columns_ = 17;
-    tilesX_ = description_["width"];
-    tilesY_ = description_["height"];
+    columns_ = 14;
+    tilesX_ = 280;
+    tilesY_ = 180;
 
     //push the json data into vectors --> maybe adjustment to the actual layers
     for (auto const &layer: this->description_["layers"])
     {
-        if (layer["type"] == "tilelayer" && layer["visible"])
-        {
-            for (auto const &tileId: layer["data"])
-            {
-                this->tileAtlas_.push_back(static_cast<int>(tileId.get<int>()));
-            }
-        }
-       if (layer["type"] == "objectgroup" && layer["name"] == "Triggerbox_Treppe")
-        {
-            for (auto const &object: layer["objects"])
-            {
-                this->triggerboxes_.push_back({static_cast<float>(object["x"].get<int>()),
-                                               static_cast<float>(object["y"].get<int>()),
-                                               static_cast<float>(object["width"].get<int>()),
-                                               static_cast<float>(object["height"].get<int>())});
-            }
-        }
-        if (layer["type"] == "objectgroup" && layer["name"] == "Hitbox_Wand")
+       if (layer["type"] == "objectgroup" && layer["name"] == "Hitbox_Ground")
         {
             for (auto const &object: layer["objects"])
             {
                 this->hitboxes_.push_back({static_cast<float>(object["x"].get<int>()),
-                                           static_cast<float>(object["y"].get<int>()),
-                                           static_cast<float>(object["width"].get<int>()),
-                                           static_cast<float>(object["height"].get<int>())});
-            }
-        }
-        if (layer["type"] == "objectgroup" && layer["name"] == "Hitbox_Gelaender")
-        {
-            for (auto const &object: layer["objects"])
-            {
-                this->hitboxes_.push_back({static_cast<float>(object["x"].get<int>()),
-                                           static_cast<float>(object["y"].get<int>()),
-                                           static_cast<float>(object["width"].get<int>()),
-                                           static_cast<float>(object["height"].get<int>())});
-            }
-        }
-        if (layer["type"] == "objectgroup" && layer["name"] == "Triggerbox_Tueren")
-        {
-            for (auto const &object: layer["objects"])
-            {
-                this->triggerboxes_.push_back({static_cast<float>(object["x"].get<int>()),
                                                static_cast<float>(object["y"].get<int>()),
                                                static_cast<float>(object["width"].get<int>()),
                                                static_cast<float>(object["height"].get<int>())});
             }
-        }
-        else
-        {
-            TraceLog(LOG_INFO, "No Triggerboxes"); //example for layer debugging
         }
     }
     TraceLog(LOG_INFO, "ProtectedTiles constructor called");
@@ -102,7 +61,7 @@ std::vector<Rectangle> ProtectedTileset::getHitboxes()
 
 std::vector<Rectangle> ProtectedTileset::getTriggerboxes()
 {
-    return this->triggerboxes_;
+    return this->hitboxesGround_;
 }
 
 ProtectedTileset::~ProtectedTileset()

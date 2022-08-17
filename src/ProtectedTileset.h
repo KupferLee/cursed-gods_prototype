@@ -7,15 +7,15 @@
 
 class ProtectedTileset  final {
 private:
-    std::ifstream file_{};
-    std::vector <int> tileAtlas_{};
-    std::vector <Rectangle> hitboxes_{};
-    std::vector <Rectangle> triggerboxes_{};
-    nlohmann::json description_{};
+    std::ifstream file_;
+    std::vector <int> tileAtlas_;
+    std::vector <Rectangle> hitboxes_;
+    std::vector <Rectangle> hitboxesGround_;
+    nlohmann::json description_;
 
-    int columns_{};
-    int tilesX_{};
-    int tilesY_{};
+    int columns_;
+    int tilesX_;
+    int tilesY_;
 
 public:
     ProtectedTileset()=delete;
