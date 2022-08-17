@@ -75,6 +75,7 @@ void player::UpdatePlayer(float delta, std::vector<Rectangle> &Ground)
     }
     else if(Momentum.y > fGravity)
     {
+        frame = 2;
         if(Momentum.x < 0)
         {
             Animation = Animation::JumpLeft;
@@ -117,7 +118,8 @@ void player::UpdatePlayer(float delta, std::vector<Rectangle> &Ground)
     if(Frametime >= FrameDuration)
     {
         Frametime -= FrameDuration;
-        SetNextFrame();
+        if (frame == 2 && Animation == Animation::JumpRight || Animation == Animation::JumpLeft){}
+        else SetNextFrame();
     }
 }
 
