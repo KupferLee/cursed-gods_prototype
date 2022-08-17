@@ -15,6 +15,7 @@
 Scene::Scene(const std::shared_ptr<player> &player, const std::shared_ptr<ProtectedTexture> &map, const std::shared_ptr<ProtectedTileset> &tileAtlas)
             : player_(player), map_(map), tileAtlas_(tileAtlas) {
     player_->SetGround(tileAtlas_->getHitboxesGround());
+    player_->SetWalls(tileAtlas_->getHitboxes());
     TraceLog(LOG_INFO, "Scene constructor called");
 }
 void Scene::Render() {

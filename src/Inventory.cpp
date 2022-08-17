@@ -49,6 +49,7 @@ void Inventory::Update()
             if (IsKeyPressed(KEY_I))
             {
                 menuState = Items;
+                isOpen = true;
             }
             break;
 
@@ -65,6 +66,7 @@ void Inventory::Update()
             else if (IsKeyPressed(KEY_I))
             {
                 menuState = Closed;
+                isOpen = false;
             }
 
             // navigate items
@@ -91,6 +93,7 @@ void Inventory::Update()
             else if (IsKeyPressed(KEY_I))
             {
                 menuState = Closed;
+                isOpen = false;
             }
 
             // do other stuff here
@@ -105,6 +108,7 @@ void Inventory::Update()
             else if (IsKeyPressed(KEY_I))
             {
                 menuState = Closed;
+                isOpen = false;
             }
 
             // do other stuff here
@@ -211,6 +215,8 @@ void Inventory::itemAdd(item_base *item)
 }
 
 bool Inventory::IsOpen() { return isOpen; }
+
+int Inventory::GetCurrentState() { return menuState; }
 
 void Inventory::HandleInput() { }
 
