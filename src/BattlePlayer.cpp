@@ -3,3 +3,8 @@
 //
 
 #include "BattlePlayer.h"
+
+BattlePlayer::BattlePlayer()
+{
+
+}

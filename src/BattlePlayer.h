@@ -5,8 +5,15 @@
 #ifndef RAYLIBSTARTER_BATTLEPLAYER_H
 #define RAYLIBSTARTER_BATTLEPLAYER_H
 
+#include "BattleActor.h"
 
-class BattlePlayer {
+
+class BattlePlayer : public BattleActor {
+public:
+    BattlePlayer();
+    attack moves[4];
+
+private:
 
 };
 
