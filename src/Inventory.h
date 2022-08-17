@@ -47,6 +47,7 @@ public:
     void Render() override;
     void HandleInput() override;
 
+    int GetCurrentState();
     bool IsOpen();
 
     Inventory();

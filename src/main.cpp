@@ -51,11 +51,13 @@ int main() {
                 inventory.Update();
 
                 // State Wechsel
-                if (IsKeyPressed(KEY_ENTER))
+                // if in options und press enter
+                if (IsKeyPressed(KEY_ENTER) && inventory.GetCurrentState() == 2)
                 {
                     gameState = state_title;
                 }
-                if (IsKeyPressed(KEY_F))
+                // if inventory not open then change to fight on key
+                if (IsKeyPressed(KEY_F) && inventory.IsOpen() == false)
                 {
                     gameState = state_fight;
                 }
