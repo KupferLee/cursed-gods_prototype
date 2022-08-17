@@ -55,21 +55,23 @@ void Inventory::Render()
                        {0, 0, (float)this->texture.width, (float)this->texture.height},
                        {(float)GetScreenWidth()/2 - this->texture.width, (float)GetScreenHeight()/2 - this->texture.height, (float)this->texture.width*this->scaleFactor, (float)this->texture.height*this->scaleFactor},
                        {0, 0}, 0, WHITE);
-    }
 
-    // draw items
-    for (int i = 0; i < 4; i++)
-    {
-        if (this->currentItem > i)
+        // draw items
+        for (int i = 0; i < 4; i++)
         {
-            DrawTexturePro(this->inventoryContainer.getItem(i)->GetTexture(),
-                           {0, 0, (float)this->inventoryContainer.getItem(i)->GetTexture().width, (float)this->inventoryContainer.getItem(i)->GetTexture().height},
-                           {slotPosition[i].x, slotPosition[i].y, (float)this->inventoryContainer.getItem(i)->GetTexture().width*this->scaleFactor, (float)this->inventoryContainer.getItem(i)->GetTexture().height*this->scaleFactor},
-                           {0, 0}, 0, WHITE);
-        }
-        // this->slotOffset = this->slotOffset + textureRing.height;
+            if (this->currentItem > i)
+            {
+                DrawTexturePro(this->inventoryContainer.getItem(i)->GetTexture(),
+                               {0, 0, (float)this->inventoryContainer.getItem(i)->GetTexture().width, (float)this->inventoryContainer.getItem(i)->GetTexture().height},
+                               {slotPosition[i].x, slotPosition[i].y, (float)this->inventoryContainer.getItem(i)->GetTexture().width*this->scaleFactor, (float)this->inventoryContainer.getItem(i)->GetTexture().height*this->scaleFactor},
+                               {0, 0}, 0, WHITE);
+            }
+            // this->slotOffset = this->slotOffset + textureRing.height;
 
+        }
     }
+
+
 
 }
 

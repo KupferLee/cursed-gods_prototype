@@ -6,7 +6,7 @@
 #include "config.h"
 
 #include "player.h"
-#include "Inventory.h"
+#include "Menus.h"
 
 int main() {
     // Raylib initialization
@@ -21,7 +21,7 @@ int main() {
     // Your own initialization code here
     // ...
     // ...
-    Inventory* inventory = new Inventory;
+    Menus* GUI_Menu = new Menus;
     player Test;
     std::vector<Rectangle> Ground;
 
@@ -48,7 +48,7 @@ int main() {
                 break;
 
             case (state_level1):
-                inventory->Update();
+                GUI_Menu->Update();
 
                 // State Wechsel
                 if (IsKeyPressed(KEY_ENTER))
@@ -97,7 +97,7 @@ int main() {
                     Test.Update(deltaTime, Ground);
                     Test.Render();
 
-                    inventory->Render();
+                    GUI_Menu->Render();
                     break;
 
                 case (state_fight):
