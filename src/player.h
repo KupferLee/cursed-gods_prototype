@@ -47,5 +47,5 @@ private:
     int iMaxJumpFrames = 6;
     int iJumpFrames = 0;
     Vector2 Momentum = {0 ,0};
-	Vector2 vPosition = { 0, 450}; // Hardcoded weil test Texture ein Raylib Rec ist
+	Vector2 vPosition = { 400, 450}; // Hardcoded weil test Texture ein Raylib Rec ist
 };

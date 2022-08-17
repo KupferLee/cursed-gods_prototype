@@ -40,7 +40,12 @@ void Scene::Update() {
 }
 
 
-void Scene::UpdateScene() {}
+void Scene::UpdateScene()
+{
+    float delta = GetFrameTime();
+    std::vector<Rectangle> parameter = tileAtlas_->getHitboxesGround();
+    player_->Update(delta, parameter);
+}
 
 void Scene::RenderScene() {
     DrawTexturePro(this->map_->getTexture(),{0,0,static_cast<float>(Game::ScreenWidth),static_cast<float>(Game::ScreenWidth)},{0,0,static_cast<float>(Game::ScreenWidth),static_cast<float>(Game::ScreenWidth)},{},{}, WHITE);
@@ -79,4 +84,5 @@ void Scene::RenderScene() {
                       tileAtlas_->getTriggerboxesBreakable().at(i).height,
                       PINK);
     }
+    player_->Render();
 }
