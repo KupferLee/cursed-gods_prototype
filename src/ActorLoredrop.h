@@ -13,6 +13,7 @@ enum class WhichLoredrop
     base,
     first,
     second,
+    third,
     none
 };
 
@@ -28,12 +29,17 @@ public:
 
 protected:
     //enum WhichLoredrop;
-    // WhichLoredrop currentLoredrop = WhichLoredrop::none;
-
+    WhichLoredrop currentLoredrop = WhichLoredrop::none;
     player Katara;
-    bool isVisible = false;
 
-    // Texture2D loredropBox[4];
+    Texture2D loredropBase;
+    Texture2D loredropOne;
+    Texture2D loredropTwo;
+    Texture2D loredropThree;
+
+private:
+    void InternUpdate();
+    void InternRender();
 
 };
 
