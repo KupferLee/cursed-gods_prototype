@@ -94,39 +94,55 @@ void player::UpdatePlayer(float delta)
     }
     vNewPos = Vector2Add(vPosition, Momentum);
 
+    //Wall Collision
+    WallCollide = false;
+    for (const auto& index : Walls)
+    {
+        if(CheckCollisionRecs(index, Rectangle{vNewPos.x, vNewPos.y, 50, 47})) //Kataras Größe Hardcoded und 2 Pixel Weniger, da die Hitboxen sometimes Slightly Off sind
+        {
+            WallCollide = true;
+        }
+    }
+
     bIsInAir = true;
     bIsOnGround = false;
 
     //Ground Collision;
     for (const auto& index : Ground)
     {
-        if(CheckCollisionRecs(index, Rectangle{vNewPos.x, vNewPos.y + 49, 50, 1}))
+        if(CheckCollisionRecs(index, Rectangle{vNewPos.x, vNewPos.y + 49, 50, 1})) //Kataras Größe Hardcoded
         {
             if(vNewPos.y >= vPosition.y)
-            {bIsInAir = false; Momentum.y = 0; bIsOnGround = true; iJumpFrames = 0;}
+            {
+                vPosition.y = index.y - 50; //Kataras Größe Hardcoded;
+                bIsInAir = false;
+                bIsOnGround = true;
+            }
         }
-        else if (CheckCollisionRecs(index, Rectangle{vNewPos.x, vNewPos.y, 50, 1}))
+        else if (CheckCollisionRecs(index, Rectangle{vNewPos.x, vNewPos.y, 50, 1})) //Kataras Größe Hardcoded
         {
             if (vNewPos.y < vPosition.y)
-            {Momentum.y = 0;}
+            {
+                Momentum.y = 0;
+            }
         }
      }
-    //Wall Collision
-    WallCollide = false;
-    for (const auto& index : Walls)
-    {
-        if(CheckCollisionRecs(index, Rectangle{vNewPos.x, vNewPos.y, 50, 48}))
-        {
-            WallCollide = true;
-        }
-    }
 
-    if(!bIsOnGround)
+    if(bIsOnGround)
+    {
+        iJumpFrames = 0;
+        Momentum.y = 0;
+    }
+    else
     {
         vPosition.y = vNewPos.y;
     }
 
-    if(!WallCollide)
+    if(WallCollide)
+    {
+
+    }
+    else
     {
         vPosition.x = vNewPos.x;
     }
