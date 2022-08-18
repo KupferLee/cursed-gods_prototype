@@ -15,13 +15,9 @@ private:
     std::shared_ptr <player> player_;
     Music theme_;
     Camera2D cam_;
+    bool drawhitbox_;
 
 
-    int counter_;
-    Vector2 vec_;
-    Rectangle rec_;
-    std::vector <Vector2> vecs_;
-    std::vector <Rectangle> recs_;
 
 public:
 

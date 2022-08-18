@@ -65,7 +65,7 @@ int main() {
                     Camera2D({Game::ScreenWidth/2,Game::ScreenHeight/2}));
 
     std::unique_ptr<Scene> TestTitle = std::make_unique<Scene>(titleTex,
-                                                           titlemusic);
+                                                          titlemusic);
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
     {
