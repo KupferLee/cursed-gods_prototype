@@ -63,14 +63,15 @@ void Scene::Update() {
 
 void Scene::UpdateScene()
 {
+
     UpdateMusicStream(theme_);
     if(IsKeyPressed(KEY_H) && !drawhitbox_) drawhitbox_ = true;
     else if(IsKeyPressed(KEY_H) && drawhitbox_) drawhitbox_ = false;
-
     float delta = GetFrameTime();
     if(player_ != nullptr) {
         player_->Update(delta);
         cam_.target = player_->GetPosition();
+        gameover_ = false;
         for(int i = 0; i < tileAtlas_->getTriggerboxesStalagmit().size(); ++i){
             if(CheckCollisionRecs({player_->GetPosition().x, player_->GetPosition().y, 32, 32},
                                    tileAtlas_->getTriggerboxesStalagmit().at(i)))
