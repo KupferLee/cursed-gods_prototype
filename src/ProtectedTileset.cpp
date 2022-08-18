@@ -78,17 +78,6 @@ ProtectedTileset::ProtectedTileset(const char *filename)
                                                         static_cast<float>(object["height"].get<int>())});
             }
         }
-
-        if (layer["type"] == "objectgroup" && layer["name"] == "Triggerbox_Breakable")
-        {
-            for (auto const &object: layer["objects"])
-            {
-                this->triggerboxesBreakable_.push_back({static_cast<float>(object["x"].get<int>()),
-                                                        static_cast<float>(object["y"].get<int>() - binZscheKonstante_),
-                                                        static_cast<float>(object["width"].get<int>()),
-                                                        static_cast<float>(object["height"].get<int>())});
-            }
-        }
     }
     TraceLog(LOG_INFO, "ProtectedTiles constructor called");
 }
@@ -126,8 +115,4 @@ std::vector<Rectangle> ProtectedTileset::getTriggerboxesStalagtit() {
 
 std::vector<Rectangle> ProtectedTileset::getTriggerboxesStalagmit() {
     return this->triggerboxesStalagmit_;
-}
-
-std::vector<Rectangle> ProtectedTileset::getTriggerboxesBreakable() {
-    return this->triggerboxesBreakable_;
 }

@@ -17,7 +17,7 @@ Scene::Scene(const std::shared_ptr<player> &player,
              const std::shared_ptr<ProtectedTileset> &tileAtlas,
              const Music &theme,
              const Camera2D &cam)
-            : player_(player), map_(map), tileAtlas_(tileAtlas), theme_(theme), cam_(cam), drawhitbox_(false) {
+            : player_(player), map_(map), tileAtlas_(tileAtlas), theme_(theme), cam_(cam), drawhitbox_(false), gameover_(false) {
 
     if(player_ != nullptr){
         player_->SetGround(tileAtlas_->getHitboxesGround());
@@ -71,8 +71,18 @@ void Scene::UpdateScene()
     if(player_ != nullptr) {
         player_->Update(delta);
         cam_.target = player_->getPosition();
+        for(int i = 0; i < tileAtlas_->getTriggerboxesStalagmit().size(); ++i){
+            if(CheckCollisionRecs({player_->getPosition().x,player_->getPosition().y,32,32},
+                                   tileAtlas_->getTriggerboxesStalagmit().at(i)))
+            {
+                gameover_ = true;
+            }
+            else
+            {
+                gameover_ = false;
+            }
+        }
     }
-
 }
 
 void Scene::RenderScene() {
@@ -119,13 +129,6 @@ void Scene::RenderScene() {
                               tileAtlas_->getTriggerboxesStalagmit().at(i).height,
                               BLUE);
             }
-            for (int i = 0; i < tileAtlas_->getTriggerboxesBreakable().size(); ++i) {
-                DrawRectangle(tileAtlas_->getTriggerboxesBreakable().at(i).x,
-                              tileAtlas_->getTriggerboxesBreakable().at(i).y,
-                              tileAtlas_->getTriggerboxesBreakable().at(i).width,
-                              tileAtlas_->getTriggerboxesBreakable().at(i).height,
-                              PINK);
-            }
             for (int i = 0; i < tileAtlas_->getHitboxesGround().size(); ++i) {
                 DrawRectangle(tileAtlas_->getHitboxesGround().at(i).x,
                               tileAtlas_->getHitboxesGround().at(i).y,
@@ -142,4 +145,8 @@ void Scene::RenderScene() {
 
 Camera2D Scene::getCamera() {
     return cam_;
+}
+
+int Scene::getGameOver() {
+    return gameover_;
 }

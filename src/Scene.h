@@ -6,6 +6,7 @@
 #include "ProtectedTileset.h"
 #include <memory>
 
+
 class Scene final : public GameObject
 {
 private:
@@ -16,6 +17,7 @@ private:
     Music theme_;
     Camera2D cam_;
     bool drawhitbox_;
+    bool gameover_;
 
 
 
@@ -48,4 +50,5 @@ public:
     void RenderScene();
 
     Camera2D getCamera();
+    int getGameOver();
 };
