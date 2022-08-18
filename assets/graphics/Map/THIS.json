@@ -7217,7 +7217,7 @@
          "offsety":0.208808,
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -10731,8 +10731,8 @@
                  "name":"",
                  "rotation":0,
                  "visible":true,
-                 "width":32,
-                 "x":4704,
+                 "width":16,
+                 "x":4720,
                  "y":1824
                 }],
          "opacity":1,
@@ -10825,7 +10825,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -11012,7 +11012,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }],
