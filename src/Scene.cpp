@@ -17,7 +17,7 @@ Scene::Scene(const std::shared_ptr<player> &player,
              const std::shared_ptr<ProtectedTileset> &tileAtlas,
              const Music &theme,
              const Camera2D &cam)
-            : player_(player), map_(map), tileAtlas_(tileAtlas), theme_(theme), cam_(cam), drawhitbox_(true) {
+            : player_(player), map_(map), tileAtlas_(tileAtlas), theme_(theme), cam_(cam), drawhitbox_(false) {
 
     if(player_ != nullptr){
         player_->SetGround(tileAtlas_->getHitboxesGround());
