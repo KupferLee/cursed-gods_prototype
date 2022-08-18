@@ -30,7 +30,8 @@ void BattleScreen::Update()
         this->currentSlot--;
     }
 
-    harpye.Update(GetFrameTime());
+    // update actors
+    harpye.UpdateAnimation(GetFrameTime(), 5, 0.22f);
 }
 
 void BattleScreen::Render()
@@ -69,7 +70,7 @@ void BattleScreen::Render()
                    {0, 0}, 0, WHITE);
 
     // draw actors
-    harpye.Render();
+    harpye.RenderAnimation(this->enemySlots[0], 5, 1);
 }
 
 void BattleScreen::SetSlots()
@@ -91,6 +92,11 @@ void BattleScreen::SetSlots()
 
     this->buttonSlots[3].x = this->buttonSlots[2].x + this->buttonDimensions.x * scaleFactor;
     this->buttonSlots[3].y = this->buttonSlots[2].y;
+
+    // setting up actor slots
+    this->enemySlots[0] = {0, 0,32 * actorScale, 32 * actorScale};
+    this->enemySlots[1] = {0, 32 * actorScale,32 * actorScale, 32 * actorScale};
+    this->playerSlot = {(float)GetScreenWidth()/2 - (GetScreenWidth()/2)/2, (float)(GetScreenHeight(), 32 * actorScale, 32 * actorScale)};
 }
 
 void BattleScreen::Update(float) { }

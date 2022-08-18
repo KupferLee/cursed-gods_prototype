@@ -12,6 +12,9 @@ class BattleScreen : public GameObject {
 protected:
     // Actors
     BattleHarpye harpye;
+    Rectangle enemySlots[2];
+    Rectangle playerSlot;
+    float actorScale = 6.f;
 
     // GUI
     Texture2D background;

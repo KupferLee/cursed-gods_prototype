@@ -29,10 +29,15 @@ public:
     // virtual void GetCurrentAttack();
     // virtual void Attack(attack currentAttack);
 
-    //virtual void Render();
-    //virtual void Update(float delta);
+    virtual void RenderAnimation(Rectangle position, int maxFramesInX, int maxFramesInY);
+    virtual void UpdateAnimation(float delta, int framesInRow, float frameDuration);
+
 protected:
     Rectangle position;
+    Texture2D animation;
+
+    float frameTime = 0.f;
+    int frame = 0;
 
 };
 
