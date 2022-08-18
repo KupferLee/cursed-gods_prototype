@@ -100,7 +100,7 @@ void BattleScreen::SetSlots()
     // setting up actor slots
     // enemies and player are 200 distance of center of screen
     this->enemySlots[0] = {(float)(GetScreenWidth()/2) + 200, 40, 64 * actorScale, 64 * actorScale};
-    this->enemySlots[1] = {(float)(GetScreenWidth()/2) + 200, 64 * actorScale + 10, 48 * actorScale, 32 * actorScale};
+    this->enemySlots[1] = {(float)(GetScreenWidth()/2) + 200, 64 * actorScale, 48 * actorScale, 32 * actorScale};
     this->playerSlot = {(float)(GetScreenWidth()/2) - 200 - (32 * actorScale), (float)(GetScreenHeight()/2) - (32 * actorScale) + 70, 32 * this->actorScale, 32 * this->actorScale};
 
 }

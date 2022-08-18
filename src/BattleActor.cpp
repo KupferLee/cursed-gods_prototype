@@ -23,6 +23,6 @@ void BattleActor::RenderAnimation(Rectangle position, int maxFramesInX, int maxF
     // draw healthbar
     DrawTexturePro(this->healthBar,
                    {0, 0, (float)this->healthBar.width, (float)this->healthBar.height},
-                   {position.x, position.y - 20, (float)this->healthBar.width * 3, (float)this->healthBar.height * 3},
+                   {position.x + (this->healthBar.width*3)/2, position.y - 20, (float)this->healthBar.width * 3, (float)this->healthBar.height * 3},
                    {0, 0}, 0, WHITE);
 }
