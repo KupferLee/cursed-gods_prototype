@@ -60,8 +60,8 @@ int main() {
                     levelmusic,
                     Camera2D({Game::ScreenWidth/2,Game::ScreenHeight/2}));
 
-    std::unique_ptr<Scene> TestTitle = std::make_unique<Scene>(titleTex,
-                                                           titlemusic);
+    //std::unique_ptr<Scene> TestTitle = std::make_unique<Scene>(titleTex,
+                                                          // titlemusic);
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
     {
@@ -120,26 +120,26 @@ int main() {
         //PlayMusicStream(leveltheme);
 
         //StopMusicStream(leveltheme);
-
+        BeginMode2D(TestScene->getCamera());
         switch(gameState)
             {
                 case (state_title):
                     ClearBackground(WHITE);
-                    TestTitle->Update();
-                    TestTitle->Render();
+                    //TestTitle->Update();
+                    //TestTitle->Render();
                     DrawText("Title", 10, 10, 30, LIGHTGRAY);
                     DrawText("Press Enter to start Level 1.", 10, 40, 30, LIGHTGRAY);
                     break;
 
                 case (state_level1):
                     // playing screen
-                    BeginMode2D(TestScene->getCamera());
+
                     ClearBackground(WHITE);
                     TestScene->Update();
                     TestScene->Render();
                     DrawText("Level 1", 10, 10, 30, LIGHTGRAY);
                     DrawText("Press F to start fight.", 10, 40, 30, LIGHTGRAY);
-                    EndMode2D();
+
 
                     // inventory
                     inventory.Render();
@@ -158,7 +158,7 @@ int main() {
                     break;
 
             }
-
+        EndMode2D();
         EndDrawing();
     } // Main game loop end
 

@@ -59,5 +59,6 @@ private:
     int iMaxJumpFrames = 6;
     int iJumpFrames = 0;
     Vector2 Momentum = {0 ,0};
-	Vector2 vPosition = { 400,400}; // Hardcoded weil test Texture ein Raylib Rec ist
+	Vector2 vPosition = { 450, 600}; // Hardcoded weil test Texture ein Raylib Rec ist
+    Vector2 vScreenPosition = {Game::ScreenWidth/2, Game::ScreenHeight};
 };

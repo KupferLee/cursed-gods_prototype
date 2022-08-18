@@ -25,6 +25,12 @@ Scene::Scene(const std::shared_ptr<player> &player,
         cam_.target = player_->getPosition();
         cam_.zoom = 1.f;
     }
+    if(tileAtlas_ != nullptr){
+        for (int i = 0; i < tileAtlas_->getHitboxes().size(); ++i){
+            std::cout << "x: " << tileAtlas_->getHitboxes().at(i).x << "y:" << tileAtlas_->getHitboxes().at(i).y << std::endl;
+        }
+    }
+
     TraceLog(LOG_INFO, "Scene constructor called");
 }
 
@@ -72,20 +78,12 @@ void Scene::UpdateScene()
 }
 
 void Scene::RenderScene() {
-    PlayMusicStream(theme_);
-    if(map_->getTextureWidth() > Game::ScreenWidth) {
-        DrawTexturePro(this->map_->getTexture(),
-                       {0, 0, static_cast<float>(Game::ScreenWidth), static_cast<float>(Game::ScreenWidth)},
-                       {0, 0, static_cast<float>(Game::ScreenWidth), static_cast<float>(Game::ScreenHeight)}, {}, {},
+    //PlayMusicStream(theme_);
+    DrawTexturePro(this->map_->getTexture(),
+                       {player_->getPosition().x, player_->getPosition().y, static_cast<float>(Game::ScreenWidth), static_cast<float>(Game::ScreenWidth)},
+                       {0,0, static_cast<float>(Game::ScreenWidth)*cam_.zoom, static_cast<float>(Game::ScreenHeight)*cam_.zoom}, {}, {},
                        WHITE);
-    }
-    else
-    {
-        DrawTexturePro(this->map_->getTexture(),
-                       {0, 0, static_cast<float>(map_->getTextureWidth()), static_cast<float>(map_->getTextureHeight())},
-                       {0, 0, static_cast<float>(Game::ScreenWidth), static_cast<float>(Game::ScreenHeight)}, {}, {},
-                       WHITE);
-    }
+
     if(tileAtlas_ != nullptr){
         for (int i = 0; i < tileAtlas_->getHitboxes().size(); ++i){
             DrawRectangle(tileAtlas_->getHitboxes().at(i).x,
