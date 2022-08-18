@@ -80,8 +80,8 @@ void Scene::UpdateScene()
 void Scene::RenderScene() {
     //PlayMusicStream(theme_);
     DrawTexturePro(this->map_->getTexture(),
-                       {player_->getPosition().x - Game::ScreenWidth/2, player_->getPosition().y - Game::ScreenHeight/2, static_cast<float>(Game::ScreenWidth), static_cast<float>(Game::ScreenWidth)},
-                       {player_->getPosition().x - Game::ScreenWidth/2,player_->getPosition().y - Game::ScreenHeight/2, static_cast<float>(Game::ScreenWidth)*cam_.zoom, static_cast<float>(Game::ScreenHeight)*cam_.zoom}, {}, {},
+                       {player_->getPosition().x - Game::ScreenWidth/2-15, player_->getPosition().y - Game::ScreenHeight/2-15, static_cast<float>(Game::ScreenWidth)+30, static_cast<float>(Game::ScreenWidth)+30},
+                       {player_->getPosition().x - Game::ScreenWidth/2-15,player_->getPosition().y - Game::ScreenHeight/2-15, static_cast<float>(Game::ScreenWidth)*cam_.zoom+30, static_cast<float>(Game::ScreenHeight)*cam_.zoom+30}, {}, {},
                        WHITE);
 
     if(tileAtlas_ != nullptr){
