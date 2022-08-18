@@ -50,6 +50,7 @@ private:
     const float fJumpAcc = -20/2.3f;
 	const float fSideAcc = 2.5;
     const float fMaxSpeed = 7.5;
+    const float fMaxAirSpeed = 22.2;
     const float fFriction = 0.6;
     const float fGravity = 1/ 3.f; //2te Ableitung der Jump kurve //floatcast important
 

@@ -85,6 +85,13 @@ void player::UpdatePlayer(float delta)
             Animation = Animation::JumpRight;
         }
     }
+    if (bIsInAir)
+    {
+        if(Momentum.y > fMaxAirSpeed)
+        {
+            Momentum.y = fMaxAirSpeed;
+        }
+    }
     vNewPos = Vector2Add(vPosition, Momentum);
 
     bIsInAir = true;
@@ -93,12 +100,12 @@ void player::UpdatePlayer(float delta)
     //Ground Collision;
     for (const auto& index : Ground)
     {
-        if(CheckCollisionRecs(index, Rectangle{vNewPos.x, vNewPos.y + 50, 50, 0}))
+        if(CheckCollisionRecs(index, Rectangle{vNewPos.x, vNewPos.y + 49, 50, 1}))
         {
             if(vNewPos.y >= vPosition.y)
             {bIsInAir = false; Momentum.y = 0; bIsOnGround = true; iJumpFrames = 0;}
         }
-        else if (CheckCollisionRecs(index, Rectangle{vNewPos.x, vNewPos.y, 50, 0}))
+        else if (CheckCollisionRecs(index, Rectangle{vNewPos.x, vNewPos.y, 50, 1}))
         {
             if (vNewPos.y < vPosition.y)
             {Momentum.y = 0;}
