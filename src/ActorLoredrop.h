@@ -8,6 +8,14 @@
 #include "Actor.h"
 #include "player.h"
 
+enum class WhichLoredrop
+{
+    base,
+    first,
+    second,
+    none
+};
+
 class ActorLoredrop : public Actor {
 public:
     ActorLoredrop();
@@ -19,7 +27,13 @@ public:
     void HandleInput()override;
 
 protected:
+    //enum WhichLoredrop;
+    // WhichLoredrop currentLoredrop = WhichLoredrop::none;
+
     player Katara;
+    bool isVisible = false;
+
+    // Texture2D loredropBox[4];
 
 };
 
