@@ -58,7 +58,7 @@ int main() {
                     mapTex,
                     description,
                     levelmusic,
-                    Camera2D({katara->getTextureWidth()/2,katara->getTextureHeight()/2}));
+                    Camera2D({Game::ScreenWidth/2,Game::ScreenHeight/2}));
 
     std::unique_ptr<Scene> TestTitle = std::make_unique<Scene>(titleTex,
                                                            titlemusic);

@@ -2,6 +2,7 @@
 #include "Actor.h"
 #include "raymath.h"
 #include "DRAW.h"
+#include "config.h"
 
 enum class Animation
 {
@@ -57,5 +58,5 @@ private:
     int iMaxJumpFrames = 6;
     int iJumpFrames = 0;
     Vector2 Momentum = {0 ,0};
-	Vector2 vPosition = { 400, 450}; // Hardcoded weil test Texture ein Raylib Rec ist
+	Vector2 vPosition = { 400,400}; // Hardcoded weil test Texture ein Raylib Rec ist
 };
