@@ -9,11 +9,11 @@
 ActorLoredrop::ActorLoredrop()
 {
     this->positionTest = {1000, 730};
-    this->posDrop_1 = {730, 700 };
-    this->posDrop_2 = {2410, 860};
-    this->posDrop_3 = {2695, 3307};
-    this->posDrop_4 = {2000, 3275};
-    this->posDrop_final = {8960, 1245};
+    this->posDrop_1 = {780, 750 };
+    this->posDrop_2 = {2460, 910};
+    this->posDrop_3 = {2725, 3357};
+    this->posDrop_4 = {2050, 3325};
+    this->posDrop_final = {8970, 1295};
 
     this->loredropBase = LoadTexture("assets/graphics/Actors/Loredrop_Template.png");
     this->loredropOne = LoadTexture("assets/graphics/Actors/Loredrop_1.png");
@@ -77,11 +77,11 @@ void ActorLoredrop::Draw()
 {
     if (this->isHitboxVisible == true)
     {
-        DrawRectangle(this->posDrop_1.x, this->posDrop_1.y, 50, 50, RED);
-        DrawRectangle(this->posDrop_2.x, this->posDrop_2.y, 50, 50, RED);
-        DrawRectangle(this->posDrop_3.x, this->posDrop_3.y, 50, 50, RED);
-        DrawRectangle(this->posDrop_4.x, this->posDrop_4.y, 50, 50, RED);
-        DrawRectangle(this->posDrop_final.x, this->posDrop_final.y, 50, 50, RED);
+        DrawCircle(this->posDrop_1.x, this->posDrop_1.y, 50, DARKBLUE);
+        DrawCircle(this->posDrop_2.x, this->posDrop_2.y, 50, DARKBLUE);
+        DrawCircle(this->posDrop_3.x, this->posDrop_3.y, 50, DARKBLUE);
+        DrawCircle(this->posDrop_4.x, this->posDrop_4.y, 50, DARKBLUE);
+        DrawCircle(this->posDrop_final.x, this->posDrop_final.y, 50, DARKBLUE);
     }
 
 }

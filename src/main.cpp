@@ -46,9 +46,6 @@ int main() {
     std::shared_ptr<ProtectedTexture> gameoverTex = std::make_shared<ProtectedTexture>(gameoverTexture);
     Music gameovermusic = LoadMusicStream("assets/audio/tracks/gameover.wav");
 
-    BattleScreen fightScreen;
-
-
     const char* mapTexture = "assets/graphics/Map/Test-LevelGit.png"; //columns = 14
     const char* mapDescription = "assets/graphics/Map/THIS.json";
     std::shared_ptr<ProtectedTexture> mapTex = std::make_shared<ProtectedTexture>(mapTexture);
@@ -176,7 +173,7 @@ int main() {
                     loredrop.Draw();
 
                     // enemies
-                    enemyHarpy.RenderHarpye(loredrop.positionTest);
+                    // enemyHarpy.RenderHarpye(loredrop.positionTest);
 
                     EndMode2D();
                     // end of camera
