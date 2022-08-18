@@ -7,7 +7,7 @@
 Inventory::Inventory()
 {
     this->textureItempageBase = LoadTexture("assets/graphics/UI/Inventory/Itemslots_Base.png");
-    this->textureOptionsBase = LoadTexture("assets/graphics/UI/Inventory/Options_Base_Platzhalter.png");
+    this->textureOptionsBase = LoadTexture("assets/graphics/UI/Inventory/Options_Base.png");
     this->textureCharacterspriteBase = LoadTexture("assets/graphics/UI/Inventory/Charactersprite_Base_Platzhalter.png");
     this->textureLoredropsBase = LoadTexture("assets/graphics/UI/Inventory/Loredrops_Base_Platzhalter.png");
     this->slotSelect = LoadTexture("assets/graphics/UI/Inventory/Slot_Select.png");
