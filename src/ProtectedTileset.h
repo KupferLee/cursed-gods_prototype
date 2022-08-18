@@ -15,7 +15,7 @@ private:
     std::vector <Rectangle> triggerboxesStalagmit_{};
     std::vector <Rectangle> triggerboxesBreakable_{};
     nlohmann::json description_{};
-    int binZscheKonstante_{388};
+    int binZscheKonstante_{374};
 
     int columns_{};
     int tilesX_{};
