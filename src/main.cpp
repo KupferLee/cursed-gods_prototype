@@ -42,6 +42,13 @@ int main() {
     std::shared_ptr<ProtectedTexture> titleTex = std::make_shared<ProtectedTexture>(titleTexture);
     Music titlemusic = LoadMusicStream("assets/audio/tracks/TitleTestMusic.wav");
 
+    const char* gameoverTexture = "assets/graphics/UI/game_over_screen.png";
+    std::shared_ptr<ProtectedTexture> gameoverTex = std::make_shared<ProtectedTexture>(gameoverTexture);
+    Music gameovermusic = LoadMusicStream("assets/audio/tracks/gameover.wav");
+
+    BattleScreen fightScreen;
+
+
     const char* mapTexture = "assets/graphics/Map/Test-LevelGit.png"; //columns = 14
     const char* mapDescription = "assets/graphics/Map/THIS.json";
     std::shared_ptr<ProtectedTexture> mapTex = std::make_shared<ProtectedTexture>(mapTexture);
@@ -52,7 +59,7 @@ int main() {
 
     // enum for changing gamestates
     // default for title
-    enum GameState {state_title, state_level1, state_fight};
+    enum GameState {state_title, state_level1, state_fight, state_gameover};
     GameState gameState = state_title;
 
 
@@ -66,6 +73,9 @@ int main() {
 
     std::unique_ptr<Scene> TestTitle = std::make_unique<Scene>(titleTex,
                                                           titlemusic);
+
+    std::unique_ptr<Scene> TestGameover = std::make_unique<Scene>(gameoverTex,
+                                                               gameovermusic);
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
     {
@@ -82,6 +92,7 @@ int main() {
                 break;
 
             case (state_level1):
+                TestScene->Update();
                 inventory.Update();
                 enemyHarpy.Update();
                 loredrop.UpdateLore(katara->getPosition());
@@ -93,9 +104,14 @@ int main() {
                     gameState = state_title;
                 }
                 // if inventory not open then change to fight on key
-                if (IsKeyPressed(KEY_F) && inventory.IsOpen() == false)
+                else if (IsKeyPressed(KEY_F) && inventory.IsOpen() == false)
                 {
                     gameState = state_fight;
+                }
+
+                else if (TestScene->getGameOver())
+                {
+                    gameState = state_gameover;
                 }
                 break;
 
@@ -104,10 +120,15 @@ int main() {
                 {
                     gameState = state_level1;
                 }
-
-
-
                 break;
+
+            case(state_gameover):
+                if(IsKeyPressed(KEY_ENTER))
+                {
+                    gameState = state_title;
+                }
+                break;
+
             default:
                 break;
         }
@@ -150,7 +171,7 @@ int main() {
 
                     //begin of camera
                     BeginMode2D(TestScene->getCamera());
-                    TestScene->Update();
+
                     TestScene->Render();
                     loredrop.Draw();
 
@@ -174,6 +195,14 @@ int main() {
 
                     fightScreen.Update();
                     fightScreen.Render();
+                    break;
+
+                case (state_gameover):
+                    ClearBackground(WHITE);
+                    TestGameover->Update();
+                    TestGameover->Render();
+                    // DrawText("Title", 10, 10, 30, LIGHTGRAY);
+                    // DrawText("Press Enter to start Level 1.", 10, 40, 30, LIGHTGRAY);
                     break;
 
                 default:
