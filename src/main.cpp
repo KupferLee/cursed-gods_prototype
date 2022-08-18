@@ -107,7 +107,7 @@ int main() {
         }
 
         BeginDrawing();
-
+        BeginMode2D(TestScene->getCamera());
 
             // You can draw on the screen between BeginDrawing() and EndDrawing()
             // ...
@@ -120,7 +120,7 @@ int main() {
         //PlayMusicStream(leveltheme);
 
         //StopMusicStream(leveltheme);
-        BeginMode2D(TestScene->getCamera());
+
         switch(gameState)
             {
                 case (state_title):

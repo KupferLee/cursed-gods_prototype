@@ -40,7 +40,7 @@ ProtectedTileset::ProtectedTileset(const char *filename)
             for (auto const &object: layer["objects"])
             {
                 this->hitboxes_.push_back({static_cast<float>(object["x"].get<int>()),
-                                           static_cast<float>(object["y"].get<int>()),
+                                           static_cast<float>(object["y"].get<int>() - binZscheKonstante_),
                                            static_cast<float>(object["width"].get<int>()),
                                            static_cast<float>(object["height"].get<int>())});
             }
@@ -51,7 +51,7 @@ ProtectedTileset::ProtectedTileset(const char *filename)
             for (auto const &object: layer["objects"])
             {
                 this->hitboxesGround_.push_back({static_cast<float>(object["x"].get<int>()),
-                                               static_cast<float>(object["y"].get<int>()),
+                                               static_cast<float>(object["y"].get<int>() - binZscheKonstante_) ,
                                                static_cast<float>(object["width"].get<int>()),
                                                static_cast<float>(object["height"].get<int>())});
             }
@@ -62,7 +62,7 @@ ProtectedTileset::ProtectedTileset(const char *filename)
             for (auto const &object: layer["objects"])
             {
                 this->triggerboxesStalagtit_.push_back({static_cast<float>(object["x"].get<int>()),
-                                                 static_cast<float>(object["y"].get<int>()),
+                                                 static_cast<float>(object["y"].get<int>() - binZscheKonstante_),
                                                  static_cast<float>(object["width"].get<int>()),
                                                  static_cast<float>(object["height"].get<int>())});
             }
@@ -73,7 +73,7 @@ ProtectedTileset::ProtectedTileset(const char *filename)
             for (auto const &object: layer["objects"])
             {
                 this->triggerboxesStalagmit_.push_back({static_cast<float>(object["x"].get<int>()),
-                                                        static_cast<float>(object["y"].get<int>()),
+                                                        static_cast<float>(object["y"].get<int>() - binZscheKonstante_),
                                                         static_cast<float>(object["width"].get<int>()),
                                                         static_cast<float>(object["height"].get<int>())});
             }
@@ -84,7 +84,7 @@ ProtectedTileset::ProtectedTileset(const char *filename)
             for (auto const &object: layer["objects"])
             {
                 this->triggerboxesBreakable_.push_back({static_cast<float>(object["x"].get<int>()),
-                                                        static_cast<float>(object["y"].get<int>()),
+                                                        static_cast<float>(object["y"].get<int>() - binZscheKonstante_),
                                                         static_cast<float>(object["width"].get<int>()),
                                                         static_cast<float>(object["height"].get<int>())});
             }

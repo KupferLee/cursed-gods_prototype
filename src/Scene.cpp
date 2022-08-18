@@ -17,18 +17,13 @@ Scene::Scene(const std::shared_ptr<player> &player,
              const std::shared_ptr<ProtectedTileset> &tileAtlas,
              const Music &theme,
              const Camera2D &cam)
-            : player_(player), map_(map), tileAtlas_(tileAtlas), theme_(theme), cam_(cam) {
+            : player_(player), map_(map), tileAtlas_(tileAtlas), theme_(theme), cam_(cam), drawhitbox_(false) {
 
     if(player_ != nullptr){
         player_->SetGround(tileAtlas_->getHitboxesGround());
         player_->SetWalls(tileAtlas_->getHitboxes());
         cam_.target = player_->getPosition();
         cam_.zoom = 1.f;
-    }
-    if(tileAtlas_ != nullptr){
-        for (int i = 0; i < tileAtlas_->getHitboxes().size(); ++i){
-            std::cout << "x: " << tileAtlas_->getHitboxes().at(i).x << "y:" << tileAtlas_->getHitboxes().at(i).y << std::endl;
-        }
     }
 
     TraceLog(LOG_INFO, "Scene constructor called");
@@ -69,6 +64,9 @@ void Scene::Update() {
 void Scene::UpdateScene()
 {
     UpdateMusicStream(theme_);
+    if(IsKeyPressed(KEY_H) && !drawhitbox_) drawhitbox_ = true;
+    else if(IsKeyPressed(KEY_H) && drawhitbox_) drawhitbox_ = false;
+
     float delta = GetFrameTime();
     if(player_ != nullptr) {
         player_->Update(delta);
@@ -84,43 +82,45 @@ void Scene::RenderScene() {
                        {player_->getPosition().x - Game::ScreenWidth/2-15,player_->getPosition().y - Game::ScreenHeight/2-15, static_cast<float>(Game::ScreenWidth)*cam_.zoom+30, static_cast<float>(Game::ScreenHeight)*cam_.zoom+30}, {}, {},
                        WHITE);
 
-    if(tileAtlas_ != nullptr){
-        for (int i = 0; i < tileAtlas_->getHitboxes().size(); ++i){
-            DrawRectangle(tileAtlas_->getHitboxes().at(i).x,
-                          tileAtlas_->getHitboxes().at(i).y,
-                          tileAtlas_->getHitboxes().at(i).width,
-                          tileAtlas_->getHitboxes().at(i).height,
-                          ORANGE);
+    if(drawhitbox_) {
+        if (tileAtlas_ != nullptr) {
+            for (int i = 0; i < tileAtlas_->getHitboxes().size(); ++i) {
+                DrawRectangle(tileAtlas_->getHitboxes().at(i).x,
+                              tileAtlas_->getHitboxes().at(i).y,
+                              tileAtlas_->getHitboxes().at(i).width,
+                              tileAtlas_->getHitboxes().at(i).height,
+                              ORANGE);
             }
-        for (int i = 0; i < tileAtlas_->getTriggerboxesStalagtit().size(); ++i){
-            DrawRectangle(tileAtlas_->getTriggerboxesStalagtit().at(i).x,
-                          tileAtlas_->getTriggerboxesStalagtit().at(i).y,
-                          tileAtlas_->getTriggerboxesStalagtit().at(i).width,
-                          tileAtlas_->getTriggerboxesStalagtit().at(i).height,
-                          GREEN);
+            for (int i = 0; i < tileAtlas_->getTriggerboxesStalagtit().size(); ++i) {
+                DrawRectangle(tileAtlas_->getTriggerboxesStalagtit().at(i).x,
+                              tileAtlas_->getTriggerboxesStalagtit().at(i).y,
+                              tileAtlas_->getTriggerboxesStalagtit().at(i).width,
+                              tileAtlas_->getTriggerboxesStalagtit().at(i).height,
+                              GREEN);
             }
-        for (int i = 0; i < tileAtlas_->getTriggerboxesStalagmit().size(); ++i){
-            DrawRectangle(tileAtlas_->getTriggerboxesStalagmit().at(i).x,
-                          tileAtlas_->getTriggerboxesStalagmit().at(i).y,
-                          tileAtlas_->getTriggerboxesStalagmit().at(i).width,
-                          tileAtlas_->getTriggerboxesStalagmit().at(i).height,
-                          BLUE);
+            for (int i = 0; i < tileAtlas_->getTriggerboxesStalagmit().size(); ++i) {
+                DrawRectangle(tileAtlas_->getTriggerboxesStalagmit().at(i).x,
+                              tileAtlas_->getTriggerboxesStalagmit().at(i).y,
+                              tileAtlas_->getTriggerboxesStalagmit().at(i).width,
+                              tileAtlas_->getTriggerboxesStalagmit().at(i).height,
+                              BLUE);
             }
-        for (int i = 0; i < tileAtlas_->getTriggerboxesBreakable().size(); ++i){
-            DrawRectangle(tileAtlas_->getTriggerboxesBreakable().at(i).x,
-                          tileAtlas_->getTriggerboxesBreakable().at(i).y,
-                          tileAtlas_->getTriggerboxesBreakable().at(i).width,
-                          tileAtlas_->getTriggerboxesBreakable().at(i).height,
-                          PINK);
+            for (int i = 0; i < tileAtlas_->getTriggerboxesBreakable().size(); ++i) {
+                DrawRectangle(tileAtlas_->getTriggerboxesBreakable().at(i).x,
+                              tileAtlas_->getTriggerboxesBreakable().at(i).y,
+                              tileAtlas_->getTriggerboxesBreakable().at(i).width,
+                              tileAtlas_->getTriggerboxesBreakable().at(i).height,
+                              PINK);
             }
-        for (int i = 0; i < tileAtlas_->getHitboxesGround().size(); ++i){
-            DrawRectangle(tileAtlas_->getHitboxesGround().at(i).x,
-                          tileAtlas_->getHitboxesGround().at(i).y,
-                          tileAtlas_->getHitboxesGround().at(i).width,
-                          tileAtlas_->getHitboxesGround().at(i).height,
-                          RED);
+            for (int i = 0; i < tileAtlas_->getHitboxesGround().size(); ++i) {
+                DrawRectangle(tileAtlas_->getHitboxesGround().at(i).x,
+                              tileAtlas_->getHitboxesGround().at(i).y,
+                              tileAtlas_->getHitboxesGround().at(i).width,
+                              tileAtlas_->getHitboxesGround().at(i).height,
+                              RED);
+            }
         }
-        }
+    }
     if(player_ != nullptr){
     player_->Render();
     }

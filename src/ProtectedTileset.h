@@ -4,6 +4,7 @@
 #include <fstream>
 #include <cassert>
 #include <vector>
+#include "config.h"
 
 class ProtectedTileset  final {
 private:
@@ -14,6 +15,7 @@ private:
     std::vector <Rectangle> triggerboxesStalagmit_{};
     std::vector <Rectangle> triggerboxesBreakable_{};
     nlohmann::json description_{};
+    int binZscheKonstante_{388};
 
     int columns_{};
     int tilesX_{};
