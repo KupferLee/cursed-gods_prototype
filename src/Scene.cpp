@@ -75,7 +75,7 @@ void Scene::RenderScene() {
     PlayMusicStream(theme_);
     if(map_->getTextureWidth() > Game::ScreenWidth) {
         DrawTexturePro(this->map_->getTexture(),
-                       {0, 0, static_cast<float>(Game::ScreenWidth), static_cast<float>(Game::ScreenHeight)},
+                       {0, 0, static_cast<float>(Game::ScreenWidth), static_cast<float>(Game::ScreenWidth)},
                        {0, 0, static_cast<float>(Game::ScreenWidth), static_cast<float>(Game::ScreenHeight)}, {}, {},
                        WHITE);
     }
