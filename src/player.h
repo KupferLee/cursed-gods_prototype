@@ -16,6 +16,8 @@ enum class Animation
 class player : public Actor
 {
 public:
+
+    //Base-functions
     player(){};
     void HandleInput() override;
     void Update(float) override;
@@ -23,22 +25,29 @@ public:
 	void Render() override;
     void UpdatePlayer(float);
     void RenderPlayer();
+
+    //Setter-functions
     void SetNextFrame();
     void SetGround(std::vector<Rectangle> a);
     void SetWalls(std::vector<Rectangle> a);
-    Vector2 getPosition();
+    void SetPosition(Vector2 x);
+
+    //Getter-functions
+    Vector2 GetPosition();
+    Vector2 GetInitialPosition();
     Vector2 GetCurrentPosition();
-    float getTextureWidth();
-    float getTextureHeight();
+    float GetTextureWidth();
+    float GetTextureHeight();
 
 private:
+
     //KataraBoxes
     Rectangle KataraBox =  {0,0,32,32};
     Rectangle HitBoxHead = {0,0,18, 3};
     Rectangle HitBoxBody = {0,0, 26, 28};
     Rectangle HitBoxFeet = {0,0, 20, 3};
 
-    //animation shit
+    //Animation Stuff
     Texture2D Frames = LoadTexture("assets/graphics/Actors/katara_animations.png");
     float TilecountX = 8;
     float TilecountY = 9;
@@ -47,7 +56,7 @@ private:
     Animation Animation;
     int frame;
 
-    //states
+    //State-Bools
     bool bIsWalking = false;
 	bool bIsOnGround = true;
     bool bIsInAir = false;
@@ -60,14 +69,15 @@ private:
     const float fMaxSpeed = 4.f;
     const float fMaxAirSpeed = 22.2;
     const float fFriction = 0.6;
-    const float fGravity = 1/ 3.f; //2te Ableitung der Jump kurve //floatcast important
+    const float fGravity = 1/ 3.f; //2te Ableitung der Jump kurve
 
+    //Restlicher Stuff
     std::vector<Rectangle> Ground;
     std::vector<Rectangle> Walls;
     int iMaxJumpFrames = 6;
     int iJumpFrames = 0;
+    Vector2 InitialPosition = {730, 700};
     Vector2 Momentum = {0 ,0};
-	Vector2 vPosition = { 730, 700};// 730, 700 Hardcoded weil test Texture ein Raylib Rec ist
-    //Rectangle Katara = {vPosition.x, vPosition.y, };
+	Vector2 vPosition = InitialPosition;
     Vector2 vScreenPosition = {Game::ScreenWidth/2, Game::ScreenHeight/2};
 };

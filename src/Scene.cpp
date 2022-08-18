@@ -22,7 +22,7 @@ Scene::Scene(const std::shared_ptr<player> &player,
     if(player_ != nullptr){
         player_->SetGround(tileAtlas_->getHitboxesGround());
         player_->SetWalls(tileAtlas_->getHitboxes());
-        cam_.target = player_->getPosition();
+        cam_.target = player_->GetPosition();
         cam_.zoom = 2.f;
     }
 
@@ -70,11 +70,12 @@ void Scene::UpdateScene()
     float delta = GetFrameTime();
     if(player_ != nullptr) {
         player_->Update(delta);
-        cam_.target = player_->getPosition();
+        cam_.target = player_->GetPosition();
         for(int i = 0; i < tileAtlas_->getTriggerboxesStalagmit().size(); ++i){
-            if(CheckCollisionRecs({player_->getPosition().x,player_->getPosition().y,32,32},
+            if(CheckCollisionRecs({player_->GetPosition().x, player_->GetPosition().y, 32, 32},
                                    tileAtlas_->getTriggerboxesStalagmit().at(i)))
             {
+                player_->SetPosition(player_->GetInitialPosition());
                 gameover_ = true;
             }
         }
@@ -85,12 +86,12 @@ void Scene::RenderScene() {
     PlayMusicStream(theme_);
     if(player_ != nullptr) {
         DrawTexturePro(this->map_->getTexture(),
-                       {(player_->getPosition().x - Game::ScreenWidth / 2),
-                        (player_->getPosition().y - Game::ScreenHeight / 2),
+                       {(player_->GetPosition().x - Game::ScreenWidth / 2),
+                        (player_->GetPosition().y - Game::ScreenHeight / 2),
                         (static_cast<float>(Game::ScreenWidth)/2) * cam_.zoom,
                         (static_cast<float>(Game::ScreenHeight)/2) * cam_.zoom},
-                       {player_->getPosition().x - Game::ScreenWidth / 2,
-                        player_->getPosition().y - Game::ScreenHeight / 2,
+                       {player_->GetPosition().x - Game::ScreenWidth / 2,
+                        player_->GetPosition().y - Game::ScreenHeight / 2,
                         (static_cast<float>(Game::ScreenWidth) / 2) *cam_.zoom,
                         (static_cast<float>(Game::ScreenHeight) / 2) *cam_.zoom},
                         {},

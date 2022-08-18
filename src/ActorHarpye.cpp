@@ -12,7 +12,7 @@ ActorHarpye::ActorHarpye()
 
 void ActorHarpye::Update()
 {
-    //this->position = {(float)Katara.getPosition().x, (float)Katara.getPosition().y, (float)this->animation.width/5, (float)this->animation.height};
+    //this->position = {(float)Katara.getPosition().x, (float)Katara.GetPosition().y, (float)this->animation.width/5, (float)this->animation.height};
     UpdateAnimation(GetFrameTime(), 5, 0.22f);
 }
 

@@ -4,8 +4,8 @@
 *   Title: ProtectedTexture
 *   Required: const char* filename --> for Initialization
 *   Return: you can get readingaccess to:  -> texture [getTexture()] returns a Texture2D
-*                                          -> width [getTextureWidth()] returns a int
-*                                          -> height [getTextureHeight()] returns a int
+*                                          -> width [GetTextureWidth()] returns a int
+*                                          -> height [GetTextureHeight()] returns a int
 *   Function: assertion handling of texture file and provide save data for game
 */
 

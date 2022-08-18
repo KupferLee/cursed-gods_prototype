@@ -92,7 +92,7 @@ int main() {
                 TestScene->Update();
                 inventory.Update();
                 enemyHarpy.Update();
-                loredrop.UpdateLore(katara->getPosition());
+                loredrop.UpdateLore(katara->GetPosition());
 
                 // State Wechsel
                 // if in options und press enter

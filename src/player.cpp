@@ -151,6 +151,7 @@ void player::UpdatePlayer(float delta)
         }
      }
 
+    //State results
     if(bIsOnGround)
     {
         iJumpFrames = 0;
@@ -237,7 +238,7 @@ void player::SetGround(std::vector<Rectangle> a)
     Ground = a;
 }
 
-Vector2 player::getPosition() {
+Vector2 player::GetPosition() {
     return this->vPosition;
 }
 
@@ -250,11 +251,19 @@ void player::SetWalls(std::vector<Rectangle> a)
 {
     Walls = a;
 }
+void player::SetPosition(Vector2 x)
+{
+    vPosition = x;
+}
+Vector2 player::GetInitialPosition()
+{
+    return InitialPosition;
+}
 
-float player::getTextureHeight() {
+float player::GetTextureHeight() {
     return static_cast<float>(Frames.width)/static_cast<float>(TilecountX);
 }
 
-float player::getTextureWidth() {
+float player::GetTextureWidth() {
     return static_cast<float>(Frames.height)/static_cast<float>(TilecountY);
 }
