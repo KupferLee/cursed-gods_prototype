@@ -212,6 +212,11 @@ Vector2 player::getPosition() {
     return this->vPosition;
 }
 
+Vector2 player::GetCurrentPosition()
+{
+    return this->Momentum;
+}
+
 void player::SetWalls(std::vector<Rectangle> a)
 {
     Walls = a;

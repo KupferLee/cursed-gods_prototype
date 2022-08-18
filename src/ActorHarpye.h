@@ -6,6 +6,7 @@
 #define RAYLIBSTARTER_ACTORHARPYE_H
 
 #include "Actor.h"
+#include "player.h"
 
 class ActorHarpye : public Actor{
 public:
@@ -18,6 +19,7 @@ public:
 
 protected:
     Rectangle position;
+    player Katara;
 
 };
 

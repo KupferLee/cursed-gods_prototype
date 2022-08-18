@@ -33,6 +33,7 @@ protected:
 
     void SetSlots();
     Vector2 infoPosition;
+    Vector2 inventoryPosition;
 
     // inventory container
     item_ring* itemRing = new item_ring;

@@ -7,11 +7,12 @@
 ActorHarpye::ActorHarpye()
 {
     this->animation = LoadTexture("assets/graphics/Actors/Harpye_Animations.png");
-    this->position = {(float)GetScreenWidth()/2, (float)GetScreenHeight()/2, (float)this->animation.width/5, (float)this->animation.height};
+
 }
 
 void ActorHarpye::Update()
 {
+    this->position = {(float)Katara.getPosition().x + 10, (float)Katara.getPosition().y, (float)this->animation.width/5, (float)this->animation.height};
     UpdateAnimation(GetFrameTime(), 5, 0.22f);
 }
 

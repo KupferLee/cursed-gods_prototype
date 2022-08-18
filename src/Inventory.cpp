@@ -111,6 +111,7 @@ void Inventory::Update()
             else if (IsKeyPressed(KEY_I))
             {
                 menuState = Closed;
+                isOpen = false;
             }
 
             // do other stuff here
@@ -127,7 +128,7 @@ void Inventory::Render()
         case Items: // draw inventory
             DrawTexturePro(this->textureInventoryBase,
                            {0, 0, (float)this->textureInventoryBase.width, (float)this->textureInventoryBase.height},
-                           {(float)GetScreenWidth()/2 - (this->textureInventoryBase.width*scaleFactor/2), (float)GetScreenHeight() / 2 - (this->textureInventoryBase.height*scaleFactor/2), (float)this->textureInventoryBase.width * this->scaleFactor, (float)this->textureInventoryBase.height * this->scaleFactor},
+                           {(float)this->inventoryPosition.x, (float)this->inventoryPosition.y, (float)this->textureInventoryBase.width * this->scaleFactor, (float)this->textureInventoryBase.height * this->scaleFactor},
                            {0, 0}, 0, WHITE);
 
             // draw items
@@ -166,21 +167,21 @@ void Inventory::Render()
         case Options: // draw options
             DrawTexturePro(this->textureOptionsBase,
                            {0, 0, (float)this->textureOptionsBase.width, (float)this->textureOptionsBase.height},
-                           {(float)GetScreenWidth()/2 - this->textureOptionsBase.width, (float)GetScreenHeight() / 2 - this->textureOptionsBase.height, (float)this->textureOptionsBase.width * this->scaleFactor, (float)this->textureOptionsBase.height * this->scaleFactor},
+                           {(float)this->inventoryPosition.x, (float)this->inventoryPosition.y, (float)this->textureOptionsBase.width * this->scaleFactor, (float)this->textureOptionsBase.height * this->scaleFactor},
                            {0, 0}, 0, WHITE);
             break;
 
         case Character: // draw charactersprite
             DrawTexturePro(this->textureCharacterspriteBase,
                            {0, 0, (float)this->textureCharacterspriteBase.width, (float)this->textureCharacterspriteBase.height},
-                           {(float)GetScreenWidth()/2 - this->textureCharacterspriteBase.width, (float)GetScreenHeight() / 2 - this->textureCharacterspriteBase.height, (float)this->textureCharacterspriteBase.width * this->scaleFactor, (float)this->textureCharacterspriteBase.height * this->scaleFactor},
+                           {(float)this->inventoryPosition.x, (float)this->inventoryPosition.y, (float)this->textureCharacterspriteBase.width * this->scaleFactor, (float)this->textureCharacterspriteBase.height * this->scaleFactor},
                            {0, 0}, 0, WHITE);
             break;
 
         case Loredrops:
             DrawTexturePro(this->textureLoredropsBase,
                            {0, 0, (float)this->textureLoredropsBase.width, (float)this->textureLoredropsBase.height},
-                           {(float)GetScreenWidth()/2 - this->textureLoredropsBase.width, (float)GetScreenHeight() / 2 - this->textureLoredropsBase.height, (float)this->textureLoredropsBase.width * this->scaleFactor, (float)this->textureLoredropsBase.height * this->scaleFactor},
+                           {(float)this->inventoryPosition.x, (float)this->inventoryPosition.y, (float)this->textureLoredropsBase.width * this->scaleFactor, (float)this->textureLoredropsBase.height * this->scaleFactor},
                            {0, 0}, 0, WHITE);
             break;
 
@@ -209,6 +210,7 @@ void Inventory::SetSlots()
 {
     // assign position for Info draw
     this->infoPosition = {(float)GetScreenWidth()/2 + 88, (float)GetScreenHeight()/2};
+    this->inventoryPosition = {(float)GetScreenWidth()/2 - (this->textureInventoryBase.width*scaleFactor/2), (float)GetScreenHeight() / 2 - (this->textureInventoryBase.height*scaleFactor/2)};
 
     // assign x and y position for every slot
     // currently putting -90 is a quick and dirty solution only for the Platzhalter
