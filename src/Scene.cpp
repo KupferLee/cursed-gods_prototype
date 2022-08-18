@@ -77,10 +77,6 @@ void Scene::UpdateScene()
             {
                 gameover_ = true;
             }
-            else
-            {
-                gameover_ = false;
-            }
         }
     }
 }
