@@ -75,10 +75,6 @@ void Inventory::Update()
             {
                 menuState = Items;
             }
-            else if (IsKeyPressed(KEY_E))
-            {
-                menuState = Loredrops;
-            }
             else if (IsKeyPressed(KEY_I))
             {
                 menuState = Closed;
