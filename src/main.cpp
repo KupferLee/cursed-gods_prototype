@@ -142,12 +142,13 @@ int main() {
                     TestScene->Render();
                     DrawText("Level 1", 10, 10, 30, LIGHTGRAY);
                     DrawText("Press F to start fight.", 10, 40, 30, LIGHTGRAY);
+
                     // enemies
+                    enemyHarpy.RenderHarpye({400, 500});
 
                     EndMode2D();
 
-                    // enemyHarpy.Update();
-                    enemyHarpy.Render();
+
                     // inventory
                     inventory.Render();
 

@@ -15,6 +15,7 @@ public:
     void Update() override;
     void Update(float) override;
     void Render() override;
+    void RenderHarpye (Vector2 position);
     void HandleInput()override;
 
 protected:
