@@ -35,6 +35,7 @@ public:
 protected:
     Rectangle position;
     Texture2D animation;
+    Texture2D healthBar;
 
     float frameTime = 0.f;
     int frame = 0;
