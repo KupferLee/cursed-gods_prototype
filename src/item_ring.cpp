@@ -9,5 +9,6 @@ item_ring::item_ring()
     this->name = "HP Ring";
     this->description = "An ancient ring that adds a few HP to your max HP.";
     this->addHP = 10;
-    this->texture = LoadTexture("assets/graphics/UI/Slot_Ring.png");
+    this->texture_item = LoadTexture("assets/graphics/UI/Slot_Ring.png");
+    this->texture_infos = LoadTexture("assets/graphics/UI/Info_Ring.png");
 }

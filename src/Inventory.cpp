@@ -138,12 +138,12 @@ void Inventory::Render()
                                    {slotPosition[i].x, slotPosition[i].y, (float)this->inventoryContainer.getItem(i)->GetTexture().width*this->scaleFactor, (float)this->inventoryContainer.getItem(i)->GetTexture().height*this->scaleFactor},
                                    {0, 0}, 0, WHITE);
 
-                    // draw infos if there is a item in the slot selected
+                    // draw texture_infos if there is a item in the slot selected
                     if (this->inventoryContainer.getItem(currentSlot) != NULL)
                     {
-                        DrawTexturePro(this->inventoryContainer.getItem(currentSlot)->GetTexture(),
-                                       {0, 0, (float)this->inventoryContainer.getItem(i)->GetTexture().width, (float)this->inventoryContainer.getItem(i)->GetTexture().height},
-                                       {this->infoPosition.x, this->infoPosition.y, (float)this->inventoryContainer.getItem(i)->GetTexture().width*this->scaleFactor, (float)this->inventoryContainer.getItem(i)->GetTexture().height*this->scaleFactor},
+                        DrawTexturePro(this->inventoryContainer.getItem(currentSlot)->GetInfos(),
+                                       {0, 0, (float)this->inventoryContainer.getItem(i)->GetInfos().width, (float)this->inventoryContainer.getItem(i)->GetInfos().height},
+                                       {this->infoPosition.x, this->infoPosition.y, (float)this->inventoryContainer.getItem(i)->GetInfos().width*this->scaleFactor, (float)this->inventoryContainer.getItem(i)->GetInfos().height*this->scaleFactor},
                                        {0, 0}, 0, WHITE);
                     }
 
@@ -205,13 +205,13 @@ bool Inventory::IsOpen() { return isOpen; }
 void Inventory::SetSlots()
 {
     // assign position for Info draw
-    this->infoPosition = {(float)GetScreenWidth()/2 + 88, (float)GetScreenHeight()/2};
+    this->infoPosition = {(float)GetScreenWidth()/2 + 60, (float)GetScreenHeight()/2 - 325};
     this->inventoryPosition = {(float)GetScreenWidth()/2 - (this->textureInventoryBase.width*scaleFactor/2), (float)GetScreenHeight() / 2 - (this->textureInventoryBase.height*scaleFactor/2)};
 
     // assign x and y position for every slot
     // currently putting -90 is a quick and dirty solution only for the Platzhalter
-    this->slotPosition[0].x = GetScreenWidth()/2 - this->textureRing.width * scaleFactor - 145;
-    this->slotPosition[0].y = GetScreenHeight()/2 - this->textureRing.height * this->scaleFactor - 145;
+    this->slotPosition[0].x = GetScreenWidth()/2 - this->textureRing.width * scaleFactor - 127;
+    this->slotPosition[0].y = GetScreenHeight()/2 - this->textureRing.height * this->scaleFactor - 143;
 
     this->slotPosition[1].x = this->slotPosition[0].x;
     this->slotPosition[1].y = this->slotPosition[0].y + this->textureRing.height * this->scaleFactor;
