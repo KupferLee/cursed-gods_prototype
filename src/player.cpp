@@ -100,7 +100,7 @@ void player::UpdatePlayer(float delta)
     vNewPos = Vector2Add(vPosition, Momentum);
     KataraBox.x = vNewPos.x;
     KataraBox.y = vNewPos.y;
-    HitBoxBody.x = vNewPos.x+4;
+    HitBoxBody.x = vNewPos.x+3;
     HitBoxBody.y = vNewPos.y+2;
     HitBoxHead.x = vNewPos.x+7;
     HitBoxHead.y = vNewPos.y+1;

@@ -35,7 +35,7 @@ private:
     //KataraBoxes
     Rectangle KataraBox =  {0,0,32,32};
     Rectangle HitBoxHead = {0,0,18, 3};
-    Rectangle HitBoxBody = {0,0, 24, 28};
+    Rectangle HitBoxBody = {0,0, 26, 28};
     Rectangle HitBoxFeet = {0,0, 20, 3};
 
     //animation shit
