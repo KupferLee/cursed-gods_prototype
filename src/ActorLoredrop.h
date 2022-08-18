@@ -23,16 +23,20 @@ class ActorLoredrop : public Actor {
 public:
     ActorLoredrop();
 
+    void UpdateLore(Vector2 position);
+
     void Update() override;
     void Update(float) override;
     void Render() override;
 
     void HandleInput()override;
 
+    Vector2 positionTest;
+
 protected:
     WhichLoredrop currentLoredrop = WhichLoredrop::none;
 
-    player Katara;
+    player* Katara = new player;
 
     int scaleFactor = 4;
     int offset = 20;
@@ -42,6 +46,9 @@ protected:
     Texture2D loredropThree;
     Texture2D loredropFour;
     Texture2D loredropFinal;
+
+    // positions
+
 
 private:
     void InternUpdate();

@@ -3,9 +3,13 @@
 //
 
 #include "ActorLoredrop.h"
+#include "iostream"
+
 
 ActorLoredrop::ActorLoredrop()
 {
+    this->positionTest = {1000, 730};
+
     this->loredropBase = LoadTexture("assets/graphics/Actors/Loredrop_Template.png");
     this->loredropOne = LoadTexture("assets/graphics/Actors/Loredrop_1.png");
     this->loredropTwo = LoadTexture("assets/graphics/Actors/Loredrop_2.png");
@@ -14,9 +18,23 @@ ActorLoredrop::ActorLoredrop()
     this->loredropFinal = LoadTexture("assets/graphics/Actors/Loredrop_5.png");
 }
 
-void ActorLoredrop::Update()
+void ActorLoredrop::UpdateLore(Vector2 currentPosition)
 {
+    // to get mid of katara
+    currentPosition.x += 16;
+    currentPosition.y += 16;
+
     // show loredrop on/off
+    if (Vector2Distance(currentPosition, this->positionTest) < 50)
+    {
+        this->currentLoredrop = WhichLoredrop::base;
+    }
+    else
+    {
+        this->currentLoredrop = WhichLoredrop::none;
+    }
+
+    /*
     if (IsKeyPressed(KEY_TAB) && this->currentLoredrop == WhichLoredrop::none)
     {
         this->currentLoredrop = WhichLoredrop::base;
@@ -45,6 +63,7 @@ void ActorLoredrop::Update()
     {
         this->currentLoredrop = WhichLoredrop::none;
     }
+     */
 
     InternUpdate();
 
@@ -138,5 +157,6 @@ void ActorLoredrop::InternRender()
 }
 
 // not used
+void ActorLoredrop::Update() {}
 void ActorLoredrop::Update(float) { }
 void ActorLoredrop::HandleInput() { }

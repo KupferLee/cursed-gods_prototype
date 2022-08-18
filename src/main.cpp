@@ -84,7 +84,7 @@ int main() {
             case (state_level1):
                 inventory.Update();
                 enemyHarpy.Update();
-                loredrop.Update();
+                loredrop.UpdateLore(katara->getPosition());
 
                 // State Wechsel
                 // if in options und press enter
@@ -154,7 +154,8 @@ int main() {
                     TestScene->Render();
 
                     // enemies
-                    enemyHarpy.RenderHarpye({400, 500});
+                    enemyHarpy.RenderHarpye(loredrop.positionTest);
+                    enemyHarpy.RenderHarpye(katara->getPosition());
 
                     EndMode2D();
                     // end of camera
