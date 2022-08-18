@@ -7,11 +7,15 @@
 
 #include "GameObject.h"
 #include "BattleHarpye.h"
+#include "BattleRat.h"
+#include "BattlePlayer.h"
 
 class BattleScreen : public GameObject {
 protected:
     // Actors
     BattleHarpye harpye;
+    BattleRat rat;
+    BattlePlayer katara;
     Rectangle enemySlots[2];
     Rectangle playerSlot;
     float actorScale = 6.f;

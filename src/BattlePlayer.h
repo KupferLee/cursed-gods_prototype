@@ -7,18 +7,13 @@
 
 #include "BattleActor.h"
 
-/*
+
 class BattlePlayer final : public BattleActor {
 public:
     BattlePlayer();
     attack moves[4] {Slash, Arrow,ArrowRain};
 
-    void Update(float delta) override;
-    void Render() override;
-
 protected:
-    Texture2D Animations;
-
     //Attributes
     float LP = 200.f;
     float AP = 5.f;
@@ -28,9 +23,7 @@ protected:
     attack Arrow = {15,1,2, DamageType::Pierce, true};
     attack ArrowRain = {15, 3, 5, DamageType::Pierce, true};
 
-
-
 };
-*/
+
 
 #endif //RAYLIBSTARTER_BATTLEPLAYER_H

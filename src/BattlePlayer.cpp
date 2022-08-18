@@ -4,10 +4,8 @@
 
 #include "BattlePlayer.h"
 
-/*
-BattlePlayer::BattlePlayer() {}
 
-void BattlePlayer::Update(float delta) {}
-
-void BattlePlayer::Render() {}
- */
+BattlePlayer::BattlePlayer()
+{
+    this->animation = LoadTexture("assets/graphics/Actors/katara_animations.png");
+}

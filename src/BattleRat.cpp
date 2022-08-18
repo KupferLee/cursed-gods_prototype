@@ -4,8 +4,7 @@
 
 #include "BattleRat.h"
 
-BattleRat::BattleRat() {}
-
-void BattleRat::Update(float delta) {}
-
-void BattleRat::Render() {}
+BattleRat::BattleRat()
+{
+    this->animation = LoadTexture("assets/graphics/Actors/Battle_Rat.png");
+}

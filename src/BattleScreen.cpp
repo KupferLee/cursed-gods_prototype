@@ -32,6 +32,8 @@ void BattleScreen::Update()
 
     // update actors
     harpye.UpdateAnimation(GetFrameTime(), 5, 0.22f);
+    rat.UpdateAnimation(GetFrameTime(), 6, 0.22f);
+    katara.UpdateAnimation(GetFrameTime(), 8, 0.22f);
 }
 
 void BattleScreen::Render()
@@ -71,6 +73,8 @@ void BattleScreen::Render()
 
     // draw actors
     harpye.RenderAnimation(this->enemySlots[0], 5, 1);
+    rat.RenderAnimation(this->enemySlots[1], 11, 2);
+    katara.RenderAnimation(this->playerSlot, 8, 9);
 }
 
 void BattleScreen::SetSlots()
@@ -94,9 +98,9 @@ void BattleScreen::SetSlots()
     this->buttonSlots[3].y = this->buttonSlots[2].y;
 
     // setting up actor slots
-    this->enemySlots[0] = {0, 0,32 * actorScale, 32 * actorScale};
-    this->enemySlots[1] = {0, 32 * actorScale,32 * actorScale, 32 * actorScale};
-    this->playerSlot = {(float)GetScreenWidth()/2 - (GetScreenWidth()/2)/2, (float)(GetScreenHeight(), 32 * actorScale, 32 * actorScale)};
+    this->enemySlots[0] = {(float)GetScreenWidth() - (64 * actorScale) - 100, 0,64 * actorScale, 64 * actorScale};
+    this->enemySlots[1] = {(float)GetScreenWidth() - (64 * actorScale) - 100, 64 * actorScale, 48 * actorScale, 32 * actorScale};
+    this->playerSlot = {(32 * actorScale) * 2, (float(GetScreenHeight()/2 - (32 * actorScale) + 70)), 32 * this->actorScale, 32 * this->actorScale};
 }
 
 void BattleScreen::Update(float) { }
