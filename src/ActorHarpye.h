@@ -8,18 +8,19 @@
 #include "Actor.h"
 #include "player.h"
 
-class ActorHarpye : public Actor{
+class ActorHarpye : public Actor {
 public:
     ActorHarpye();
+
+    // use this render
+    void RenderHarpye (Vector2 position);
 
     void Update() override;
     void Update(float) override;
     void Render() override;
-    void RenderHarpye (Vector2 position);
+
     void HandleInput()override;
 
-protected:
-    player Katara;
 
 };
 

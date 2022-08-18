@@ -13,6 +13,7 @@
 #include "Inventory.h"
 #include "BattleScreen.h"
 #include "ActorHarpye.h"
+#include "ActorLoredrop.h"
 
 int main() {
     // Raylib initialization
@@ -32,6 +33,7 @@ int main() {
     // ...
     Inventory inventory;
     ActorHarpye enemyHarpy;
+    ActorLoredrop loredrop;
 
 
     const char* titleTexture = "assets/graphics/UI/title_screen.png";
@@ -82,6 +84,7 @@ int main() {
             case (state_level1):
                 inventory.Update();
                 enemyHarpy.Update();
+                loredrop.Update();
 
                 // State Wechsel
                 // if in options und press enter
@@ -136,6 +139,7 @@ int main() {
 
                 case (state_level1):
                     // playing screen
+                    //begin of camera
                     BeginMode2D(TestScene->getCamera());
                     ClearBackground(WHITE);
                     TestScene->Update();
@@ -147,10 +151,12 @@ int main() {
                     enemyHarpy.RenderHarpye({400, 500});
 
                     EndMode2D();
+                    // end of camera
 
 
                     // inventory
                     inventory.Render();
+                    loredrop.Render();
 
                     break;
 
