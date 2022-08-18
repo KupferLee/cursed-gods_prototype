@@ -18,7 +18,6 @@ public:
     void HandleInput()override;
 
 protected:
-    Rectangle position;
     player Katara;
 
 };

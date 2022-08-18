@@ -210,8 +210,8 @@ void Inventory::SetSlots()
 
     // assign x and y position for every slot
     // currently putting -90 is a quick and dirty solution only for the Platzhalter
-    this->slotPosition[0].x = GetScreenWidth()/2 - this->textureRing.width * scaleFactor - 125;
-    this->slotPosition[0].y = GetScreenHeight()/2 - this->textureRing.height * this->scaleFactor - 130;
+    this->slotPosition[0].x = GetScreenWidth()/2 - this->textureRing.width * scaleFactor - 145;
+    this->slotPosition[0].y = GetScreenHeight()/2 - this->textureRing.height * this->scaleFactor - 145;
 
     this->slotPosition[1].x = this->slotPosition[0].x;
     this->slotPosition[1].y = this->slotPosition[0].y + this->textureRing.height * this->scaleFactor;
