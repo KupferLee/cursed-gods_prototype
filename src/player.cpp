@@ -98,7 +98,7 @@ void player::UpdatePlayer(float delta)
     WallCollide = false;
     for (const auto& index : Walls)
     {
-        if(CheckCollisionRecs(index, Rectangle{vNewPos.x, vNewPos.y, 50, 47})) //Kataras Größe Hardcoded und 2 Pixel Weniger, da die Hitboxen sometimes Slightly Off sind
+        if(CheckCollisionRecs(index, Rectangle{vNewPos.x, vNewPos.y, 32, 29})) //Kataras Größe Hardcoded und 2 Pixel Weniger, da die Hitboxen sometimes Slightly Off sind
         {
             WallCollide = true;
         }
@@ -110,16 +110,16 @@ void player::UpdatePlayer(float delta)
     //Ground Collision;
     for (const auto& index : Ground)
     {
-        if(CheckCollisionRecs(index, Rectangle{vNewPos.x, vNewPos.y + 49, 50, 1})) //Kataras Größe Hardcoded
+        if(CheckCollisionRecs(index, Rectangle{vNewPos.x, vNewPos.y + 31, 32, 1})) //Kataras Größe Hardcoded
         {
             if(vNewPos.y >= vPosition.y)
             {
-                vPosition.y = index.y - 50; //Kataras Größe Hardcoded;
+                vPosition.y = index.y - 32; //Kataras Größe Hardcoded;
                 bIsInAir = false;
                 bIsOnGround = true;
             }
         }
-        else if (CheckCollisionRecs(index, Rectangle{vNewPos.x, vNewPos.y, 50, 1})) //Kataras Größe Hardcoded
+        else if (CheckCollisionRecs(index, Rectangle{vNewPos.x, vNewPos.y, 32, 1})) //Kataras Größe Hardcoded
         {
             if (vNewPos.y < vPosition.y)
             {
@@ -158,8 +158,8 @@ void player::UpdatePlayer(float delta)
 
 void player::RenderPlayer()
 {
-	DrawRectangleV(vPosition, {50, 50}, SKYBLUE);
-    DrawFrame(Rectangle{vPosition.x, vPosition.y, 50,50}, frame, static_cast<int>(Animation), Frames, TilecountX , TilecountY);
+	DrawRectangleV(vPosition, {32, 32}, SKYBLUE); //Kataras Größe Hardcoded
+    DrawFrame(Rectangle{vPosition.x, vPosition.y, 32,32}, frame, static_cast<int>(Animation), Frames, TilecountX , TilecountY);
 }
 
 void player::Render() {
