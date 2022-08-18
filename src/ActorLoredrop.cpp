@@ -43,23 +43,19 @@ void ActorLoredrop::InternUpdate()
     {
         case (int)WhichLoredrop::base:
             this->position = {(float)Katara.getPosition().x, (float)Katara.getPosition().y - 20, (float)this->loredropBase.width, (float)this->loredropBase.height};
-            UpdateAnimation(GetFrameTime(), 5, 0.7f);
 
             break;
 
         case (int)WhichLoredrop::first:
             this->position = {(float)Katara.getPosition().x, (float)Katara.getPosition().y - 20, (float)this->loredropOne.width, (float)this->loredropOne.height};
-            UpdateAnimation(GetFrameTime(), 1, 0.7f);
-            break;
+           break;
 
         case (int)WhichLoredrop::second:
             this->position = {(float)Katara.getPosition().x, (float)Katara.getPosition().y - 20, (float)this->loredropTwo.width, (float)this->loredropTwo.height};
-            UpdateAnimation(GetFrameTime(), 1, 0.7f);
             break;
 
         case (int)WhichLoredrop::third:
             this->position = {(float)Katara.getPosition().x, (float)Katara.getPosition().y - 20, (float)this->loredropThree.width, (float)this->loredropThree.height};
-            UpdateAnimation(GetFrameTime(), 1, 0.7f);
             break;
     }
 }
@@ -67,25 +63,35 @@ void ActorLoredrop::InternUpdate()
 void ActorLoredrop::InternRender()
 {
     // position above kataras head
-    // specific for every loredrop
-
-
+    // specific for every loredrop weil texture
     switch (currentLoredrop)
     {
         case WhichLoredrop::base:
-            RenderAnimation({this->position.x, this->position.y, (float)this->loredropBase.width / 5, (float)this->loredropBase.height}, 5, 1);
+            DrawTexturePro(this->loredropBase,
+                           {0, 0, (float)this->loredropBase.width, (float)this->loredropBase.width},
+                           {this->position.x, this->position.y, (float)this->loredropBase.width, (float)this->loredropBase.height},
+                           {0, 0}, 0, WHITE);
             break;
 
         case WhichLoredrop::first:
-            RenderAnimation({this->position.x, this->position.y, (float)this->loredropOne.width, (float)this->loredropOne.height}, 1, 1);
+            DrawTexturePro(this->loredropOne,
+                           {0, 0, (float)this->loredropOne.width, (float)this->loredropOne.width},
+                           {this->position.x, this->position.y, (float)this->loredropOne.width, (float)this->loredropOne.height},
+                           {0, 0}, 0, WHITE);
             break;
 
         case WhichLoredrop::second:
-            RenderAnimation({this->position.x, this->position.y, (float)this->loredropTwo.width, (float)this->loredropTwo.height}, 1, 1);
+            DrawTexturePro(this->loredropTwo,
+                           {0, 0, (float)this->loredropTwo.width, (float)this->loredropTwo.width},
+                           {this->position.x, this->position.y, (float)this->loredropTwo.width, (float)this->loredropTwo.height},
+                           {0, 0}, 0, WHITE);
             break;
 
         case WhichLoredrop::third:
-            RenderAnimation({this->position.x, this->position.y, (float)this->loredropThree.width, (float)this->loredropThree.height}, 1, 1);
+            DrawTexturePro(this->loredropThree,
+                           {0, 0, (float)this->loredropThree.width, (float)this->loredropThree.width},
+                           {this->position.x, this->position.y, (float)this->loredropThree.width, (float)this->loredropThree.height},
+                           {0, 0}, 0, WHITE);
             break;
 
     }
