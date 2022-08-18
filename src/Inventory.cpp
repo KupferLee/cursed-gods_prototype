@@ -14,19 +14,8 @@ Inventory::Inventory()
 
     this->textureRing = LoadTexture("assets/graphics/UI/Slot_Ring.png");
 
-    // assign x and y position for every slot
-    // currently putting -90 is a quick and dirty solution only for the Platzhalter
-    this->slotPosition[0].x = GetScreenWidth()/2 - this->textureRing.width * scaleFactor - 80;
-    this->slotPosition[0].y = GetScreenHeight()/2 - this->textureRing.height * this->scaleFactor - 90;
+    this->SetSlots();
 
-    this->slotPosition[1].x = this->slotPosition[0].x;
-    this->slotPosition[1].y = this->slotPosition[0].y + this->textureRing.height * this->scaleFactor;
-
-    this->slotPosition[2].x = this->slotPosition[0].x;
-    this->slotPosition[2].y = this->slotPosition[1].y + this->textureRing.height * this->scaleFactor;
-
-    this->slotPosition[3].x = this->slotPosition[0].x;
-    this->slotPosition[3].y = this->slotPosition[2].y + this->textureRing.height * this->scaleFactor;
 }
 
 void Inventory::Update()
@@ -138,7 +127,7 @@ void Inventory::Render()
         case Items: // draw inventory
             DrawTexturePro(this->textureInventoryBase,
                            {0, 0, (float)this->textureInventoryBase.width, (float)this->textureInventoryBase.height},
-                           {(float)GetScreenWidth()/2 - this->textureInventoryBase.width, (float)GetScreenHeight() / 2 - this->textureInventoryBase.height, (float)this->textureInventoryBase.width * this->scaleFactor, (float)this->textureInventoryBase.height * this->scaleFactor},
+                           {(float)GetScreenWidth()/2 - (this->textureInventoryBase.width*scaleFactor/2), (float)GetScreenHeight() / 2 - (this->textureInventoryBase.height*scaleFactor/2), (float)this->textureInventoryBase.width * this->scaleFactor, (float)this->textureInventoryBase.height * this->scaleFactor},
                            {0, 0}, 0, WHITE);
 
             // draw items
@@ -157,7 +146,7 @@ void Inventory::Render()
                     {
                         DrawTexturePro(this->inventoryContainer.getItem(currentSlot)->GetTexture(),
                                        {0, 0, (float)this->inventoryContainer.getItem(i)->GetTexture().width, (float)this->inventoryContainer.getItem(i)->GetTexture().height},
-                                       {(float)GetScreenWidth()/2 + 60, (float)GetScreenHeight()/2, (float)this->inventoryContainer.getItem(i)->GetTexture().width*this->scaleFactor, (float)this->inventoryContainer.getItem(i)->GetTexture().height*this->scaleFactor},
+                                       {this->infoPosition.x, this->infoPosition.y, (float)this->inventoryContainer.getItem(i)->GetTexture().width*this->scaleFactor, (float)this->inventoryContainer.getItem(i)->GetTexture().height*this->scaleFactor},
                                        {0, 0}, 0, WHITE);
                     }
 
@@ -215,6 +204,26 @@ void Inventory::itemAdd(item_base *item)
 }
 
 bool Inventory::IsOpen() { return isOpen; }
+
+void Inventory::SetSlots()
+{
+    // assign position for Info draw
+    this->infoPosition = {(float)GetScreenWidth()/2 + 88, (float)GetScreenHeight()/2};
+
+    // assign x and y position for every slot
+    // currently putting -90 is a quick and dirty solution only for the Platzhalter
+    this->slotPosition[0].x = GetScreenWidth()/2 - this->textureRing.width * scaleFactor - 125;
+    this->slotPosition[0].y = GetScreenHeight()/2 - this->textureRing.height * this->scaleFactor - 130;
+
+    this->slotPosition[1].x = this->slotPosition[0].x;
+    this->slotPosition[1].y = this->slotPosition[0].y + this->textureRing.height * this->scaleFactor;
+
+    this->slotPosition[2].x = this->slotPosition[0].x;
+    this->slotPosition[2].y = this->slotPosition[1].y + this->textureRing.height * this->scaleFactor;
+
+    this->slotPosition[3].x = this->slotPosition[0].x;
+    this->slotPosition[3].y = this->slotPosition[2].y + this->textureRing.height * this->scaleFactor;
+}
 
 int Inventory::GetCurrentState() { return menuState; }
 

@@ -127,8 +127,8 @@ int main() {
                     ClearBackground(WHITE);
                     TestTitle->Update();
                     TestTitle->Render();
-                    DrawText("Title", 10, 10, 30, LIGHTGRAY);
-                    DrawText("Press Enter to start Level 1.", 10, 40, 30, LIGHTGRAY);
+                    // DrawText("Title", 10, 10, 30, LIGHTGRAY);
+                    // DrawText("Press Enter to start Level 1.", 10, 40, 30, LIGHTGRAY);
                     break;
 
                 case (state_level1):
