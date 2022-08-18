@@ -77,11 +77,22 @@ void Scene::UpdateScene()
 
 void Scene::RenderScene() {
     //PlayMusicStream(theme_);
-    DrawTexturePro(this->map_->getTexture(),
-                       {player_->getPosition().x - Game::ScreenWidth/2-15, player_->getPosition().y - Game::ScreenHeight/2-15, static_cast<float>(Game::ScreenWidth)+30, static_cast<float>(Game::ScreenWidth)+30},
-                       {player_->getPosition().x - Game::ScreenWidth/2-15,player_->getPosition().y - Game::ScreenHeight/2-15, static_cast<float>(Game::ScreenWidth)*cam_.zoom+30, static_cast<float>(Game::ScreenHeight)*cam_.zoom+30}, {}, {},
+    if(player_ != nullptr) {
+        DrawTexturePro(this->map_->getTexture(),
+                       {player_->getPosition().x - Game::ScreenWidth / 2 - 15,
+                        player_->getPosition().y - Game::ScreenHeight / 2 - 15,
+                        static_cast<float>(Game::ScreenWidth) + 30, static_cast<float>(Game::ScreenWidth) + 30},
+                       {player_->getPosition().x - Game::ScreenWidth / 2 - 15,
+                        player_->getPosition().y - Game::ScreenHeight / 2 - 15,
+                        static_cast<float>(Game::ScreenWidth) * cam_.zoom + 30,
+                        static_cast<float>(Game::ScreenHeight) * cam_.zoom + 30}, {}, {},
                        WHITE);
-
+    }
+    else{
+        DrawTexturePro(this->map_->getTexture(),
+                       {0,0,static_cast<float>(this->map_->getTexture().width),static_cast<float>(this->map_->getTexture().height)},
+                       {0,0,Game::ScreenWidth,Game::ScreenHeight},{},0,WHITE);
+    }
     if(drawhitbox_) {
         if (tileAtlas_ != nullptr) {
             for (int i = 0; i < tileAtlas_->getHitboxes().size(); ++i) {
