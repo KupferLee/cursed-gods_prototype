@@ -6,12 +6,12 @@
 
 BattleScreen::BattleScreen()
 {
-    this->background = LoadTexture("assets/graphics/UI/BattleScreen_Background.png");
-    this->attackButton_1 = LoadTexture("assets/graphics/UI/Buttons/AttackButton_1.png");
-    this->attackButton_2 = LoadTexture("assets/graphics/UI/Buttons/AttackButton_2.png");
-    this->attackButton_3 = LoadTexture("assets/graphics/UI/Buttons/AttackButton_3.png");
-    this->attackButton_4 = LoadTexture("assets/graphics/UI/Buttons/AttackButton_4.png");
-    this->attackSelection = LoadTexture("assets/graphics/UI/Buttons/AttackSelect.png");
+    this->background = LoadTexture("assets/graphics/UI/Fightscreen/BattleScreen_Background.png");
+    this->attackButton_1 = LoadTexture("assets/graphics/UI/Fightscreen/AttackButton_1.png");
+    this->attackButton_2 = LoadTexture("assets/graphics/UI/Fightscreen/AttackButton_2.png");
+    this->attackButton_3 = LoadTexture("assets/graphics/UI/Fightscreen/AttackButton_3.png");
+    this->attackButton_4 = LoadTexture("assets/graphics/UI/Fightscreen/AttackButton_4.png");
+    this->attackSelection = LoadTexture("assets/graphics/UI/Fightscreen/AttackSelect.png");
 
     // textures get used in set slots
     this->SetSlots();

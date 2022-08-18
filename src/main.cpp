@@ -12,6 +12,8 @@
 #include "ProtectedTileset.h"
 #include "Inventory.h"
 #include "BattleScreen.h"
+#include "ActorHarpye.h"
+#include "ActorLoredrop.h"
 
 int main() {
     // Raylib initialization
@@ -30,6 +32,8 @@ int main() {
     // ...
     // ...
     Inventory inventory;
+    ActorHarpye enemyHarpy;
+    ActorLoredrop loredrop;
 
 
     const char* titleTexture = "assets/graphics/UI/title_screen.png";
@@ -79,6 +83,8 @@ int main() {
 
             case (state_level1):
                 inventory.Update();
+                enemyHarpy.Update();
+                loredrop.Update();
 
                 // State Wechsel
                 // if in options und press enter
@@ -127,22 +133,30 @@ int main() {
                     ClearBackground(WHITE);
                     TestTitle->Update();
                     TestTitle->Render();
-                    DrawText("Title", 10, 10, 30, LIGHTGRAY);
-                    DrawText("Press Enter to start Level 1.", 10, 40, 30, LIGHTGRAY);
+                    // DrawText("Title", 10, 10, 30, LIGHTGRAY);
+                    // DrawText("Press Enter to start Level 1.", 10, 40, 30, LIGHTGRAY);
                     break;
 
                 case (state_level1):
                     // playing screen
+                    //begin of camera
                     BeginMode2D(TestScene->getCamera());
                     ClearBackground(WHITE);
                     TestScene->Update();
                     TestScene->Render();
                     DrawText("Level 1", 10, 10, 30, LIGHTGRAY);
                     DrawText("Press F to start fight.", 10, 40, 30, LIGHTGRAY);
+
+                    // enemies
+                    enemyHarpy.RenderHarpye({400, 500});
+
                     EndMode2D();
+                    // end of camera
+
 
                     // inventory
                     inventory.Render();
+                    loredrop.Render();
 
                     break;
 

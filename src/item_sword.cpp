@@ -9,5 +9,6 @@ item_sword::item_sword()
     this->name = "Soldier's Xisiphos";
     this->description = "A simple sword.";
     this->addAD = 10;
-    this->texture = LoadTexture("assets/graphics/UI/Slot_Sword.png");
+    this->texture_item = LoadTexture("assets/graphics/UI/Inventory/Slot_Sword.png");
+    this->texture_infos = LoadTexture("assets/graphics/UI/Inventory/Info_Sword.png");
 }

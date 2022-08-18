@@ -6,6 +6,6 @@
 
 BattleRat::BattleRat()
 {
-    this->animation = LoadTexture("assets/graphics/Actors/Battle_Rat.png");
+    this->animation = LoadTexture("assets/graphics/Actors/Rat_Animations.png");
     this->healthBar = LoadTexture("assets/graphics/Actors/health_bar.png");
 }

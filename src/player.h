@@ -13,7 +13,7 @@ enum class Animation
     JumpLeft
 };
 
-class player : public Actor, public DRAW
+class player : public Actor
 {
 public:
     player(){};
@@ -27,6 +27,7 @@ public:
     void SetGround(std::vector<Rectangle> a);
     void SetWalls(std::vector<Rectangle> a);
     Vector2 getPosition();
+    Vector2 GetCurrentPosition();
     float getTextureWidth();
     float getTextureHeight();
 
