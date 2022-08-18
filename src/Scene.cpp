@@ -87,13 +87,6 @@ void Scene::RenderScene() {
                        WHITE);
     }
     if(tileAtlas_ != nullptr){
-        for (int i = 0; i < tileAtlas_->getHitboxesGround().size(); ++i){
-            DrawRectangle(tileAtlas_->getHitboxesGround().at(i).x,
-                          tileAtlas_->getHitboxesGround().at(i).y,
-                          tileAtlas_->getHitboxesGround().at(i).width,
-                          tileAtlas_->getHitboxesGround().at(i).height,
-                          RED);
-            }
         for (int i = 0; i < tileAtlas_->getHitboxes().size(); ++i){
             DrawRectangle(tileAtlas_->getHitboxes().at(i).x,
                           tileAtlas_->getHitboxes().at(i).y,
@@ -122,6 +115,13 @@ void Scene::RenderScene() {
                           tileAtlas_->getTriggerboxesBreakable().at(i).height,
                           PINK);
             }
+        for (int i = 0; i < tileAtlas_->getHitboxesGround().size(); ++i){
+            DrawRectangle(tileAtlas_->getHitboxesGround().at(i).x,
+                          tileAtlas_->getHitboxesGround().at(i).y,
+                          tileAtlas_->getHitboxesGround().at(i).width,
+                          tileAtlas_->getHitboxesGround().at(i).height,
+                          RED);
+        }
         }
     if(player_ != nullptr){
     player_->Render();

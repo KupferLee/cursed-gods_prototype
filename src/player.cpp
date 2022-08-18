@@ -90,6 +90,7 @@ void player::UpdatePlayer(float delta)
     bIsInAir = true;
     bIsOnGround = false;
 
+    //Ground Collision;
     for (const auto& index : Ground)
     {
         if(CheckCollisionRecs(index, Rectangle{vNewPos.x, vNewPos.y + 50, 50, 0}))
@@ -103,6 +104,7 @@ void player::UpdatePlayer(float delta)
             {Momentum.y = 0;}
         }
      }
+    //Wall Collision
     WallCollide = false;
     for (const auto& index : Walls)
     {
