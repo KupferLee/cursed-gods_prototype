@@ -6,7 +6,7 @@
 
 BattleHarpye::BattleHarpye()
 {
-    this->animation = LoadTexture("assets/graphics/Actors/Battle_Harpye.png");
+    this->animation = LoadTexture("assets/graphics/Actors/Harpye_Animations.png");
     this->healthBar = LoadTexture("assets/graphics/Actors/health_bar.png");
 }
 

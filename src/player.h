@@ -13,7 +13,7 @@ enum class Animation
     JumpLeft
 };
 
-class player : public Actor, public DRAW
+class player : public Actor
 {
 public:
     player(){};
