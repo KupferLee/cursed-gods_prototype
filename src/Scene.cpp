@@ -17,13 +17,13 @@ Scene::Scene(const std::shared_ptr<player> &player,
              const std::shared_ptr<ProtectedTileset> &tileAtlas,
              const Music &theme,
              const Camera2D &cam)
-            : player_(player), map_(map), tileAtlas_(tileAtlas), theme_(theme), cam_(cam), drawhitbox_(false) {
+            : player_(player), map_(map), tileAtlas_(tileAtlas), theme_(theme), cam_(cam), drawhitbox_(true) {
 
     if(player_ != nullptr){
         player_->SetGround(tileAtlas_->getHitboxesGround());
         player_->SetWalls(tileAtlas_->getHitboxes());
         cam_.target = player_->getPosition();
-        cam_.zoom = 1.f;
+        cam_.zoom = 2.f;
     }
 
     TraceLog(LOG_INFO, "Scene constructor called");
@@ -79,13 +79,16 @@ void Scene::RenderScene() {
     //PlayMusicStream(theme_);
     if(player_ != nullptr) {
         DrawTexturePro(this->map_->getTexture(),
-                       {player_->getPosition().x - Game::ScreenWidth / 2 - 15,
-                        player_->getPosition().y - Game::ScreenHeight / 2 - 15,
-                        static_cast<float>(Game::ScreenWidth) + 30, static_cast<float>(Game::ScreenWidth) + 30},
-                       {player_->getPosition().x - Game::ScreenWidth / 2 - 15,
-                        player_->getPosition().y - Game::ScreenHeight / 2 - 15,
-                        static_cast<float>(Game::ScreenWidth) * cam_.zoom + 30,
-                        static_cast<float>(Game::ScreenHeight) * cam_.zoom + 30}, {}, {},
+                       {(player_->getPosition().x - Game::ScreenWidth / 2),
+                        (player_->getPosition().y - Game::ScreenHeight / 2),
+                        (static_cast<float>(Game::ScreenWidth)/2) * cam_.zoom,
+                        (static_cast<float>(Game::ScreenHeight)/2) * cam_.zoom},
+                       {player_->getPosition().x - Game::ScreenWidth / 2,
+                        player_->getPosition().y - Game::ScreenHeight / 2,
+                        (static_cast<float>(Game::ScreenWidth) / 2) *cam_.zoom,
+                        (static_cast<float>(Game::ScreenHeight) / 2) *cam_.zoom},
+                        {},
+                        {},
                        WHITE);
     }
     else{
