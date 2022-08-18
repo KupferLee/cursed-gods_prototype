@@ -118,6 +118,13 @@ void player::UpdatePlayer(float delta)
         {
             WallCollide = true;
         }
+         if (CheckCollisionRecs(index, HitBoxHead))
+        {
+            if (vNewPos.y < vPosition.y)
+            {
+                Momentum.y = 0;
+            }
+        }
     }
 
     bIsInAir = true;
