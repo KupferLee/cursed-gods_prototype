@@ -51,20 +51,19 @@ void ActorLoredrop::InternUpdate()
     switch ((int)this->currentLoredrop)
     {
         case (int)WhichLoredrop::base:
-            this->position = {(float)Katara.getPosition().x, (float)Katara.getPosition().y - 20, (float)this->loredropBase.width, (float)this->loredropBase.height};
-
+            this->position = {(float)(GetScreenWidth()/2 - this->loredropBase.width/2*this->scaleFactor), (float)(GetScreenHeight() - this->loredropBase.height*this->scaleFactor - this->offset), (float)this->loredropBase.width, (float)this->loredropBase.height};
             break;
 
         case (int)WhichLoredrop::first:
-            this->position = {(float)Katara.getPosition().x, (float)Katara.getPosition().y - 20, (float)this->loredropOne.width, (float)this->loredropOne.height};
-           break;
+            this->position = {(float)(GetScreenWidth()/2 - this->loredropOne.width/2*this->scaleFactor), (float)(GetScreenHeight() - this->loredropOne.height*this->scaleFactor - this->offset), (float)this->loredropOne.width, (float)this->loredropOne.height};
+            break;
 
         case (int)WhichLoredrop::second:
-            this->position = {(float)Katara.getPosition().x, (float)Katara.getPosition().y - 20, (float)this->loredropTwo.width, (float)this->loredropTwo.height};
+            this->position = {(float)(GetScreenWidth()/2 - this->loredropTwo.width/2*this->scaleFactor), (float)(GetScreenHeight() - this->loredropTwo.height*this->scaleFactor - this->offset), (float)this->loredropTwo.width, (float)this->loredropTwo.height};
             break;
 
         case (int)WhichLoredrop::third:
-            this->position = {(float)Katara.getPosition().x, (float)Katara.getPosition().y - 20, (float)this->loredropThree.width, (float)this->loredropThree.height};
+            this->position = {(float)(GetScreenWidth()/2 - this->loredropThree.width/2*this->scaleFactor), (float)(GetScreenHeight() - this->loredropThree.height*this->scaleFactor - this->offset), (float)this->loredropThree.width, (float)this->loredropThree.height};
             break;
     }
 }
@@ -78,7 +77,7 @@ void ActorLoredrop::InternRender()
         case WhichLoredrop::base:
             DrawTexturePro(this->loredropBase,
                            {0, 0, (float)this->loredropBase.width, (float)this->loredropBase.height},
-                           {this->position.x, this->position.y, (float)this->loredropBase.width, (float)this->loredropBase.height},
+                           {this->position.x, this->position.y, (float)this->loredropBase.width*this->scaleFactor, (float)this->loredropBase.height*this->scaleFactor},
                            {0, 0}, 0, WHITE);
             break;
 

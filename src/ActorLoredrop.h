@@ -31,9 +31,11 @@ protected:
     //enum WhichLoredrop;
     WhichLoredrop currentLoredrop = WhichLoredrop::none;
 
-    int current = 0;
+    //int current = 0;
     player Katara;
 
+    int scaleFactor = 4;
+    int offset = 20;
     Texture2D loredropBase;
     Texture2D loredropOne;
     Texture2D loredropTwo;
