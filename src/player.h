@@ -55,7 +55,7 @@ private:
     bool drawhitbox_ = false;
 
     //constants
-    const float fJumpAcc = -7.5f;
+    const float fJumpAcc = -7.7f;
 	const float fSideAcc = 2.5;
     const float fMaxSpeed = 4.f;
     const float fMaxAirSpeed = 22.2;
