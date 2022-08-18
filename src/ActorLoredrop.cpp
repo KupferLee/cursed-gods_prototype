@@ -10,6 +10,7 @@ ActorLoredrop::ActorLoredrop()
 {
     this->positionTest = {1000, 730};
     this->posDrop_1 = {700, 720 };
+    this->posDrop_2 = {2400, 860};
 
     this->loredropBase = LoadTexture("assets/graphics/Actors/Loredrop_Template.png");
     this->loredropOne = LoadTexture("assets/graphics/Actors/Loredrop_1.png");
@@ -30,6 +31,10 @@ void ActorLoredrop::UpdateLore(Vector2 currentPosition)
     {
         this->currentLoredrop = WhichLoredrop::first;
     }
+    else if (Vector2Distance(currentPosition, this->posDrop_2) < 50)
+    {
+        this->currentLoredrop = WhichLoredrop::second;
+    }
     else
     {
         this->currentLoredrop = WhichLoredrop::none;
@@ -47,6 +52,7 @@ void ActorLoredrop::Render()
 void ActorLoredrop::Draw()
 {
     DrawRectangle(this->posDrop_1.x, this->posDrop_1.y, 50, 50, RED);
+    DrawRectangle(this->posDrop_2.x, this->posDrop_2.y, 50, 50, RED);
 }
 
 void ActorLoredrop::InternUpdate()

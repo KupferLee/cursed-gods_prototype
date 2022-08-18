@@ -51,6 +51,7 @@ protected:
 
     // positions
     Vector2 posDrop_1;
+    Vector2 posDrop_2;
 
 
 private:
