@@ -68,7 +68,7 @@ void BattleScreen::Render()
     // draw selection
     DrawTexturePro(this->attackSelection,
                    {0.0, 0.0, (float)this->attackSelection.width, (float)this->attackSelection.height},
-                   {buttonSlots[currentSlot].x - 10, buttonSlots[currentSlot].y - 10, (float)this->attackSelection.width * this->scaleFactor, (float)this->attackSelection.height * this->scaleFactor},
+                   {buttonSlots[currentSlot].x - 10, buttonSlots[currentSlot].y - 12, (float)this->attackSelection.width * this->scaleFactor, (float)this->attackSelection.height * this->scaleFactor},
                    {0, 0}, 0, WHITE);
 
     // draw actors
