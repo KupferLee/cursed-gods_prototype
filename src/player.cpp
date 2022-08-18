@@ -182,7 +182,20 @@ void player::SetGround(std::vector<Rectangle> a)
 {
     Ground = a;
 }
+
+Vector2 player::getPosition() {
+    return this->vPosition;
+}
+
 void player::SetWalls(std::vector<Rectangle> a)
 {
     Walls = a;
+}
+
+float player::getTextureHeight() {
+    return static_cast<float>(Frames.width)/static_cast<float>(TilecountX);
+}
+
+float player::getTextureWidth() {
+    return static_cast<float>(Frames.height)/static_cast<float>(TilecountY);
 }

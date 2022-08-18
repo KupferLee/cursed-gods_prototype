@@ -37,9 +37,6 @@ int main() {
     Music titlemusic = LoadMusicStream("assets/audio/tracks/TitleTestMusic.wav");
 
     BattleScreen fightScreen;
-    player test;
-    std::vector <Rectangle> Ground;
-
 
     const char* mapTexture = "assets/graphics/Map/Test-LevelGit.png"; //columns = 14
     const char* mapDescription = "assets/graphics/Map/THIS.json";
@@ -54,16 +51,17 @@ int main() {
     enum GameState {state_title, state_level1, state_fight};
     GameState gameState = state_title;
 
-    std::shared_ptr<Scene> TestScene = std::make_shared<Scene>((std::make_shared<player>()),
+
+
+    std::shared_ptr <player> katara = std::make_shared<player>();
+    std::unique_ptr<Scene> TestScene = std::make_unique<Scene>(katara,
                     mapTex,
                     description,
-                    levelmusic);
+                    levelmusic,
+                    Camera2D({katara->getTextureWidth()/2,katara->getTextureHeight()/2}));
 
-    std::shared_ptr<Scene> TestTitle = std::make_shared<Scene>(nullptr,
-                                                               titleTex,
-                                                               nullptr,
-                                                               titlemusic);
-
+    std::unique_ptr<Scene> TestTitle = std::make_unique<Scene>(titleTex,
+                                                           titlemusic);
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
     {
@@ -101,7 +99,7 @@ int main() {
                     gameState = state_level1;
                 }
 
-                fightScreen.Update();
+
 
                 break;
             default:
@@ -109,6 +107,8 @@ int main() {
         }
 
         BeginDrawing();
+
+
             // You can draw on the screen between BeginDrawing() and EndDrawing()
             // ...
             // ...
@@ -133,12 +133,13 @@ int main() {
 
                 case (state_level1):
                     // playing screen
+                    BeginMode2D(TestScene->getCamera());
                     ClearBackground(WHITE);
                     TestScene->Update();
                     TestScene->Render();
                     DrawText("Level 1", 10, 10, 30, LIGHTGRAY);
                     DrawText("Press F to start fight.", 10, 40, 30, LIGHTGRAY);
-
+                    EndMode2D();
 
                     // inventory
                     inventory.Render();
@@ -148,6 +149,7 @@ int main() {
                     ClearBackground(WHITE);
                     DrawText("Fight", 10, 10, 30, LIGHTGRAY);
                     DrawText("Press F to return to Level 1.", 10, 40, 30, LIGHTGRAY);
+                    fightScreen.Update();
                     fightScreen.Render();
                     break;
 
@@ -155,7 +157,6 @@ int main() {
                     break;
 
             }
-
 
         EndDrawing();
     } // Main game loop end

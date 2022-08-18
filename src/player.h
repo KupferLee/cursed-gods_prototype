@@ -25,6 +25,9 @@ public:
     void SetNextFrame();
     void SetGround(std::vector<Rectangle> a);
     void SetWalls(std::vector<Rectangle> a);
+    Vector2 getPosition();
+    float getTextureWidth();
+    float getTextureHeight();
 
 private:
     //animation shit
