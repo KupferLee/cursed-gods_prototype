@@ -20,11 +20,11 @@ protected:
     enum MenuState {Closed, Items, Options, Character, Loredrops };
     MenuState menuState = Closed;
 
-    Texture2D textureInventoryBase;
+    Texture2D textureItempageBase;
     Texture2D textureOptionsBase;
     Texture2D textureCharacterspriteBase;
     Texture2D textureLoredropsBase;
-    Texture2D textureRing;
+    Texture2D textureItem;
 
     // GUI Item select
     Texture2D slotSelect;

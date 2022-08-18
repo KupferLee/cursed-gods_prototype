@@ -6,13 +6,14 @@
 
 Inventory::Inventory()
 {
-    this->textureInventoryBase = LoadTexture("assets/graphics/UI/Inventory_Base_Platzhalter.png");
-    this->textureOptionsBase = LoadTexture("assets/graphics/UI/Options_Base_Platzhalter.png");
-    this->textureCharacterspriteBase = LoadTexture("assets/graphics/UI/Charactersprite_Base_Platzhalter.png");
-    this->textureLoredropsBase = LoadTexture("assets/graphics/UI/Loredrops_Base_Platzhalter.png");
-    this->slotSelect = LoadTexture("assets/graphics/UI/Slot_Select.png");
+    this->textureItempageBase = LoadTexture("assets/graphics/UI/Inventory/Itemslots_Base_Platzhalter.png");
+    this->textureOptionsBase = LoadTexture("assets/graphics/UI/Inventory/Options_Base_Platzhalter.png");
+    this->textureCharacterspriteBase = LoadTexture("assets/graphics/UI/Inventory/Charactersprite_Base_Platzhalter.png");
+    this->textureLoredropsBase = LoadTexture("assets/graphics/UI/Inventory/Loredrops_Base_Platzhalter.png");
+    this->slotSelect = LoadTexture("assets/graphics/UI/Inventory/Slot_Select.png");
 
-    this->textureRing = LoadTexture("assets/graphics/UI/Slot_Ring.png");
+    // load empty item slot to get width and height for set slots
+    this->textureItem = LoadTexture("assets/graphics/UI/Inventory/Slot_Item.png");
 
     this->SetSlots();
 
@@ -122,9 +123,9 @@ void Inventory::Render()
     switch (menuState)
     {
         case Items: // draw inventory
-            DrawTexturePro(this->textureInventoryBase,
-                           {0, 0, (float)this->textureInventoryBase.width, (float)this->textureInventoryBase.height},
-                           {(float)this->inventoryPosition.x, (float)this->inventoryPosition.y, (float)this->textureInventoryBase.width * this->scaleFactor, (float)this->textureInventoryBase.height * this->scaleFactor},
+            DrawTexturePro(this->textureItempageBase,
+                           {0, 0, (float)this->textureItempageBase.width, (float)this->textureItempageBase.height},
+                           {(float)this->inventoryPosition.x, (float)this->inventoryPosition.y, (float)this->textureItempageBase.width * this->scaleFactor, (float)this->textureItempageBase.height * this->scaleFactor},
                            {0, 0}, 0, WHITE);
 
             // draw items
@@ -206,21 +207,21 @@ void Inventory::SetSlots()
 {
     // assign position for Info draw
     this->infoPosition = {(float)GetScreenWidth()/2 + 60, (float)GetScreenHeight()/2 - 325};
-    this->inventoryPosition = {(float)GetScreenWidth()/2 - (this->textureInventoryBase.width*scaleFactor/2), (float)GetScreenHeight() / 2 - (this->textureInventoryBase.height*scaleFactor/2)};
+    this->inventoryPosition = {(float)GetScreenWidth()/2 - (this->textureItempageBase.width * scaleFactor / 2), (float)GetScreenHeight() / 2 - (this->textureItempageBase.height * scaleFactor / 2)};
 
     // assign x and y position for every slot
     // currently putting -90 is a quick and dirty solution only for the Platzhalter
-    this->slotPosition[0].x = GetScreenWidth()/2 - this->textureRing.width * scaleFactor - 127;
-    this->slotPosition[0].y = GetScreenHeight()/2 - this->textureRing.height * this->scaleFactor - 143;
+    this->slotPosition[0].x = GetScreenWidth()/2 - this->textureItem.width * scaleFactor - 127;
+    this->slotPosition[0].y = GetScreenHeight()/2 - this->textureItem.height * this->scaleFactor - 143;
 
     this->slotPosition[1].x = this->slotPosition[0].x;
-    this->slotPosition[1].y = this->slotPosition[0].y + this->textureRing.height * this->scaleFactor;
+    this->slotPosition[1].y = this->slotPosition[0].y + this->textureItem.height * this->scaleFactor;
 
     this->slotPosition[2].x = this->slotPosition[0].x;
-    this->slotPosition[2].y = this->slotPosition[1].y + this->textureRing.height * this->scaleFactor;
+    this->slotPosition[2].y = this->slotPosition[1].y + this->textureItem.height * this->scaleFactor;
 
     this->slotPosition[3].x = this->slotPosition[0].x;
-    this->slotPosition[3].y = this->slotPosition[2].y + this->textureRing.height * this->scaleFactor;
+    this->slotPosition[3].y = this->slotPosition[2].y + this->textureItem.height * this->scaleFactor;
 }
 
 int Inventory::GetCurrentState() { return menuState; }
