@@ -30,6 +30,8 @@ public:
 protected:
     //enum WhichLoredrop;
     WhichLoredrop currentLoredrop = WhichLoredrop::none;
+
+    int current = 0;
     player Katara;
 
     Texture2D loredropBase;
