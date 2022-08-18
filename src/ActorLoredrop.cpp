@@ -9,8 +9,11 @@
 ActorLoredrop::ActorLoredrop()
 {
     this->positionTest = {1000, 730};
-    this->posDrop_1 = {700, 720 };
-    this->posDrop_2 = {2400, 860};
+    this->posDrop_1 = {730, 700 };
+    this->posDrop_2 = {2410, 860};
+    this->posDrop_3 = {2695, 3307};
+    this->posDrop_4 = {2000, 3275};
+    this->posDrop_final = {8960, 1245};
 
     this->loredropBase = LoadTexture("assets/graphics/Actors/Loredrop_Template.png");
     this->loredropOne = LoadTexture("assets/graphics/Actors/Loredrop_1.png");
@@ -22,6 +25,15 @@ ActorLoredrop::ActorLoredrop()
 
 void ActorLoredrop::UpdateLore(Vector2 currentPosition)
 {
+    if (IsKeyPressed(KEY_H) && isHitboxVisible == false)
+    {
+        this->isHitboxVisible = true;
+    }
+    else if (IsKeyPressed(KEY_H) && isHitboxVisible == true)
+    {
+        this->isHitboxVisible = false;
+    }
+
     // to get mid of katara
     currentPosition.x += 16;
     currentPosition.y += 16;
@@ -34,6 +46,18 @@ void ActorLoredrop::UpdateLore(Vector2 currentPosition)
     else if (Vector2Distance(currentPosition, this->posDrop_2) < 50)
     {
         this->currentLoredrop = WhichLoredrop::second;
+    }
+    else if (Vector2Distance(currentPosition, this->posDrop_3) < 50)
+    {
+        this->currentLoredrop = WhichLoredrop::third;
+    }
+    else if (Vector2Distance(currentPosition, this->posDrop_4) < 50)
+    {
+        this->currentLoredrop = WhichLoredrop::fourth;
+    }
+    else if (Vector2Distance(currentPosition, this->posDrop_final) < 50)
+    {
+        this->currentLoredrop = WhichLoredrop::final;
     }
     else
     {
@@ -51,8 +75,15 @@ void ActorLoredrop::Render()
 
 void ActorLoredrop::Draw()
 {
-    DrawRectangle(this->posDrop_1.x, this->posDrop_1.y, 50, 50, RED);
-    DrawRectangle(this->posDrop_2.x, this->posDrop_2.y, 50, 50, RED);
+    if (this->isHitboxVisible == true)
+    {
+        DrawRectangle(this->posDrop_1.x, this->posDrop_1.y, 50, 50, RED);
+        DrawRectangle(this->posDrop_2.x, this->posDrop_2.y, 50, 50, RED);
+        DrawRectangle(this->posDrop_3.x, this->posDrop_3.y, 50, 50, RED);
+        DrawRectangle(this->posDrop_4.x, this->posDrop_4.y, 50, 50, RED);
+        DrawRectangle(this->posDrop_final.x, this->posDrop_final.y, 50, 50, RED);
+    }
+
 }
 
 void ActorLoredrop::InternUpdate()
