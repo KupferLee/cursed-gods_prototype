@@ -3,6 +3,9 @@
 
 void player::UpdatePlayer(float delta)
 {
+    if(IsKeyPressed(KEY_H) && !drawhitbox_) drawhitbox_ = true;
+    else if(IsKeyPressed(KEY_H) && drawhitbox_) drawhitbox_ = false;
+
 //Movement
     bIsWalking = false;
     if (bIsOnGround)Animation = Animation::Idle;
@@ -92,13 +95,26 @@ void player::UpdatePlayer(float delta)
             Momentum.y = fMaxAirSpeed;
         }
     }
+
+    //PosUpdates;
     vNewPos = Vector2Add(vPosition, Momentum);
+    KataraBox.x = vNewPos.x;
+    KataraBox.y = vNewPos.y;
+    HitBoxBody.x = vNewPos.x+4;
+    HitBoxBody.y = vNewPos.y+2;
+    HitBoxHead.x = vNewPos.x+7;
+    HitBoxHead.y = vNewPos.y+1;
+    HitBoxFeet.x = vNewPos.x+6;
+    HitBoxFeet.y = vNewPos.y+29;
+
+
+
 
     //Wall Collision
     WallCollide = false;
     for (const auto& index : Walls)
     {
-        if(CheckCollisionRecs(index, Rectangle{vNewPos.x, vNewPos.y, 32, 29})) //Kataras Größe Hardcoded und 2 Pixel Weniger, da die Hitboxen sometimes Slightly Off sind
+        if(CheckCollisionRecs(index, HitBoxBody))
         {
             WallCollide = true;
         }
@@ -110,7 +126,7 @@ void player::UpdatePlayer(float delta)
     //Ground Collision;
     for (const auto& index : Ground)
     {
-        if(CheckCollisionRecs(index, Rectangle{vNewPos.x, vNewPos.y + 31, 32, 1})) //Kataras Größe Hardcoded
+        if(CheckCollisionRecs(index, HitBoxFeet))
         {
             if(vNewPos.y >= vPosition.y)
             {
@@ -119,7 +135,7 @@ void player::UpdatePlayer(float delta)
                 bIsOnGround = true;
             }
         }
-        else if (CheckCollisionRecs(index, Rectangle{vNewPos.x, vNewPos.y, 32, 1})) //Kataras Größe Hardcoded
+        else if (CheckCollisionRecs(index, HitBoxHead))
         {
             if (vNewPos.y < vPosition.y)
             {
@@ -158,8 +174,14 @@ void player::UpdatePlayer(float delta)
 
 void player::RenderPlayer()
 {
-	DrawRectangleV(vPosition, {32, 32}, SKYBLUE); //Kataras Größe Hardcoded
-    DrawFrame(Rectangle{vPosition.x, vPosition.y, 32,32}, frame, static_cast<int>(Animation), Frames, TilecountX , TilecountY);
+    if(drawhitbox_)
+    {
+        DrawRectangleRec(HitBoxBody, SKYBLUE);
+        DrawRectangleRec(HitBoxHead, LIME);
+        DrawRectangleRec(HitBoxFeet, RED);
+    }
+
+    DrawFrame(KataraBox, frame, static_cast<int>(Animation), Frames, TilecountX , TilecountY);
 }
 
 void player::Render() {

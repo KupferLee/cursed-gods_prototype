@@ -32,6 +32,12 @@ public:
     float getTextureHeight();
 
 private:
+    //KataraBoxes
+    Rectangle KataraBox =  {0,0,32,32};
+    Rectangle HitBoxHead = {0,0,18, 3};
+    Rectangle HitBoxBody = {0,0, 24, 28};
+    Rectangle HitBoxFeet = {0,0, 20, 3};
+
     //animation shit
     Texture2D Frames = LoadTexture("assets/graphics/Actors/katara_animations.png");
     float TilecountX = 8;
@@ -46,6 +52,7 @@ private:
 	bool bIsOnGround = true;
     bool bIsInAir = false;
     bool WallCollide = false;
+    bool drawhitbox_ = false;
 
     //constants
     const float fJumpAcc = -7.5f;
