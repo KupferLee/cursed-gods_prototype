@@ -12,14 +12,29 @@
 #include "Scene.h"
 #include "config.h"
 #include <iostream>
-Scene::Scene(const std::shared_ptr<player> &player, const std::shared_ptr<ProtectedTexture> &map, const std::shared_ptr<ProtectedTileset> &tileAtlas, const Music &theme)
-            : player_(player), map_(map), tileAtlas_(tileAtlas), theme_(theme) {
+Scene::Scene(const std::shared_ptr<player> &player,
+             const std::shared_ptr<ProtectedTexture> &map,
+             const std::shared_ptr<ProtectedTileset> &tileAtlas,
+             const Music &theme,
+             const Camera2D &cam)
+            : player_(player), map_(map), tileAtlas_(tileAtlas), theme_(theme), cam_(cam) {
+
     if(player_ != nullptr){
         player_->SetGround(tileAtlas_->getHitboxesGround());
         player_->SetWalls(tileAtlas_->getHitboxes());
+        cam_.target = player_->getPosition();
+        cam_.zoom = 1.f;
     }
     TraceLog(LOG_INFO, "Scene constructor called");
 }
+
+Scene::Scene(const std::shared_ptr<ProtectedTexture> &map, const Music &theme)
+        : player_(nullptr), map_(map), tileAtlas_(nullptr), theme_(theme), cam_({0,0}) {
+    cam_.target = {0,0};
+    cam_.zoom = 1.f;
+    TraceLog(LOG_INFO, "Scene constructor called");
+}
+
 void Scene::Render() {
     return RenderScene();
 }
@@ -51,20 +66,27 @@ void Scene::UpdateScene()
     float delta = GetFrameTime();
     if(player_ != nullptr) {
         player_->Update(delta);
+        cam_.target = player_->getPosition();
     }
+
 }
 
 void Scene::RenderScene() {
     PlayMusicStream(theme_);
-    DrawTexturePro(this->map_->getTexture(),{0,0,static_cast<float>(Game::ScreenWidth),static_cast<float>(Game::ScreenWidth)},{0,0,static_cast<float>(Game::ScreenWidth),static_cast<float>(Game::ScreenWidth)},{},{}, WHITE);
-if(tileAtlas_ != nullptr){
-        for (int i = 0; i < tileAtlas_->getHitboxesGround().size(); ++i){
-            DrawRectangle(tileAtlas_->getHitboxesGround().at(i).x,
-                          tileAtlas_->getHitboxesGround().at(i).y,
-                          tileAtlas_->getHitboxesGround().at(i).width,
-                          tileAtlas_->getHitboxesGround().at(i).height,
-                          RED);
-            }
+    if(map_->getTextureWidth() > Game::ScreenWidth) {
+        DrawTexturePro(this->map_->getTexture(),
+                       {0, 0, static_cast<float>(Game::ScreenWidth), static_cast<float>(Game::ScreenWidth)},
+                       {0, 0, static_cast<float>(Game::ScreenWidth), static_cast<float>(Game::ScreenHeight)}, {}, {},
+                       WHITE);
+    }
+    else
+    {
+        DrawTexturePro(this->map_->getTexture(),
+                       {0, 0, static_cast<float>(map_->getTextureWidth()), static_cast<float>(map_->getTextureHeight())},
+                       {0, 0, static_cast<float>(Game::ScreenWidth), static_cast<float>(Game::ScreenHeight)}, {}, {},
+                       WHITE);
+    }
+    if(tileAtlas_ != nullptr){
         for (int i = 0; i < tileAtlas_->getHitboxes().size(); ++i){
             DrawRectangle(tileAtlas_->getHitboxes().at(i).x,
                           tileAtlas_->getHitboxes().at(i).y,
@@ -93,8 +115,19 @@ if(tileAtlas_ != nullptr){
                           tileAtlas_->getTriggerboxesBreakable().at(i).height,
                           PINK);
             }
+        for (int i = 0; i < tileAtlas_->getHitboxesGround().size(); ++i){
+            DrawRectangle(tileAtlas_->getHitboxesGround().at(i).x,
+                          tileAtlas_->getHitboxesGround().at(i).y,
+                          tileAtlas_->getHitboxesGround().at(i).width,
+                          tileAtlas_->getHitboxesGround().at(i).height,
+                          RED);
+        }
         }
     if(player_ != nullptr){
     player_->Render();
     }
+}
+
+Camera2D Scene::getCamera() {
+    return cam_;
 }

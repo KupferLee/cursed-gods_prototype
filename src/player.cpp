@@ -85,39 +85,64 @@ void player::UpdatePlayer(float delta)
             Animation = Animation::JumpRight;
         }
     }
+    if (bIsInAir)
+    {
+        if(Momentum.y > fMaxAirSpeed)
+        {
+            Momentum.y = fMaxAirSpeed;
+        }
+    }
     vNewPos = Vector2Add(vPosition, Momentum);
 
-    bIsInAir = true;
-    bIsOnGround = false;
-
-    for (const auto& index : Ground)
-    {
-        if(CheckCollisionRecs(index, Rectangle{vNewPos.x, vNewPos.y + 50, 50, 0}))
-        {
-            if(vNewPos.y >= vPosition.y)
-            {bIsInAir = false; Momentum.y = 0; bIsOnGround = true; iJumpFrames = 0;}
-        }
-        else if (CheckCollisionRecs(index, Rectangle{vNewPos.x, vNewPos.y, 50, 0}))
-        {
-            if (vNewPos.y < vPosition.y)
-            {Momentum.y = 0;}
-        }
-     }
+    //Wall Collision
     WallCollide = false;
     for (const auto& index : Walls)
     {
-        if(CheckCollisionRecs(index, Rectangle{vNewPos.x, vNewPos.y, 50, 48}))
+        if(CheckCollisionRecs(index, Rectangle{vNewPos.x, vNewPos.y, 50, 47})) //Kataras Größe Hardcoded und 2 Pixel Weniger, da die Hitboxen sometimes Slightly Off sind
         {
             WallCollide = true;
         }
     }
 
-    if(!bIsOnGround)
+    bIsInAir = true;
+    bIsOnGround = false;
+
+    //Ground Collision;
+    for (const auto& index : Ground)
+    {
+        if(CheckCollisionRecs(index, Rectangle{vNewPos.x, vNewPos.y + 49, 50, 1})) //Kataras Größe Hardcoded
+        {
+            if(vNewPos.y >= vPosition.y)
+            {
+                vPosition.y = index.y - 50; //Kataras Größe Hardcoded;
+                bIsInAir = false;
+                bIsOnGround = true;
+            }
+        }
+        else if (CheckCollisionRecs(index, Rectangle{vNewPos.x, vNewPos.y, 50, 1})) //Kataras Größe Hardcoded
+        {
+            if (vNewPos.y < vPosition.y)
+            {
+                Momentum.y = 0;
+            }
+        }
+     }
+
+    if(bIsOnGround)
+    {
+        iJumpFrames = 0;
+        Momentum.y = 0;
+    }
+    else
     {
         vPosition.y = vNewPos.y;
     }
 
-    if(!WallCollide)
+    if(WallCollide)
+    {
+
+    }
+    else
     {
         vPosition.x = vNewPos.x;
     }
@@ -182,7 +207,20 @@ void player::SetGround(std::vector<Rectangle> a)
 {
     Ground = a;
 }
+
+Vector2 player::getPosition() {
+    return this->vPosition;
+}
+
 void player::SetWalls(std::vector<Rectangle> a)
 {
     Walls = a;
+}
+
+float player::getTextureHeight() {
+    return static_cast<float>(Frames.width)/static_cast<float>(TilecountX);
+}
+
+float player::getTextureWidth() {
+    return static_cast<float>(Frames.height)/static_cast<float>(TilecountY);
 }

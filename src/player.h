@@ -2,6 +2,7 @@
 #include "Actor.h"
 #include "raymath.h"
 #include "DRAW.h"
+#include "config.h"
 
 enum class Animation
 {
@@ -25,6 +26,9 @@ public:
     void SetNextFrame();
     void SetGround(std::vector<Rectangle> a);
     void SetWalls(std::vector<Rectangle> a);
+    Vector2 getPosition();
+    float getTextureWidth();
+    float getTextureHeight();
 
 private:
     //animation shit
@@ -46,6 +50,7 @@ private:
     const float fJumpAcc = -20/2.3f;
 	const float fSideAcc = 2.5;
     const float fMaxSpeed = 7.5;
+    const float fMaxAirSpeed = 22.2;
     const float fFriction = 0.6;
     const float fGravity = 1/ 3.f; //2te Ableitung der Jump kurve //floatcast important
 
@@ -54,5 +59,5 @@ private:
     int iMaxJumpFrames = 6;
     int iJumpFrames = 0;
     Vector2 Momentum = {0 ,0};
-	Vector2 vPosition = { 400, 450}; // Hardcoded weil test Texture ein Raylib Rec ist
+	Vector2 vPosition = { 400,400}; // Hardcoded weil test Texture ein Raylib Rec ist
 };

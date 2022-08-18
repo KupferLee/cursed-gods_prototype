@@ -13,13 +13,15 @@ private:
     std::shared_ptr <ProtectedTexture> map_;
     std::shared_ptr <ProtectedTileset> tileAtlas_;
     std::shared_ptr <player> player_;
+    Music theme_;
+    Camera2D cam_;
+
 
     int counter_;
     Vector2 vec_;
     Rectangle rec_;
     std::vector <Vector2> vecs_;
     std::vector <Rectangle> recs_;
-    Music theme_;
 
 public:
 
@@ -28,6 +30,10 @@ public:
     Scene(const std::shared_ptr<player> &player,
           const std::shared_ptr<ProtectedTexture> &map,
           const std::shared_ptr <ProtectedTileset> &tileAtlas,
+          const Music &theme,
+          const Camera2D &cam);
+
+    Scene(const std::shared_ptr<ProtectedTexture> &map,
           const Music &theme);
 
     Scene(const Scene &other) = delete;
@@ -44,4 +50,6 @@ public:
     void HandleInputScene ();
     void UpdateScene ();
     void RenderScene();
+
+    Camera2D getCamera();
 };
