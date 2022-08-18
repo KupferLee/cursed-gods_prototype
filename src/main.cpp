@@ -34,7 +34,9 @@ int main() {
     Inventory inventory;
     ActorHarpye enemyHarpy;
     ActorLoredrop loredrop;
+    BattleScreen fightScreen;
 
+    Texture2D background = LoadTexture("assets/graphics/Backgrounds/Background_1.png");
 
     const char* titleTexture = "assets/graphics/UI/title_screen.png";
     std::shared_ptr<ProtectedTexture> titleTex = std::make_shared<ProtectedTexture>(titleTexture);
@@ -45,6 +47,7 @@ int main() {
     Music gameovermusic = LoadMusicStream("assets/audio/tracks/gameover.wav");
 
     BattleScreen fightScreen;
+
 
     const char* mapTexture = "assets/graphics/Map/Test-LevelGit.png"; //columns = 14
     const char* mapDescription = "assets/graphics/Map/THIS.json";
@@ -92,7 +95,7 @@ int main() {
                 TestScene->Update();
                 inventory.Update();
                 enemyHarpy.Update();
-                loredrop.Update();
+                loredrop.UpdateLore(katara->getPosition());
 
                 // State Wechsel
                 // if in options und press enter
@@ -155,25 +158,33 @@ int main() {
                     // DrawText("Press Enter to start Level 1.", 10, 40, 30, LIGHTGRAY);
                     break;
 
-                case (state_level1):
-                    // playing screen
-                    //begin of camera
-                    BeginMode2D(TestScene->getCamera());
+                case (state_level1): // playing screen
                     ClearBackground(WHITE);
-                    TestScene->Render();
                     DrawText("Level 1", 10, 10, 30, LIGHTGRAY);
                     DrawText("Press F to start fight.", 10, 40, 30, LIGHTGRAY);
 
+                    //draw Background
+                    DrawTexturePro(background,
+                                   {0, 0, (float)background.width, (float)background.height},
+                                   {0, 0, (float)GetScreenWidth(), (float)GetScreenHeight()},
+                                   {0, 0}, 0, WHITE);
+
+                    //begin of camera
+                    BeginMode2D(TestScene->getCamera());
+
+                    TestScene->Render();
+                    loredrop.Draw();
+
                     // enemies
-                    enemyHarpy.RenderHarpye({400, 500});
+                    enemyHarpy.RenderHarpye(loredrop.positionTest);
 
                     EndMode2D();
                     // end of camera
 
-
                     // inventory
                     inventory.Render();
                     loredrop.Render();
+
 
                     break;
 
