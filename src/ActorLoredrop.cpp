@@ -9,6 +9,7 @@
 ActorLoredrop::ActorLoredrop()
 {
     this->positionTest = {1000, 730};
+    this->posDrop_1 = {700, 720 };
 
     this->loredropBase = LoadTexture("assets/graphics/Actors/Loredrop_Template.png");
     this->loredropOne = LoadTexture("assets/graphics/Actors/Loredrop_1.png");
@@ -25,45 +26,14 @@ void ActorLoredrop::UpdateLore(Vector2 currentPosition)
     currentPosition.y += 16;
 
     // show loredrop on/off
-    if (Vector2Distance(currentPosition, this->positionTest) < 50)
+    if (Vector2Distance(currentPosition, this->posDrop_1) < 50)
     {
-        this->currentLoredrop = WhichLoredrop::base;
+        this->currentLoredrop = WhichLoredrop::first;
     }
     else
     {
         this->currentLoredrop = WhichLoredrop::none;
     }
-
-    /*
-    if (IsKeyPressed(KEY_TAB) && this->currentLoredrop == WhichLoredrop::none)
-    {
-        this->currentLoredrop = WhichLoredrop::base;
-    }
-    else if (IsKeyPressed(KEY_TAB) && this->currentLoredrop == WhichLoredrop::base)
-    {
-        this->currentLoredrop = WhichLoredrop::first;
-    }
-    else if (IsKeyPressed(KEY_TAB) && this->currentLoredrop == WhichLoredrop::first)
-    {
-        this->currentLoredrop = WhichLoredrop::second;
-    }
-    else if (IsKeyPressed(KEY_TAB) && this->currentLoredrop == WhichLoredrop::second)
-    {
-        this->currentLoredrop = WhichLoredrop::third;
-    }
-    else if (IsKeyPressed(KEY_TAB) && this->currentLoredrop == WhichLoredrop::third)
-    {
-        this->currentLoredrop = WhichLoredrop::fourth;
-    }
-    else if (IsKeyPressed(KEY_TAB) && this->currentLoredrop == WhichLoredrop::fourth)
-    {
-        this->currentLoredrop = WhichLoredrop::final;
-    }
-    else if (IsKeyPressed(KEY_TAB) && this->currentLoredrop == WhichLoredrop::final)
-    {
-        this->currentLoredrop = WhichLoredrop::none;
-    }
-     */
 
     InternUpdate();
 
@@ -72,6 +42,11 @@ void ActorLoredrop::UpdateLore(Vector2 currentPosition)
 void ActorLoredrop::Render()
 {
     InternRender();
+}
+
+void ActorLoredrop::Draw()
+{
+    DrawRectangle(this->posDrop_1.x, this->posDrop_1.y, 50, 50, RED);
 }
 
 void ActorLoredrop::InternUpdate()

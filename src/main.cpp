@@ -152,10 +152,10 @@ int main() {
                     BeginMode2D(TestScene->getCamera());
                     TestScene->Update();
                     TestScene->Render();
+                    loredrop.Draw();
 
                     // enemies
                     enemyHarpy.RenderHarpye(loredrop.positionTest);
-                    enemyHarpy.RenderHarpye(katara->getPosition());
 
                     EndMode2D();
                     // end of camera
@@ -163,6 +163,7 @@ int main() {
                     // inventory
                     inventory.Render();
                     loredrop.Render();
+
 
                     break;
 

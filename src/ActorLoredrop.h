@@ -23,6 +23,8 @@ class ActorLoredrop : public Actor {
 public:
     ActorLoredrop();
 
+    void Draw();
+
     void UpdateLore(Vector2 position);
 
     void Update() override;
@@ -48,6 +50,7 @@ protected:
     Texture2D loredropFinal;
 
     // positions
+    Vector2 posDrop_1;
 
 
 private:
