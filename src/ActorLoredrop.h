@@ -14,6 +14,8 @@ enum class WhichLoredrop
     first,
     second,
     third,
+    fourth,
+    final,
     none
 };
 
@@ -28,10 +30,8 @@ public:
     void HandleInput()override;
 
 protected:
-    //enum WhichLoredrop;
     WhichLoredrop currentLoredrop = WhichLoredrop::none;
 
-    //int current = 0;
     player Katara;
 
     int scaleFactor = 4;
@@ -40,6 +40,8 @@ protected:
     Texture2D loredropOne;
     Texture2D loredropTwo;
     Texture2D loredropThree;
+    Texture2D loredropFour;
+    Texture2D loredropFinal;
 
 private:
     void InternUpdate();
