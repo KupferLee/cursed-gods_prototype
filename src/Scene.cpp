@@ -76,7 +76,7 @@ void Scene::UpdateScene()
 }
 
 void Scene::RenderScene() {
-    //PlayMusicStream(theme_);
+    PlayMusicStream(theme_);
     if(player_ != nullptr) {
         DrawTexturePro(this->map_->getTexture(),
                        {(player_->getPosition().x - Game::ScreenWidth / 2),
