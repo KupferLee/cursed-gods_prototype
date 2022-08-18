@@ -29,6 +29,11 @@ void BattleScreen::Update()
     {
         this->currentSlot--;
     }
+
+    // update actors
+    harpye.UpdateAnimation(GetFrameTime(), 5, 0.22f);
+    rat.UpdateAnimation(GetFrameTime(), 6, 0.22f);
+    katara.UpdateAnimation(GetFrameTime(), 8, 0.22f);
 }
 
 void BattleScreen::Render()
@@ -63,8 +68,13 @@ void BattleScreen::Render()
     // draw selection
     DrawTexturePro(this->attackSelection,
                    {0.0, 0.0, (float)this->attackSelection.width, (float)this->attackSelection.height},
-                   {buttonSlots[currentSlot].x - 10, buttonSlots[currentSlot].y - 10, (float)this->attackSelection.width * this->scaleFactor, (float)this->attackSelection.height * this->scaleFactor},
+                   {buttonSlots[currentSlot].x - 10, buttonSlots[currentSlot].y - 12, (float)this->attackSelection.width * this->scaleFactor, (float)this->attackSelection.height * this->scaleFactor},
                    {0, 0}, 0, WHITE);
+
+    // draw actors
+    harpye.RenderAnimation(this->enemySlots[0], 5, 1);
+    rat.RenderAnimation(this->enemySlots[1], 11, 2);
+    katara.RenderAnimation(this->playerSlot, 8, 9);
 }
 
 void BattleScreen::SetSlots()
@@ -86,6 +96,13 @@ void BattleScreen::SetSlots()
 
     this->buttonSlots[3].x = this->buttonSlots[2].x + this->buttonDimensions.x * scaleFactor;
     this->buttonSlots[3].y = this->buttonSlots[2].y;
+
+    // setting up actor slots
+    // enemies and player are 200 distance of center of screen
+    this->enemySlots[0] = {(float)(GetScreenWidth()/2) + 200, 40, 64 * this->actorScale, 64 * this->actorScale};
+    this->enemySlots[1] = {(float)(GetScreenWidth()/2) + 200, 64 * this->actorScale, 48 * this->actorScale, 32 * this->actorScale};
+    this->playerSlot = {(float)(GetScreenWidth()/2) - 200 - (32 * this->actorScale), (float)(GetScreenHeight()/2) - (32 * this->actorScale) + 70, 32 * this->actorScale, 32 * this->actorScale};
+
 }
 
 void BattleScreen::Update(float) { }

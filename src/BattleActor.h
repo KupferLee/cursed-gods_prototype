@@ -7,6 +7,8 @@
 
 #include "raylib.h"
 #include "Actor.h"
+#include "DRAW.h"
+
 enum class DamageType
 {
     Pierce,
@@ -22,13 +24,21 @@ struct attack
     bool state; //true active false passive
 };
 
-class BattleActor : public Actor {
+class BattleActor : public DRAW {
 public:
     // virtual void GetCurrentAttack();
     // virtual void Attack(attack currentAttack);
 
-protected:
+    virtual void RenderAnimation(Rectangle position, int maxFramesInX, int maxFramesInY);
+    virtual void UpdateAnimation(float delta, int framesInRow, float frameDuration);
 
+protected:
+    Rectangle position;
+    Texture2D animation;
+    Texture2D healthBar;
+
+    float frameTime = 0.f;
+    int frame = 0;
 
 };
 

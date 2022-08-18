@@ -12,9 +12,8 @@ public:
     BattleRat();
     attack moves[2] {Scratch, Bite};
 
-protected:
-    Texture2D Animations;
 
+protected:
     // Attributes
     float LP = 100.f;
     float AP = 5.f;

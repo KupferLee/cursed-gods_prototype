@@ -7,21 +7,20 @@
 
 #include "BattleActor.h"
 
-class BattleHarpye final : public BattleActor{
+class BattleHarpye final : public BattleActor {
 public:
     BattleHarpye();
     attack moves[1] = {Scratch};
 
-protected:
-    Texture2D Animations;
 
+protected:
     // Atributes
     float LP = 50.f;
     float AP = 2.f;
 
     // Moves
     attack Scratch = {5, 1, 2, DamageType::Slash, true};
-    // attach Screech bricht andere Attacke ab
+    // attack Screech bricht andere Attacke ab
 };
 
 

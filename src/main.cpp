@@ -149,6 +149,7 @@ int main() {
                     ClearBackground(WHITE);
                     DrawText("Fight", 10, 10, 30, LIGHTGRAY);
                     DrawText("Press F to return to Level 1.", 10, 40, 30, LIGHTGRAY);
+
                     fightScreen.Update();
                     fightScreen.Render();
                     break;
