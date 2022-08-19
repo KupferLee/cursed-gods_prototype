@@ -4,6 +4,7 @@
 #include "player.h"
 #include "ProtectedTexture.h"
 #include "ProtectedTileset.h"
+#include "ActorLoredrop.h"
 #include <memory>
 
 
@@ -18,6 +19,7 @@ private:
     Camera2D cam_;
     bool drawhitbox_;
     bool gameover_;
+    std::vector<Vector2> spawnpoints = {{730, 700}, {2725, 3327}};
 
 
 

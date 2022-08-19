@@ -21,7 +21,7 @@ int main() {
     InitWindow(Game::ScreenWidth, Game::ScreenHeight, Game::PROJECT_NAME);
     SetTargetFPS(60);
     InitAudioDevice();
-    SetMasterVolume(0.5f);
+    SetMasterVolume(0.1f);
 
 
 #ifdef GAME_START_FULLSCREEN
