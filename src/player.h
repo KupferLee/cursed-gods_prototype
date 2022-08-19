@@ -76,7 +76,7 @@ private:
     std::vector<Rectangle> Walls;
     int iMaxJumpFrames = 6;
     int iJumpFrames = 0;
-    Vector2 InitialPosition = {8970, 1255}; // 730, 700
+    Vector2 InitialPosition = {730, 700};
     Vector2 Momentum = {0 ,0};
 	Vector2 vPosition = InitialPosition;
     Vector2 vScreenPosition = {Game::ScreenWidth/2, Game::ScreenHeight/2};
