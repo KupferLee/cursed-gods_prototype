@@ -54,7 +54,7 @@ protected:
     // positions
     Vector2 posDrop_1;
     Vector2 posDrop_2;
-    Vector2 posDrop_3;
+    Vector2 posDrop_Checkpoint;
     Vector2 posDrop_4;
     Vector2 posDrop_final;
 
