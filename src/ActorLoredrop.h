@@ -26,7 +26,8 @@ public:
     void Draw();
 
     void UpdateLore(Vector2 position);
-    bool GetCheckpointActive();
+    // every checkpoint has an ID that gets updated when we reach it
+    int GetCurrentCheckpointID();
 
     void Update() override;
     void Update(float) override;
@@ -58,7 +59,7 @@ protected:
     Vector2 posDrop_final;
 
     bool isHitboxVisible = false;
-    bool isCheckpointActive = false;
+    int whichCheckpointIsActive = 0;
 
 
 private:

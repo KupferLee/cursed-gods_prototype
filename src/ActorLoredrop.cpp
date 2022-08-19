@@ -51,7 +51,8 @@ void ActorLoredrop::UpdateLore(Vector2 currentPosition)
     {
         this->currentLoredrop = WhichLoredrop::third;
         // activate checkpoint when loredrop gets triggered first time
-        this->isCheckpointActive = true;
+        // each checkpoint has a assigned id
+        this->whichCheckpointIsActive = 1;
     }
     else if (Vector2Distance(currentPosition, this->posDrop_4) < 50)
     {
@@ -86,7 +87,7 @@ void ActorLoredrop::Draw()
         DrawCircle(this->posDrop_final.x, this->posDrop_final.y, 50, DARKBLUE);
 
         // show me if i activated checkpoint
-        if (this->isCheckpointActive == true)
+        if (this->whichCheckpointIsActive == 1)
         {
             DrawCircle(this->posDrop_3.x, this->posDrop_3.y, 50, DARKGREEN);
         }
@@ -94,7 +95,7 @@ void ActorLoredrop::Draw()
 
 }
 
-bool ActorLoredrop::GetCheckpointActive() { return this->isCheckpointActive; }
+int ActorLoredrop::GetCurrentCheckpointID() { return this->whichCheckpointIsActive; }
 
 void ActorLoredrop::InternUpdate()
 {
