@@ -89,6 +89,7 @@ void Scene::UpdateScene()
                 gameover_ = true;
             }
         }
+        //if(IsKeyPressed(KEY_P)) player_->SetPosition({730, 700});
     }
 }
 
