@@ -36,7 +36,7 @@ int main() {
     ActorLoredrop loredrop;
     BattleScreen fightScreen;
 
-    Texture2D background = LoadTexture("assets/graphics/Backgrounds/Background_1.png");
+    Texture2D background = LoadTexture("assets/graphics/Backgrounds/Background1.png");
 
     const char* titleTexture = "assets/graphics/UI/title_screen.png";
     std::shared_ptr<ProtectedTexture> titleTex = std::make_shared<ProtectedTexture>(titleTexture);
