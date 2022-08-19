@@ -132,7 +132,7 @@ void ActorLoredrop::InternUpdate()
 
 void ActorLoredrop::InternRender()
 {
-    // position above kataras head
+    // position on the lower edge of screen, middle
     // specific for every loredrop weil texture
     switch (currentLoredrop)
     {

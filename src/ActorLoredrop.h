@@ -51,7 +51,7 @@ protected:
     Texture2D loredropFour;
     Texture2D loredropFinal;
 
-    // positions
+    // ingame positions of Loredrops
     Vector2 posDrop_1;
     Vector2 posDrop_2;
     Vector2 posDrop_Checkpoint;
