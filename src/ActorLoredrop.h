@@ -26,6 +26,7 @@ public:
     void Draw();
 
     void UpdateLore(Vector2 position);
+    bool GetCheckpointActive();
 
     void Update() override;
     void Update(float) override;
@@ -57,6 +58,7 @@ protected:
     Vector2 posDrop_final;
 
     bool isHitboxVisible = false;
+    bool isCheckpointActive = false;
 
 
 private:
