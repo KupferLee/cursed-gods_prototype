@@ -19,7 +19,9 @@ private:
     Camera2D cam_;
     bool drawhitbox_;
     bool gameover_;
-    std::vector<Vector2> spawnpoints = {{730, 700}, {2725, 3327}};
+    int IndexCounter;
+    int whichCheckpointIsActive = 0;
+    std::vector<Vector2> spawnpoints = {{730, 700}, {2725, 3298}};
 
 
 

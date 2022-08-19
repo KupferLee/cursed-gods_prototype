@@ -71,12 +71,21 @@ void Scene::UpdateScene()
     if(player_ != nullptr) {
         player_->Update(delta);
         cam_.target = player_->GetPosition();
+        IndexCounter = 0;
+        for(auto &index : spawnpoints)
+        {
+            if (Vector2Distance(player_->GetPosition(), index) < 50)
+            {
+                whichCheckpointIsActive = IndexCounter;
+            }
+            IndexCounter++;
+        }
         gameover_ = false;
         for(int i = 0; i < tileAtlas_->getTriggerboxesStalagmit().size(); ++i){
             if(CheckCollisionRecs({player_->GetPosition().x, player_->GetPosition().y, 32, 32},
                                    tileAtlas_->getTriggerboxesStalagmit().at(i)))
             {
-                player_->SetPosition(player_->GetInitialPosition());
+                player_->SetPosition(spawnpoints[whichCheckpointIsActive]);
                 gameover_ = true;
             }
         }

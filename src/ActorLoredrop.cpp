@@ -52,7 +52,6 @@ void ActorLoredrop::UpdateLore(Vector2 currentPosition)
         this->currentLoredrop = WhichLoredrop::third;
         // activate checkpoint when loredrop gets triggered first time
         // each checkpoint has a assigned id
-        this->whichCheckpointIsActive = 1;
     }
     else if (Vector2Distance(currentPosition, this->posDrop_4) < 50)
     {
