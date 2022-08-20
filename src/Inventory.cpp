@@ -11,6 +11,7 @@ Inventory::Inventory()
     this->textureCharacterspriteBase = LoadTexture("assets/graphics/UI/Inventory/Charactersprite_Base_Platzhalter.png");
     this->textureLoredropsBase = LoadTexture("assets/graphics/UI/Inventory/Loredrops_Base_Platzhalter.png");
     this->slotSelect = LoadTexture("assets/graphics/UI/Inventory/Slot_Select.png");
+    this->iconBook = LoadTexture("assets/graphics/UI/Inventory/Icon.png");
 
     // load empty item slot to get width and height for set slots
     this->textureItem = LoadTexture("assets/graphics/UI/Inventory/Slot_Item.png");
@@ -119,6 +120,12 @@ void Inventory::Update()
 
 void Inventory::Render()
 {
+    // draw icon no matter what state
+    DrawTexturePro(this->iconBook,
+                   {(float)this->isOpen*this->iconBook.width/2, 0, (float)this->iconBook.width/2, (float)this->iconBook.width/2},
+                   {10, 10, (float)this->iconBook.width/2 * scaleFactor, (float)this->iconBook.height*scaleFactor},
+                   {0, 0}, 0, WHITE);
+
     // draw Inventory
     switch (menuState)
     {

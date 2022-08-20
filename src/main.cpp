@@ -179,9 +179,8 @@ int main() {
                     // end of camera
 
                     // inventory
-                    inventory.Render();
                     loredrop.Render();
-
+                    inventory.Render();
 
                     break;
 

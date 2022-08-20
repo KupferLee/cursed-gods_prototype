@@ -25,6 +25,7 @@ protected:
     Texture2D textureCharacterspriteBase;
     Texture2D textureLoredropsBase;
     Texture2D textureItem;
+    Texture2D iconBook;
 
     // GUI Item select
     Texture2D slotSelect;
