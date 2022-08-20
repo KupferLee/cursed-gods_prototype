@@ -52,6 +52,7 @@ int main() {
     std::shared_ptr<ProtectedTileset> description = std::make_shared<ProtectedTileset>(mapDescription);
     Music levelmusic = LoadMusicStream("assets/audio/tracks/TraumDerHellenen.wav");
 
+    Texture2D button_start = LoadTexture("assets/graphics/UI/Buttons/start_button.png");
 
 
     // enum for changing gamestates
@@ -151,8 +152,12 @@ int main() {
                     ClearBackground(WHITE);
                     TestTitle->Update();
                     TestTitle->Render();
-                    // DrawText("Title", 10, 10, 30, LIGHTGRAY);
-                    // DrawText("Press Enter to start Level 1.", 10, 40, 30, LIGHTGRAY);
+
+                    // draw a button that should later be added to the scene
+                    DrawTexturePro(button_start,
+                                   {0, 0, (float)button_start.width, (float)button_start.height},
+                                   {(float)GetScreenWidth()/2 - (button_start.width * 5)/2, (float)GetScreenHeight() - 260, (float)button_start.width * 5, (float)button_start.height * 5},
+                                   {0, 0}, 0, WHITE);
                     break;
 
                 case (state_level1): // playing screen
