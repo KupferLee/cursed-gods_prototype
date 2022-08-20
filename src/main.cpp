@@ -173,7 +173,10 @@ int main() {
                     loredrop.Draw();
 
                     // enemies
-                    // enemyHarpy.RenderHarpye(loredrop.positionTest);
+                    enemyHarpy.RenderHarpye({3510, 3015});
+                    enemyHarpy.RenderHarpye({3800, 3025});
+                    enemyHarpy.RenderHarpye({3990, 3015});
+                    enemyHarpy.RenderHarpye({4380, 3005});
 
                     EndMode2D();
                     // end of camera
