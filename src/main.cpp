@@ -53,6 +53,9 @@ int main() {
     Music levelmusic = LoadMusicStream("assets/audio/tracks/TraumDerHellenen.wav");
 
     Texture2D button_start = LoadTexture("assets/graphics/UI/Buttons/start_button.png");
+    Texture2D button_exit = LoadTexture("assets/graphics/UI/Buttons/exit_button.png");
+    Texture2D button_resume = LoadTexture("assets/graphics/UI/Buttons/resume_button.png");
+    Texture2D button_marker = LoadTexture("assets/graphics/UI/Buttons/menu_marker.png");
 
 
     // enum for changing gamestates
@@ -153,7 +156,7 @@ int main() {
                     TestTitle->Update();
                     TestTitle->Render();
 
-                    // draw a button that should later be added to the scene
+                    // draw a start button that should later be added to the scene
                     DrawTexturePro(button_start,
                                    {0, 0, (float)button_start.width, (float)button_start.height},
                                    {(float)GetScreenWidth()/2 - (button_start.width * 5)/2, (float)GetScreenHeight() - 260, (float)button_start.width * 5, (float)button_start.height * 5},
@@ -205,8 +208,22 @@ int main() {
                     ClearBackground(WHITE);
                     TestGameover->Update();
                     TestGameover->Render();
-                    // DrawText("Title", 10, 10, 30, LIGHTGRAY);
-                    // DrawText("Press Enter to start Level 1.", 10, 40, 30, LIGHTGRAY);
+
+                    // Draw Buttons
+                    DrawTexturePro(button_resume,
+                                   {0, 0, (float)button_resume.width, (float)button_resume.height},
+                                   {(float)GetScreenWidth()/2 - (button_resume.width * 5) - 50, (float)GetScreenHeight() - 200, (float)button_resume.width * 5, (float)button_resume.height * 5},
+                                   {0, 0}, 0, WHITE);
+
+                    DrawTexturePro(button_exit,
+                                   {0, 0, (float)button_exit.width, (float)button_exit.height},
+                                   {(float)GetScreenWidth()/2 + 50, (float)GetScreenHeight() - 200, (float)button_exit.width * 5, (float)button_exit.height * 5},
+                                   {0, 0}, 0, WHITE);
+
+                    DrawTexturePro(button_marker,
+                                   {0, 0, (float)button_marker.width, (float)button_marker.height},
+                                   {(float)GetScreenWidth()/2 + 50, (float)GetScreenHeight() - 200, (float)button_marker.width * 5, (float)button_marker.height * 5},
+                                   {0, 0}, 0, WHITE);
                     break;
 
                 default:
