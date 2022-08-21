@@ -10,7 +10,7 @@ Inventory::Inventory()
     this->textureOptionsBase = LoadTexture("assets/graphics/UI/Inventory/Options_Base.png");
     this->textureCharacterspriteBase = LoadTexture("assets/graphics/UI/Inventory/Charactersprite_Base_Platzhalter.png");
     this->textureLoredropsBase = LoadTexture("assets/graphics/UI/Inventory/Loredrops_Base_Platzhalter.png");
-    this->slotSelect = LoadTexture("assets/graphics/UI/Inventory/Slot_Select.png");
+    this->itemSelect = LoadTexture("assets/graphics/UI/Inventory/Slot_Select.png");
     this->iconBook = LoadTexture("assets/graphics/UI/Inventory/Icon.png");
 
     // load empty item slot to get width and height for set slots
@@ -143,7 +143,7 @@ void Inventory::Render()
                     // draw itemslot
                     DrawTexturePro(this->inventoryContainer.getItem(i)->GetTexture(),
                                    {0, 0, (float)this->inventoryContainer.getItem(i)->GetTexture().width, (float)this->inventoryContainer.getItem(i)->GetTexture().height},
-                                   {slotPosition[i].x, slotPosition[i].y, (float)this->inventoryContainer.getItem(i)->GetTexture().width*this->scaleFactor, (float)this->inventoryContainer.getItem(i)->GetTexture().height*this->scaleFactor},
+                                   {itemsSlotPosition[i].x, itemsSlotPosition[i].y, (float)this->inventoryContainer.getItem(i)->GetTexture().width * this->scaleFactor, (float)this->inventoryContainer.getItem(i)->GetTexture().height * this->scaleFactor},
                                    {0, 0}, 0, WHITE);
 
                     // draw texture_infos if there is a item in the slot selected
@@ -160,9 +160,9 @@ void Inventory::Render()
             }
 
             // draw select
-            DrawTexturePro(this->slotSelect,
-                           {0, 0, (float)this->slotSelect.width, (float)this->slotSelect.height},
-                           {slotPosition[currentSlot].x, slotPosition[currentSlot].y, (float)this->slotSelect.width*this->scaleFactor, (float)this->slotSelect.height*this->scaleFactor},
+            DrawTexturePro(this->itemSelect,
+                           {0, 0, (float)this->itemSelect.width, (float)this->itemSelect.height},
+                           {itemsSlotPosition[currentSlot].x, itemsSlotPosition[currentSlot].y, (float)this->itemSelect.width * this->scaleFactor, (float)this->itemSelect.height * this->scaleFactor},
                            {0, 0}, 0, WHITE);
 
 
@@ -218,17 +218,17 @@ void Inventory::SetSlots()
 
     // assign x and y position for every slot
     // currently putting -90 is a quick and dirty solution only for the Platzhalter
-    this->slotPosition[0].x = GetScreenWidth()/2 - this->textureItem.width * scaleFactor - 127;
-    this->slotPosition[0].y = GetScreenHeight()/2 - this->textureItem.height * this->scaleFactor - 143;
+    this->itemsSlotPosition[0].x = GetScreenWidth() / 2 - this->textureItem.width * scaleFactor - 127;
+    this->itemsSlotPosition[0].y = GetScreenHeight() / 2 - this->textureItem.height * this->scaleFactor - 143;
 
-    this->slotPosition[1].x = this->slotPosition[0].x;
-    this->slotPosition[1].y = this->slotPosition[0].y + this->textureItem.height * this->scaleFactor;
+    this->itemsSlotPosition[1].x = this->itemsSlotPosition[0].x;
+    this->itemsSlotPosition[1].y = this->itemsSlotPosition[0].y + this->textureItem.height * this->scaleFactor;
 
-    this->slotPosition[2].x = this->slotPosition[0].x;
-    this->slotPosition[2].y = this->slotPosition[1].y + this->textureItem.height * this->scaleFactor;
+    this->itemsSlotPosition[2].x = this->itemsSlotPosition[0].x;
+    this->itemsSlotPosition[2].y = this->itemsSlotPosition[1].y + this->textureItem.height * this->scaleFactor;
 
-    this->slotPosition[3].x = this->slotPosition[0].x;
-    this->slotPosition[3].y = this->slotPosition[2].y + this->textureItem.height * this->scaleFactor;
+    this->itemsSlotPosition[3].x = this->itemsSlotPosition[0].x;
+    this->itemsSlotPosition[3].y = this->itemsSlotPosition[2].y + this->textureItem.height * this->scaleFactor;
 }
 
 int Inventory::GetCurrentState() { return menuState; }

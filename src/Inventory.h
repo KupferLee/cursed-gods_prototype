@@ -28,8 +28,8 @@ protected:
     Texture2D iconBook;
 
     // GUI Item select
-    Texture2D slotSelect;
-    Vector2 slotPosition[4]; // to determine x and y value for the slots
+    Texture2D itemSelect;
+    Vector2 itemsSlotPosition[4]; // to determine x and y value for the slots
     int currentSlot = 0;
 
     void SetSlots();
