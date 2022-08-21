@@ -242,6 +242,9 @@ Vector2 player::GetPosition() {
     return this->vPosition;
 }
 
+// vPosition.x + this->texture.width ging nicht
+Vector2 player::GetMiddlePosition() { return {vPosition.x + 16, vPosition.y + 16}; }
+
 Vector2 player::GetCurrentPosition()
 {
     return this->Momentum;

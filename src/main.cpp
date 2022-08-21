@@ -108,13 +108,13 @@ int main() {
                 itemRing.Update();
                 fightScreen.UpdateOverworldHitbox();
 
-                if(Vector2Distance(katara->GetPosition(), itemSword.GetHitbox()) < 50 && itemSword.GetActive() == true)
+                if(Vector2Distance(katara->GetMiddlePosition(), itemSword.GetHitbox()) < 20 && itemSword.GetActive() == true)
                 {
                     inventory.PickUpSword();
                     itemSword.SetActive(false);
                 }
 
-                if(Vector2Distance(katara->GetPosition(), itemRing.GetHitbox()) < 50 && itemRing.GetActive() == true)
+                if(Vector2Distance(katara->GetMiddlePosition(), itemRing.GetHitbox()) < 20 && itemRing.GetActive() == true)
                 {
                     inventory.PickUpRing();
                     itemRing.SetActive(false);

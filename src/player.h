@@ -34,6 +34,7 @@ public:
 
     //Getter-functions
     Vector2 GetPosition();
+    Vector2 GetMiddlePosition();
     Vector2 GetInitialPosition();
     Vector2 GetCurrentPosition();
     float GetTextureWidth();
