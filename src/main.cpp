@@ -15,6 +15,7 @@
 #include "ActorHarpye.h"
 #include "ActorRat.h"
 #include "ActorLoredrop.h"
+#include "ActorItemSword.h"
 
 int main() {
     // Raylib initialization
@@ -36,6 +37,7 @@ int main() {
     ActorHarpye enemyHarpy;
     ActorRat enemyRat;
     ActorLoredrop loredrop;
+    ActorItemSword itemSword;
     BattleScreen fightScreen;
 
     Texture2D background = LoadTexture("assets/graphics/Backgrounds/Background1.png");
@@ -183,6 +185,7 @@ int main() {
 
                     TestScene->Render();
                     loredrop.Draw();
+                    itemSword.Render();
 
                     // enemies
                     // over jump n run
