@@ -8,7 +8,7 @@ ActorItemSword::ActorItemSword()
 {
     this->textureOverworld = LoadTexture("assets/graphics/Actors/Item_Sword.png");
 
-    this->position = {1078, 1200, (float)this->textureOverworld.width, (float)this->textureOverworld.height};
+    this->position = {7166, 3243, (float)this->textureOverworld.width, (float)this->textureOverworld.height};
     // middle of hitbox should be middle of texture
     this->hitboxPosition = {position.x + this->textureOverworld.width/2, position.y + this->textureOverworld.height/2};
 }

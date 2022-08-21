@@ -8,7 +8,7 @@ ActorItemRing::ActorItemRing()
 {
     this->textureOverworld = LoadTexture("assets/graphics/Actors/Item_Ring.png");
 
-    this->position = {7832, 3168, (float)this->textureOverworld.width, (float)this->textureOverworld.height};
+    this->position = {1078, 1200, (float)this->textureOverworld.width, (float)this->textureOverworld.height};
 
     // middle of hitbox should be middle of texture
     this->hitboxPosition = {position.x + this->textureOverworld.width/2, position.y + this->textureOverworld.height/2};
