@@ -14,11 +14,14 @@ public:
     void Update() override;
     void Update(float) override;
     void Render() override;
-
     void HandleInput()override;
+
+    Vector2 GetHitbox();
 
 protected:
     Texture2D textureOverworld;
+    Vector2 hitboxPosition;
+    bool showHitbox = false;
 };
 
 

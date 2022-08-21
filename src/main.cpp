@@ -104,6 +104,8 @@ int main() {
                 enemyHarpy.Update();
                 enemyRat.Update();
                 loredrop.UpdateLore(katara->GetPosition());
+                itemSword.Update();
+                itemRing.Update();
                 fightScreen.UpdateOverworldHitbox();
 
                 // State Wechsel
