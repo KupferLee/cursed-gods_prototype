@@ -13,6 +13,7 @@
 #include "Inventory.h"
 #include "BattleScreen.h"
 #include "ActorHarpye.h"
+#include "ActorRat.h"
 #include "ActorLoredrop.h"
 
 int main() {
@@ -33,6 +34,7 @@ int main() {
     // ...
     Inventory inventory;
     ActorHarpye enemyHarpy;
+    ActorRat enemyRat;
     ActorLoredrop loredrop;
     BattleScreen fightScreen;
 
@@ -96,6 +98,7 @@ int main() {
                 TestScene->Update();
                 inventory.Update();
                 enemyHarpy.Update();
+                enemyRat.Update();
                 loredrop.UpdateLore(katara->GetPosition());
 
                 // State Wechsel
@@ -185,6 +188,7 @@ int main() {
                     enemyHarpy.RenderHarpye({3800, 3025});
                     enemyHarpy.RenderHarpye({3990, 3015});
                     enemyHarpy.RenderHarpye({4380, 3005});
+                    enemyRat.RenderRat({780, 750});
 
                     EndMode2D();
                     // end of camera

@@ -8,7 +8,6 @@
 
 ActorLoredrop::ActorLoredrop()
 {
-    this->positionTest = {1000, 730};
     this->posDrop_1 = {780, 750 };
     this->posDrop_2 = {2460, 910};
     this->posDrop_Checkpoint = {2725, 3357};
