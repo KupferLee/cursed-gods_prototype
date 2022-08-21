@@ -18,6 +18,7 @@ BattleScreen::BattleScreen()
 
 }
 
+// GUI
 void BattleScreen::Update()
 {
     // ask if key inputs or anything here
@@ -104,6 +105,29 @@ void BattleScreen::SetSlots()
     this->playerSlot = {(float)(GetScreenWidth()/2) - 200 - (32 * this->actorScale), (float)(GetScreenHeight()/2) - (32 * this->actorScale) + 70, 32 * this->actorScale, 32 * this->actorScale};
 
 }
+
+// Overworld
+void BattleScreen::UpdateOverworldHitbox()
+{
+    if (IsKeyPressed(KEY_H) && showHitbox == false)
+    {
+        showHitbox = true;
+    }
+    else if (IsKeyPressed(KEY_H) && showHitbox == true)
+    {
+        showHitbox = false;
+    }
+}
+
+void BattleScreen::RenderOverworldHitbox()
+{
+    if (showHitbox == true)
+    {
+        DrawCircle(fightPosition.x, fightPosition.y, 50, DARKGREEN);
+    }
+}
+
+Vector2 BattleScreen::GetFightPosition() { return fightPosition; }
 
 void BattleScreen::Update(float) { }
 

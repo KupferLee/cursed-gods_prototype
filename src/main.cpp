@@ -100,6 +100,7 @@ int main() {
                 enemyHarpy.Update();
                 enemyRat.Update();
                 loredrop.UpdateLore(katara->GetPosition());
+                fightScreen.UpdateOverworldHitbox();
 
                 // State Wechsel
                 // if in options und press enter
@@ -184,11 +185,17 @@ int main() {
                     loredrop.Draw();
 
                     // enemies
+                    // over jump n run
                     enemyHarpy.RenderHarpye({3510, 3015});
                     enemyHarpy.RenderHarpye({3800, 3025});
                     enemyHarpy.RenderHarpye({3990, 3015});
                     enemyHarpy.RenderHarpye({4380, 3005});
-                    enemyRat.RenderRat({780, 750});
+
+                    // fight stage
+                    enemyRat.RenderRat({5200, 1712});
+                    enemyHarpy.RenderHarpye({5168, 1648});
+
+                    fightScreen.RenderOverworldHitbox();
 
                     EndMode2D();
                     // end of camera

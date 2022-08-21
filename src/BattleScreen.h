@@ -35,6 +35,10 @@ protected:
 
     void SetSlots();
 
+    // Overworld
+    bool showHitbox = false;
+    Vector2 fightPosition = {5200, 1692};
+
 public:
     BattleScreen();
 
@@ -42,6 +46,11 @@ public:
     void Update(float) override;
     void Render() override;
     void HandleInput() override;
+
+    void RenderOverworldHitbox();
+    void UpdateOverworldHitbox();
+    Vector2 GetFightPosition();
+
 };
 
 

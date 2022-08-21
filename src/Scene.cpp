@@ -89,8 +89,8 @@ void Scene::UpdateScene()
                 gameover_ = true;
             }
         }
-        // teleport back to start
-        // if(IsKeyPressed(KEY_P)) player_->SetPosition({730, 700});
+        // teleport to fight
+        if(IsKeyPressed(KEY_P)) player_->SetPosition({5150, 1592});
     }
 }
 
