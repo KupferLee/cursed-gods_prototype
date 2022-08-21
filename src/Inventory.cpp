@@ -20,6 +20,10 @@ Inventory::Inventory()
 
 }
 
+void Inventory::PickUpSword() { itemAdd(itemSword); }
+
+void Inventory::PickUpRing() { itemAdd(itemRing); }
+
 void Inventory::Update()
 {
     // add items for debug

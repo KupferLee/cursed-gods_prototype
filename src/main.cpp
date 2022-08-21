@@ -108,6 +108,19 @@ int main() {
                 itemRing.Update();
                 fightScreen.UpdateOverworldHitbox();
 
+                if(Vector2Distance(katara->GetPosition(), itemSword.GetHitbox()) < 50 && itemSword.GetActive() == true)
+                {
+                    inventory.PickUpSword();
+                    itemSword.SetActive(false);
+                }
+
+                if(Vector2Distance(katara->GetPosition(), itemRing.GetHitbox()) < 50 && itemRing.GetActive() == true)
+                {
+                    inventory.PickUpRing();
+                    itemRing.SetActive(false);
+                }
+
+
                 // State Wechsel
                 // if in options und press enter
                 if (IsKeyPressed(KEY_ENTER) && inventory.GetCurrentState() == 2)

@@ -33,18 +33,26 @@ void ActorItemRing::Update()
 
 void ActorItemRing::Render()
 {
-    DrawTexturePro(this->textureOverworld,
-                   {0, 0, (float)this->textureOverworld.width, (float)this->textureOverworld.height},
-                   position, {0, 0}, 0, WHITE);
-
-    if (showHitbox == true)
+    if (isActive == true)
     {
-        DrawCircle(hitboxPosition.x, hitboxPosition.y, 10, GREEN);
+        DrawTexturePro(this->textureOverworld,
+                       {0, 0, (float)this->textureOverworld.width, (float)this->textureOverworld.height},
+                       position, {0, 0}, 0, WHITE);
+
+        if (showHitbox == true)
+        {
+            DrawCircle(hitboxPosition.x, hitboxPosition.y, 10, GREEN);
+        }
     }
+
 }
 
 
 Vector2 ActorItemRing::GetHitbox() { return hitboxPosition; };
+
+void ActorItemRing::SetActive(bool b) {this->isActive = b; }
+
+bool ActorItemRing::GetActive() { return this->isActive; }
 
 // not used
 

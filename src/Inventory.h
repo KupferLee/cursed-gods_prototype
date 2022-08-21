@@ -54,6 +54,9 @@ public:
     int GetCurrentState();
     bool IsOpen();
 
+    void PickUpSword();
+    void PickUpRing();
+
     Inventory();
 };
 
