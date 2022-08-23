@@ -37,6 +37,7 @@ protected:
 
     // Overworld
     bool showHitbox = false;
+    bool isEncouterActive = true;
     Vector2 fightPosition = {5200, 1692};
 
 public:
@@ -50,6 +51,8 @@ public:
     void RenderOverworldHitbox();
     void UpdateOverworldHitbox();
     Vector2 GetFightPosition();
+    bool GetEncounterActive();
+    void SetEncounterActive(bool current);
 
 };
 

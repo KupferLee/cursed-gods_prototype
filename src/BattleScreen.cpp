@@ -129,6 +129,10 @@ void BattleScreen::RenderOverworldHitbox()
 
 Vector2 BattleScreen::GetFightPosition() { return fightPosition; }
 
+bool BattleScreen::GetEncounterActive() { return isEncouterActive; }
+
+void BattleScreen::SetEncounterActive(bool current) { this->isEncouterActive = current; }
+
 void BattleScreen::Update(float) { }
 
 void BattleScreen::HandleInput() { }

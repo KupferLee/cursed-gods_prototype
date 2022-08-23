@@ -128,9 +128,10 @@ int main() {
                     gameState = state_title;
                 }
                 // if inventory not open then change to fight on key
-                else if (IsKeyPressed(KEY_F) && inventory.IsOpen() == false)
+                else if (IsKeyPressed(KEY_F) && inventory.IsOpen() == false || Vector2Distance(katara->GetMiddlePosition(), fightScreen.GetFightPosition()) < 50 && inventory.IsOpen() == false && fightScreen.GetEncounterActive() == true)
                 {
                     gameState = state_fight;
+                    fightScreen.SetEncounterActive(false);
                 }
 
                 else if (TestScene->getGameOver())
