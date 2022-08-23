@@ -214,8 +214,11 @@ int main() {
                     enemyHarpy.RenderHarpye({4380, 3005});
 
                     // fight stage
-                    enemyRat.RenderRat({5200, 1712});
-                    enemyHarpy.RenderHarpye({5168, 1648});
+                    if (fightScreen.GetEncounterActive() == true)
+                    {
+                        enemyRat.RenderRat({5200, 1712});
+                        enemyHarpy.RenderHarpye({5168, 1648});
+                    }
 
                     fightScreen.RenderOverworldHitbox();
 

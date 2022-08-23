@@ -72,6 +72,7 @@ void BattleScreen::Render()
                    {buttonSlots[currentSlot].x - 10, buttonSlots[currentSlot].y - 12, (float)this->attackSelection.width * this->scaleFactor, (float)this->attackSelection.height * this->scaleFactor},
                    {0, 0}, 0, WHITE);
 
+
     // draw actors
     harpye.RenderAnimation(this->enemySlots[0], 5, 1);
     rat.RenderAnimation(this->enemySlots[1], 11, 2);
