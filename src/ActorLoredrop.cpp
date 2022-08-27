@@ -98,6 +98,7 @@ void ActorLoredrop::Draw()
 
 int ActorLoredrop::GetCurrentCheckpointID() { return this->whichCheckpointIsActive; }
 
+// Lee: forgot what this is fore and what it does oops
 void ActorLoredrop::InternUpdate()
 {
     switch ((int)this->currentLoredrop)
