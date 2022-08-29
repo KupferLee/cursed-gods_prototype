@@ -9,7 +9,7 @@
 ActorLoredrop::ActorLoredrop()
 {
     this->posDrop_1 = {780, 750 };
-    this->posDrop_2 = {2460, 910};
+    this->posDrop_2 = {2400, 910};
     this->posDrop_Checkpoint = {2725, 3357};
     this->posDrop_4 = {2050, 3325};
     this->posDrop_final = {8970, 1295};
