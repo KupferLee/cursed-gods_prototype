@@ -75,7 +75,7 @@ void ActorLoredrop::Render()
     InternRender();
 }
 
-void ActorLoredrop::Draw()
+void ActorLoredrop::DrawHitbox()
 {
     if (this->isHitboxVisible == true)
     {

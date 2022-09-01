@@ -202,7 +202,7 @@ int main() {
                     BeginMode2D(TestScene->getCamera());
 
                     TestScene->Render();
-                    loredrop.Draw();
+                    loredrop.DrawHitbox();
                     itemSword.Render();
                     itemRing.Render();
 
@@ -225,7 +225,7 @@ int main() {
                     EndMode2D();
                     // end of camera
 
-                    // inventory
+                    // gui
                     loredrop.Render();
                     inventory.Render();
 

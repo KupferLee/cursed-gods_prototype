@@ -24,7 +24,7 @@ class ActorLoredrop : public Actor {
 public:
     ActorLoredrop();
 
-    void Draw();
+    void DrawHitbox();
 
     void UpdateLore(Vector2 position);
     // every checkpoint has an ID that gets updated when we reach it
