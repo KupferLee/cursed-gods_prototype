@@ -8,20 +8,20 @@
 
 ActorLoredrop::ActorLoredrop()
 {
-    this->posDrop_1 = {780, 750 };
-    this->posDrop_2 = {2400, 910};
+    this->posDrop_Horse = {780, 750 };
+    this->posDrop_Canyon_Oversight = {2400, 910};
     this->posDrop_Checkpoint = {2725, 3357};
-    this->posDrop_4 = {2050, 3325};
+    this->posDrop_Shack = {2050, 3325};
     this->posDrop_abillity = {8360,3180};
     this->posDrop_final = {8970, 1295}; //8970, 1295
 
-    this->loredropBase = LoadTexture("assets/graphics/Actors/Loredrop_Template.png");
-    this->loredropOne = LoadTexture("assets/graphics/Actors/Loredrop_1.png");
-    this->loredropTwo = LoadTexture("assets/graphics/Actors/Loredrop_2.png");
-    this->loredropThree = LoadTexture("assets/graphics/Actors/Loredrop_3.png");
-    this->loredropFour = LoadTexture("assets/graphics/Actors/Loredrop_4.png");
-    this->loredropAbillity =LoadTexture("assets/graphics/Actors/Loredrop_Template.png");
-    this->loredropFinal = LoadTexture("assets/graphics/Actors/Loredrop_5.png");
+    this->loredropBase = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Template.png");
+    this->loredropOne = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Horse.png");
+    this->loredropTwo = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Canyon_Oversight.png");
+    this->loredropCheckpoint = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Checkpoint.png");
+    this->loredropShack = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Hut.png");
+    this->loredropAbillity =LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Boots.png");
+    this->loredropFinal = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Towerentry.png");
 }
 
 void ActorLoredrop::UpdateLore(Vector2 currentPosition)
@@ -40,11 +40,11 @@ void ActorLoredrop::UpdateLore(Vector2 currentPosition)
     currentPosition.y += 16;
 
     // show loredrop on/off
-    if (Vector2Distance(currentPosition, this->posDrop_1) < 50)
+    if (Vector2Distance(currentPosition, this->posDrop_Horse) < 50)
     {
         this->currentLoredrop = WhichLoredrop::first;
     }
-    else if (Vector2Distance(currentPosition, this->posDrop_2) < 50)
+    else if (Vector2Distance(currentPosition, this->posDrop_Canyon_Oversight) < 50)
     {
         this->currentLoredrop = WhichLoredrop::second;
     }
@@ -54,7 +54,7 @@ void ActorLoredrop::UpdateLore(Vector2 currentPosition)
         // activate checkpoint when loredrop gets triggered first time
         // each checkpoint has a assigned id
     }
-    else if (Vector2Distance(currentPosition, this->posDrop_4) < 50)
+    else if (Vector2Distance(currentPosition, this->posDrop_Shack) < 50)
     {
         this->currentLoredrop = WhichLoredrop::fourth;
     }
@@ -83,11 +83,11 @@ void ActorLoredrop::Draw()
 {
     if (this->isHitboxVisible == true)
     {
-        DrawCircle(this->posDrop_1.x, this->posDrop_1.y, 50, DARKBLUE);
-        DrawCircle(this->posDrop_2.x, this->posDrop_2.y, 50, DARKBLUE);
+        DrawCircle(this->posDrop_Horse.x, this->posDrop_Horse.y, 50, DARKBLUE);
+        DrawCircle(this->posDrop_Canyon_Oversight.x, this->posDrop_Canyon_Oversight.y, 50, DARKBLUE);
         DrawCircle(this->posDrop_Checkpoint.x, this->posDrop_Checkpoint.y, 50, DARKBLUE);
         DrawText("1", posDrop_Checkpoint.x, posDrop_Checkpoint.y, 50, WHITE);
-        DrawCircle(this->posDrop_4.x, this->posDrop_4.y, 50, DARKBLUE);
+        DrawCircle(this->posDrop_Shack.x, this->posDrop_Shack.y, 50, DARKBLUE);
         DrawCircle(this->posDrop_final.x, this->posDrop_final.y, 50, DARKBLUE);
 
 
@@ -121,11 +121,11 @@ void ActorLoredrop::InternUpdate()
             break;
 
         case (int)WhichLoredrop::third:
-            this->position = {(float)(GetScreenWidth()/2 - this->loredropThree.width/2*this->scaleFactor), (float)(GetScreenHeight() - this->loredropThree.height*this->scaleFactor - this->offset), (float)this->loredropThree.width, (float)this->loredropThree.height};
+            this->position = {(float)(GetScreenWidth()/2 - this->loredropCheckpoint.width / 2 * this->scaleFactor), (float)(GetScreenHeight() - this->loredropCheckpoint.height * this->scaleFactor - this->offset), (float)this->loredropCheckpoint.width, (float)this->loredropCheckpoint.height};
             break;
 
         case (int)WhichLoredrop::fourth:
-            this->position = {(float)(GetScreenWidth()/2 - this->loredropFour.width/2*this->scaleFactor), (float)(GetScreenHeight() - this->loredropFour.height*this->scaleFactor - this->offset), (float)this->loredropFour.width, (float)this->loredropFour.height};
+            this->position = {(float)(GetScreenWidth()/2 - this->loredropShack.width / 2 * this->scaleFactor), (float)(GetScreenHeight() - this->loredropShack.height * this->scaleFactor - this->offset), (float)this->loredropShack.width, (float)this->loredropShack.height};
             break;
         case (int)WhichLoredrop::abillity:
             this->position = {(float)(GetScreenWidth()/2 - this->loredropAbillity.width/2*this->scaleFactor), (float)(GetScreenHeight() - this->loredropAbillity.height*this->scaleFactor - this->offset), (float)this->loredropAbillity.width, (float)this->loredropAbillity.height};
@@ -165,16 +165,16 @@ void ActorLoredrop::InternRender()
             break;
 
         case WhichLoredrop::third:
-            DrawTexturePro(this->loredropThree,
-                           {0, 0, (float)this->loredropThree.width, (float)this->loredropThree.height},
-                           {this->position.x, this->position.y, (float)this->loredropThree.width*this->scaleFactor, (float)this->loredropThree.height*this->scaleFactor},
+            DrawTexturePro(this->loredropCheckpoint,
+                           {0, 0, (float)this->loredropCheckpoint.width, (float)this->loredropCheckpoint.height},
+                           {this->position.x, this->position.y, (float)this->loredropCheckpoint.width * this->scaleFactor, (float)this->loredropCheckpoint.height * this->scaleFactor},
                            {0, 0}, 0, WHITE);
             break;
 
         case WhichLoredrop::fourth:
-            DrawTexturePro(this->loredropFour,
-                           {0, 0, (float)this->loredropFour.width, (float)this->loredropFour.height},
-                           {this->position.x, this->position.y, (float)this->loredropFour.width*this->scaleFactor, (float)this->loredropFour.height*this->scaleFactor},
+            DrawTexturePro(this->loredropShack,
+                           {0, 0, (float)this->loredropShack.width, (float)this->loredropShack.height},
+                           {this->position.x, this->position.y, (float)this->loredropShack.width * this->scaleFactor, (float)this->loredropShack.height * this->scaleFactor},
                            {0, 0}, 0, WHITE);
             break;
 
