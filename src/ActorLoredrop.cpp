@@ -22,9 +22,6 @@ ActorLoredrop::ActorLoredrop()
     this->loredropShack = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Hut.png");
     this->loredropAbillity =LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Boots.png");
     this->loredropFinal = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Towerentry.png");
-
-    // position loredrop on screen
-    this->position = {(float)(GetScreenWidth()/2 - this->loredropBase.width/2*this->scaleFactor), (float)(GetScreenHeight() - this->loredropBase.height*this->scaleFactor - this->offset), (float)this->loredropBase.width, (float)this->loredropBase.height};
 }
 
 void ActorLoredrop::UpdateLore(Vector2 currentPosition)
@@ -54,8 +51,6 @@ void ActorLoredrop::UpdateLore(Vector2 currentPosition)
     else if (Vector2Distance(currentPosition, this->posDrop_Checkpoint) < 50)
     {
         this->currentLoredrop = WhichLoredrop::checkpoint;
-        // activate checkpoint when loredrop gets triggered horse time
-        // each checkpoint has a assigned id
     }
     else if (Vector2Distance(currentPosition, this->posDrop_Shack) < 50)
     {
@@ -73,8 +68,6 @@ void ActorLoredrop::UpdateLore(Vector2 currentPosition)
     {
         this->currentLoredrop = WhichLoredrop::none;
     }
-
-    // InternUpdate();
 }
 
 void ActorLoredrop::Render()
@@ -101,8 +94,6 @@ int ActorLoredrop::GetCurrentCheckpointID() { return this->whichCheckpointIsActi
 
 void ActorLoredrop::InternRender()
 {
-    // position on the lower edge of screen, middle
-    // specific for every loredrop weil texture
     switch (currentLoredrop)
     {
         case WhichLoredrop::base:
@@ -138,9 +129,11 @@ void ActorLoredrop::InternRender()
 
 void ActorLoredrop::DrawTextbox(Texture2D texture)
 {
+    // position on the lower edge of screen, middle
+    // in relation to current texture
     DrawTexturePro(texture,
                    {0, 0, (float)texture.width, (float)texture.height},
-                   {this->position.x, this->position.y, (float)texture.width*this->scaleFactor, (float)texture.height*this->scaleFactor},
+                   {(float)(GetScreenWidth()/2 - this->loredropBase.width/2*this->scaleFactor), (float)(GetScreenHeight() - this->loredropBase.height*this->scaleFactor - this->offset), (float)texture.width*this->scaleFactor, (float)texture.height*this->scaleFactor},
                    {0, 0}, 0, WHITE);
 }
 
