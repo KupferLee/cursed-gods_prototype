@@ -31,6 +31,7 @@ public:
     void SetGround(std::vector<Rectangle> a);
     void SetWalls(std::vector<Rectangle> a);
     void SetPosition(Vector2 x);
+    void SetDoubleJump();
 
     //Getter-functions
     Vector2 GetPosition();
@@ -63,10 +64,11 @@ private:
     bool bIsInAir = false;
     bool WallCollide = false;
     bool drawhitbox_ = false;
+    bool doublejump = false;
 
     //constants
     const float fJumpAcc = -7.7f;
-	const float fSideAcc = 2.5;
+	const float fSideAcc = 0.5; //2.5
     const float fMaxSpeed = 4.f;
     const float fMaxAirSpeed = 22.2;
     const float fFriction = 0.6;
@@ -75,6 +77,7 @@ private:
     //Restlicher Stuff
     std::vector<Rectangle> Ground;
     std::vector<Rectangle> Walls;
+    int JumpCount = 0;
     int iMaxJumpFrames = 6;
     int iJumpFrames = 0;
     Vector2 InitialPosition = {730, 700};

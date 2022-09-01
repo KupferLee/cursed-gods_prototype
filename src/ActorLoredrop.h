@@ -15,6 +15,7 @@ enum class WhichLoredrop
     second,
     third,
     fourth,
+    abillity,
     final,
     none
 };
@@ -49,6 +50,7 @@ protected:
     Texture2D loredropTwo;
     Texture2D loredropThree;
     Texture2D loredropFour;
+    Texture2D loredropAbillity;
     Texture2D loredropFinal;
 
     // ingame positions of Loredrops
@@ -56,6 +58,7 @@ protected:
     Vector2 posDrop_2;
     Vector2 posDrop_Checkpoint;
     Vector2 posDrop_4;
+    Vector2 posDrop_abillity;
     Vector2 posDrop_final;
 
     bool isHitboxVisible = false;
