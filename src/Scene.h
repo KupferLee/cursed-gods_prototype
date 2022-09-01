@@ -21,7 +21,7 @@ private:
     bool gameover_;
     int IndexCounter;
     int whichCheckpointIsActive = 0;
-    std::vector<Vector2> spawnpoints = {{730, 680}, {2725, 3298}};
+    std::vector<Vector2> spawnpoints = {{730, 680}, {2725, 3298}, {7860, 2950}, {5120,2450}};
 
 
 

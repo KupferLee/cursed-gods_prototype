@@ -120,6 +120,12 @@ void Scene::RenderScene() {
     }
     if(drawhitbox_) {
         if (tileAtlas_ != nullptr) {
+            for (int i = 0; i < tileAtlas_->getTriggerboxesStalagtit().size(); ++i) {
+                DrawRectangle(tileAtlas_->getTriggerboxesStalagtit().at(i).x,
+                              tileAtlas_->getTriggerboxesStalagtit().at(i).y,
+                              tileAtlas_->getTriggerboxesStalagtit().at(i).width,
+                              tileAtlas_->getTriggerboxesStalagtit().at(i).height,
+                              GREEN);
             for (int i = 0; i < tileAtlas_->getHitboxes().size(); ++i) {
                 DrawRectangle(tileAtlas_->getHitboxes().at(i).x,
                               tileAtlas_->getHitboxes().at(i).y,
@@ -127,12 +133,6 @@ void Scene::RenderScene() {
                               tileAtlas_->getHitboxes().at(i).height,
                               ORANGE);
             }
-            for (int i = 0; i < tileAtlas_->getTriggerboxesStalagtit().size(); ++i) {
-                DrawRectangle(tileAtlas_->getTriggerboxesStalagtit().at(i).x,
-                              tileAtlas_->getTriggerboxesStalagtit().at(i).y,
-                              tileAtlas_->getTriggerboxesStalagtit().at(i).width,
-                              tileAtlas_->getTriggerboxesStalagtit().at(i).height,
-                              GREEN);
             }
             for (int i = 0; i < tileAtlas_->getTriggerboxesStalagmit().size(); ++i) {
                 DrawRectangle(tileAtlas_->getTriggerboxesStalagmit().at(i).x,
@@ -147,9 +147,14 @@ void Scene::RenderScene() {
                               tileAtlas_->getHitboxesGround().at(i).width,
                               tileAtlas_->getHitboxesGround().at(i).height,
                               RED);
+
             }
         }
-    }
+        for(auto &index : spawnpoints)
+        {
+            DrawCircleV({index.x,index.y}, 50, BLUE);
+        }
+        }
     if(player_ != nullptr){
     player_->Render();
     }
