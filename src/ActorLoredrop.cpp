@@ -83,6 +83,7 @@ void ActorLoredrop::Draw()
 {
     if (this->isHitboxVisible == true)
     {
+
         DrawCircle(this->posDrop_Horse.x, this->posDrop_Horse.y, 50, DARKBLUE);
         DrawCircle(this->posDrop_Canyon_Oversight.x, this->posDrop_Canyon_Oversight.y, 50, DARKBLUE);
         DrawCircle(this->posDrop_Checkpoint.x, this->posDrop_Checkpoint.y, 50, DARKBLUE);
@@ -90,13 +91,6 @@ void ActorLoredrop::Draw()
         DrawCircle(this->posDrop_Shack.x, this->posDrop_Shack.y, 50, DARKBLUE);
         DrawCircle(this->posDrop_final.x, this->posDrop_final.y, 50, DARKBLUE);
 
-
-        // show me if i activated checkpoint
-        if (this->whichCheckpointIsActive == 1)
-        {
-            DrawCircle(this->posDrop_Checkpoint.x, this->posDrop_Checkpoint.y, 50, DARKGREEN);
-            DrawText("1", posDrop_Checkpoint.x, posDrop_Checkpoint.y, 50, WHITE);
-        }
     }
 
 }
