@@ -11,10 +11,10 @@
 enum class WhichLoredrop
 {
     base,
-    first,
-    second,
-    third,
-    fourth,
+    horse,
+    canyonOversight,
+    checkpoint,
+    shack,
     abillity,
     final,
     none
@@ -46,8 +46,8 @@ protected:
     int scaleFactor = 4;
     int offset = 20;
     Texture2D loredropBase;
-    Texture2D loredropOne;
-    Texture2D loredropTwo;
+    Texture2D loredropHorse;
+    Texture2D loredropCanyonOversight;
     Texture2D loredropCheckpoint;
     Texture2D loredropShack;
     Texture2D loredropAbillity;
@@ -68,6 +68,7 @@ protected:
 private:
     void InternUpdate();
     void InternRender();
+    void DrawTextbox(Texture2D texture);
 
 };
 
