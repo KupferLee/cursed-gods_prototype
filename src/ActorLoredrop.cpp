@@ -12,13 +12,15 @@ ActorLoredrop::ActorLoredrop()
     this->posDrop_2 = {2400, 910};
     this->posDrop_Checkpoint = {2725, 3357};
     this->posDrop_4 = {2050, 3325};
-    this->posDrop_final = {8970, 1295};
+    this->posDrop_abillity = {8360,3180};
+    this->posDrop_final = {8970, 1295}; //8970, 1295
 
     this->loredropBase = LoadTexture("assets/graphics/Actors/Loredrop_Template.png");
     this->loredropOne = LoadTexture("assets/graphics/Actors/Loredrop_1.png");
     this->loredropTwo = LoadTexture("assets/graphics/Actors/Loredrop_2.png");
     this->loredropThree = LoadTexture("assets/graphics/Actors/Loredrop_3.png");
     this->loredropFour = LoadTexture("assets/graphics/Actors/Loredrop_4.png");
+    this->loredropAbillity =LoadTexture("assets/graphics/Actors/Loredrop_Template.png");
     this->loredropFinal = LoadTexture("assets/graphics/Actors/Loredrop_5.png");
 }
 
@@ -60,13 +62,16 @@ void ActorLoredrop::UpdateLore(Vector2 currentPosition)
     {
         this->currentLoredrop = WhichLoredrop::final;
     }
+    else if (Vector2Distance(currentPosition, this->posDrop_abillity) < 50)
+    {
+        this->currentLoredrop = WhichLoredrop::abillity;
+    }
     else
     {
         this->currentLoredrop = WhichLoredrop::none;
     }
 
     InternUpdate();
-
 }
 
 void ActorLoredrop::Render()
@@ -122,6 +127,9 @@ void ActorLoredrop::InternUpdate()
         case (int)WhichLoredrop::fourth:
             this->position = {(float)(GetScreenWidth()/2 - this->loredropFour.width/2*this->scaleFactor), (float)(GetScreenHeight() - this->loredropFour.height*this->scaleFactor - this->offset), (float)this->loredropFour.width, (float)this->loredropFour.height};
             break;
+        case (int)WhichLoredrop::abillity:
+            this->position = {(float)(GetScreenWidth()/2 - this->loredropAbillity.width/2*this->scaleFactor), (float)(GetScreenHeight() - this->loredropAbillity.height*this->scaleFactor - this->offset), (float)this->loredropAbillity.width, (float)this->loredropAbillity.height};
+            break;
 
         case (int)WhichLoredrop::final:
             this->position = {(float)(GetScreenWidth()/2 - this->loredropFinal.width/2*this->scaleFactor), (float)(GetScreenHeight() - this->loredropFinal.height*this->scaleFactor - this->offset), (float)this->loredropFinal.width, (float)this->loredropFinal.height};
@@ -174,6 +182,12 @@ void ActorLoredrop::InternRender()
             DrawTexturePro(this->loredropFinal,
                            {0, 0, (float)this->loredropFinal.width, (float)this->loredropFinal.height},
                            {this->position.x, this->position.y, (float)this->loredropFinal.width*this->scaleFactor, (float)this->loredropFinal.height*this->scaleFactor},
+                           {0, 0}, 0, WHITE);
+            break;
+        case WhichLoredrop::abillity:
+            DrawTexturePro(this->loredropAbillity,
+                           {0, 0, (float)this->loredropAbillity.width, (float)this->loredropAbillity.height},
+                           {this->position.x, this->position.y, (float)this->loredropAbillity.width*this->scaleFactor, (float)this->loredropAbillity.height*this->scaleFactor},
                            {0, 0}, 0, WHITE);
             break;
 

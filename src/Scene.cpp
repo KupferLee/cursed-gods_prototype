@@ -81,13 +81,16 @@ void Scene::UpdateScene()
             IndexCounter++;
         }
         gameover_ = false;
-        for(int i = 0; i < tileAtlas_->getTriggerboxesStalagmit().size(); ++i){
-            if(CheckCollisionRecs({player_->GetPosition().x, player_->GetPosition().y, 32, 32},
-                                   tileAtlas_->getTriggerboxesStalagmit().at(i)))
-            {
+        for(int i = 0; i < tileAtlas_->getTriggerboxesStalagmit().size(); ++i) {
+            if (CheckCollisionRecs({player_->GetPosition().x, player_->GetPosition().y, 32, 32},
+                                   tileAtlas_->getTriggerboxesStalagmit().at(i))) {
                 player_->SetPosition(spawnpoints[whichCheckpointIsActive]);
                 gameover_ = true;
             }
+        }
+        if (Vector2Distance(player_->GetPosition(),{8360,3180})<50)
+        {
+        player_->SetDoubleJump();
         }
         // teleport to fight
         if(IsKeyPressed(KEY_P)) player_->SetPosition({5150, 1592});

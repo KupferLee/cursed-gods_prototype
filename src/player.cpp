@@ -39,12 +39,38 @@ void player::UpdatePlayer(float delta)
         Momentum.x *= fFriction;
     }
 
-    if ((IsKeyDown(KEY_SPACE) || IsKeyDown(KEY_UP)) && !bIsInAir)
-	{
-        Momentum = Vector2Add(Momentum, Vector2{0, fJumpAcc/2}); //Y-Achsenabschnitt ableitung 1 //floatcast important
-        frame = 0;
-        iJumpFrames++;
-	}
+    if (doublejump)
+    {
+        if (((IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_UP)) && JumpCount==1))
+        {
+            Momentum = Vector2{0,0};
+            Momentum = Vector2Add(Momentum,
+                                  Vector2{0, fJumpAcc}); //Y-Achsenabschnitt ableitung 1 //floatcast important
+            frame = 0;
+            iJumpFrames++;
+            JumpCount++;
+        }
+        if ((IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_UP)) && JumpCount==0)
+        {
+            Momentum = Vector2Add(Momentum,
+                                  Vector2{0, fJumpAcc/2}); //Y-Achsenabschnitt ableitung 1 //floatcast important
+            frame = 0;
+            iJumpFrames++;
+            JumpCount++;
+
+        }
+
+    }
+    else {
+
+
+        if ((IsKeyDown(KEY_SPACE) || IsKeyDown(KEY_UP)) && !bIsInAir) {
+            Momentum = Vector2Add(Momentum,
+                                  Vector2{0, fJumpAcc / 2}); //Y-Achsenabschnitt ableitung 1 //floatcast important
+            frame = 0;
+            iJumpFrames++;
+        }
+    }
     if(IsKeyDown(KEY_SPACE) || IsKeyDown(KEY_UP))
     {
         if(iJumpFrames < iMaxJumpFrames)
@@ -126,9 +152,8 @@ void player::UpdatePlayer(float delta)
             }
         }
     }
-
-    bIsInAir = true;
-    bIsOnGround = false;
+        bIsOnGround = false;
+        bIsInAir = true;
 
     //Ground Collision;
     for (const auto& index : Ground)
@@ -140,6 +165,7 @@ void player::UpdatePlayer(float delta)
                 vPosition.y = index.y - 32; //Kataras Größe Hardcoded;
                 bIsInAir = false;
                 bIsOnGround = true;
+                JumpCount=0;
             }
         }
         else if (CheckCollisionRecs(index, HitBoxHead))
@@ -258,6 +284,7 @@ void player::SetPosition(Vector2 x)
 {
     vPosition = x;
 }
+
 Vector2 player::GetInitialPosition()
 {
     return InitialPosition;
@@ -269,4 +296,9 @@ float player::GetTextureHeight() {
 
 float player::GetTextureWidth() {
     return static_cast<float>(Frames.height)/static_cast<float>(TilecountY);
+}
+
+void player::SetDoubleJump() {
+    doublejump=true;
+
 }
