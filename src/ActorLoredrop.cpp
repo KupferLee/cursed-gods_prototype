@@ -22,6 +22,9 @@ ActorLoredrop::ActorLoredrop()
     this->loredropShack = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Hut.png");
     this->loredropAbillity =LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Boots.png");
     this->loredropFinal = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Towerentry.png");
+
+    // position loredrop on screen
+    this->position = {(float)(GetScreenWidth()/2 - this->loredropBase.width/2*this->scaleFactor), (float)(GetScreenHeight() - this->loredropBase.height*this->scaleFactor - this->offset), (float)this->loredropBase.width, (float)this->loredropBase.height};
 }
 
 void ActorLoredrop::UpdateLore(Vector2 currentPosition)
@@ -71,7 +74,7 @@ void ActorLoredrop::UpdateLore(Vector2 currentPosition)
         this->currentLoredrop = WhichLoredrop::none;
     }
 
-    InternUpdate();
+    // InternUpdate();
 }
 
 void ActorLoredrop::Render()
@@ -95,40 +98,6 @@ void ActorLoredrop::Draw()
 }
 
 int ActorLoredrop::GetCurrentCheckpointID() { return this->whichCheckpointIsActive; }
-
-// Lee: forgot what this is fore and what it does oops
-void ActorLoredrop::InternUpdate()
-{
-    switch ((int)this->currentLoredrop)
-    {
-        case (int)WhichLoredrop::base:
-            this->position = {(float)(GetScreenWidth()/2 - this->loredropBase.width/2*this->scaleFactor), (float)(GetScreenHeight() - this->loredropBase.height*this->scaleFactor - this->offset), (float)this->loredropBase.width, (float)this->loredropBase.height};
-            break;
-
-        case (int)WhichLoredrop::horse:
-            this->position = {(float)(GetScreenWidth()/2 - this->loredropHorse.width / 2 * this->scaleFactor), (float)(GetScreenHeight() - this->loredropHorse.height * this->scaleFactor - this->offset), (float)this->loredropHorse.width, (float)this->loredropHorse.height};
-            break;
-
-        case (int)WhichLoredrop::canyonOversight:
-            this->position = {(float)(GetScreenWidth()/2 - this->loredropCanyonOversight.width / 2 * this->scaleFactor), (float)(GetScreenHeight() - this->loredropCanyonOversight.height * this->scaleFactor - this->offset), (float)this->loredropCanyonOversight.width, (float)this->loredropCanyonOversight.height};
-            break;
-
-        case (int)WhichLoredrop::checkpoint:
-            this->position = {(float)(GetScreenWidth()/2 - this->loredropCheckpoint.width / 2 * this->scaleFactor), (float)(GetScreenHeight() - this->loredropCheckpoint.height * this->scaleFactor - this->offset), (float)this->loredropCheckpoint.width, (float)this->loredropCheckpoint.height};
-            break;
-
-        case (int)WhichLoredrop::shack:
-            this->position = {(float)(GetScreenWidth()/2 - this->loredropShack.width / 2 * this->scaleFactor), (float)(GetScreenHeight() - this->loredropShack.height * this->scaleFactor - this->offset), (float)this->loredropShack.width, (float)this->loredropShack.height};
-            break;
-        case (int)WhichLoredrop::abillity:
-            this->position = {(float)(GetScreenWidth()/2 - this->loredropAbillity.width/2*this->scaleFactor), (float)(GetScreenHeight() - this->loredropAbillity.height*this->scaleFactor - this->offset), (float)this->loredropAbillity.width, (float)this->loredropAbillity.height};
-            break;
-
-        case (int)WhichLoredrop::final:
-            this->position = {(float)(GetScreenWidth()/2 - this->loredropFinal.width/2*this->scaleFactor), (float)(GetScreenHeight() - this->loredropFinal.height*this->scaleFactor - this->offset), (float)this->loredropFinal.width, (float)this->loredropFinal.height};
-            break;
-    }
-}
 
 void ActorLoredrop::InternRender()
 {
