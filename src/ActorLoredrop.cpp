@@ -8,20 +8,20 @@
 
 ActorLoredrop::ActorLoredrop()
 {
-    this->posDrop_Horse = {780, 750 };
-    this->posDrop_Canyon_Oversight = {2400, 910};
-    this->posDrop_Checkpoint = {2725, 3357};
-    this->posDrop_Shack = {2050, 3325};
-    this->posDrop_abillity = {8360,3180};
-    this->posDrop_final = {8970, 1295}; //8970, 1295
-
     this->loredropBase = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Template.png");
     this->loredropHorse = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Horse.png");
     this->loredropCanyonOversight = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Canyon_Oversight.png");
     this->loredropCheckpoint = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Checkpoint.png");
     this->loredropShack = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Hut.png");
-    this->loredropAbillity =LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Boots.png");
+    this->loredropAbillity = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_HermesBoots.png");
     this->loredropFinal = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Towerentry.png");
+
+    this->loredropEntrance = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Entrance.png");
+    this->loredropRing = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Ring.png");
+    this->loredropExit = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_ExitCave.png");
+    this->loredropHarpy = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Harpy.png");
+    this->loredropFlower = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Flower.png");
+    this->loredropSword = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Sword.png");
 }
 
 void ActorLoredrop::UpdateLore(Vector2 currentPosition)
@@ -40,6 +40,7 @@ void ActorLoredrop::UpdateLore(Vector2 currentPosition)
     currentPosition.y += 16;
 
     // show loredrop on/off
+
     if (Vector2Distance(currentPosition, this->posDrop_Horse) < 50)
     {
         this->currentLoredrop = WhichLoredrop::horse;
@@ -64,6 +65,32 @@ void ActorLoredrop::UpdateLore(Vector2 currentPosition)
     {
         this->currentLoredrop = WhichLoredrop::abillity;
     }
+
+    else if (Vector2Distance(currentPosition, this->posDrop_Entrance) < 100)
+    {
+        this->currentLoredrop = WhichLoredrop::entrance;
+    }
+    else if (Vector2Distance(currentPosition, this->posDrop_Ring) < 25)
+    {
+        this->currentLoredrop = WhichLoredrop::ring;
+    }
+    else if (Vector2Distance(currentPosition, this->posDrop_Exit) < 100)
+    {
+        this->currentLoredrop = WhichLoredrop::exit;
+    }
+    else if (Vector2Distance(currentPosition, this->posDrop_Harpye) < 300)
+    {
+        this->currentLoredrop = WhichLoredrop::harpy;
+    }
+    else if (Vector2Distance(currentPosition, this->posDrop_Flower) < 25)
+    {
+        this->currentLoredrop = WhichLoredrop::flower;
+    }
+    else if (Vector2Distance(currentPosition, this->posDrop_Sword) < 25)
+    {
+        this->currentLoredrop = WhichLoredrop::sword;
+    }
+
     else
     {
         this->currentLoredrop = WhichLoredrop::none;
@@ -85,6 +112,13 @@ void ActorLoredrop::DrawHitbox()
         DrawCircle(this->posDrop_Checkpoint.x, this->posDrop_Checkpoint.y, 50, DARKBLUE);
         DrawCircle(this->posDrop_Shack.x, this->posDrop_Shack.y, 50, DARKBLUE);
         DrawCircle(this->posDrop_final.x, this->posDrop_final.y, 50, DARKBLUE);
+
+        DrawCircle(this->posDrop_Entrance.x, this->posDrop_Entrance.y, 100, DARKBLUE);
+        DrawCircle(this->posDrop_Ring.x, this->posDrop_Ring.y, 25, DARKBLUE);
+        DrawCircle(this->posDrop_Exit.x, this->posDrop_Exit.y, 100, DARKBLUE);
+        DrawCircle(this->posDrop_Harpye.x, this->posDrop_Harpye.y, 300, DARKBLUE);
+        DrawCircle(this->posDrop_Flower.x, this->posDrop_Flower.y, 25, DARKBLUE);
+        DrawCircle(this->posDrop_Sword.x, this->posDrop_Sword.y, 25, DARKBLUE);
 
     }
 
@@ -119,10 +153,35 @@ void ActorLoredrop::InternRender()
         case WhichLoredrop::final:
             DrawTextbox(this->loredropFinal);
             break;
+
         case WhichLoredrop::abillity:
             DrawTextbox(this->loredropAbillity);
             break;
 
+
+        case WhichLoredrop::entrance:
+            DrawTextbox(this->loredropEntrance);
+            break;
+
+        case WhichLoredrop::ring:
+            DrawTextbox(this->loredropRing);
+            break;
+
+        case WhichLoredrop::exit:
+            DrawTextbox(this->loredropExit);
+            break;
+
+        case WhichLoredrop::harpy:
+            DrawTextbox(this->loredropHarpy);
+            break;
+
+        case WhichLoredrop::flower:
+            DrawTextbox(this->loredropFlower);
+            break;
+
+        case WhichLoredrop::sword:
+            DrawTextbox(this->loredropSword);
+            break;
     }
 
 }
@@ -135,6 +194,15 @@ void ActorLoredrop::DrawTextbox(Texture2D texture)
                    {0, 0, (float)texture.width, (float)texture.height},
                    {(float)(GetScreenWidth()/2 - this->loredropBase.width/2*this->scaleFactor), (float)(GetScreenHeight() - this->loredropBase.height*this->scaleFactor - this->offset), (float)texture.width*this->scaleFactor, (float)texture.height*this->scaleFactor},
                    {0, 0}, 0, WHITE);
+}
+
+// not used bc it doesnt work
+void ActorLoredrop::LoredropCollision(Vector2 playerPos, Vector2 lorePos, WhichLoredrop loredrop)
+{
+    if (Vector2Distance(playerPos, lorePos) < 50)
+    {
+        this->currentLoredrop = loredrop;
+    }
 }
 
 // not used

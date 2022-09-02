@@ -17,6 +17,12 @@ enum class WhichLoredrop
     shack,
     abillity,
     final,
+    entrance,
+    ring,
+    exit,
+    harpy,
+    flower,
+    sword,
     none
 };
 
@@ -53,13 +59,27 @@ protected:
     Texture2D loredropAbillity;
     Texture2D loredropFinal;
 
+    Texture2D loredropEntrance;
+    Texture2D loredropRing;
+    Texture2D loredropExit;
+    Texture2D loredropHarpy;
+    Texture2D loredropFlower;
+    Texture2D loredropSword;
+
     // ingame positions of Loredrops
-    Vector2 posDrop_Horse;
-    Vector2 posDrop_Canyon_Oversight;
-    Vector2 posDrop_Checkpoint;
-    Vector2 posDrop_Shack;
-    Vector2 posDrop_abillity;
-    Vector2 posDrop_final;
+    Vector2 posDrop_Horse = {780, 750};
+    Vector2 posDrop_Canyon_Oversight = {2400, 910};
+    Vector2 posDrop_Checkpoint  = {2725, 3357};
+    Vector2 posDrop_Shack = {2050, 3325};
+    Vector2 posDrop_abillity = {8360,3180};
+    Vector2 posDrop_final = {8970, 1295};
+
+    Vector2 posDrop_Entrance = {1689, 1118};
+    Vector2 posDrop_Ring = {1084, 1211};
+    Vector2 posDrop_Exit = {2809, 1641};
+    Vector2 posDrop_Harpye = {3679, 3264};
+    Vector2 posDrop_Flower = {4914, 2943};
+    Vector2 posDrop_Sword = {7166, 3243};
 
     bool isHitboxVisible = false;
     int whichCheckpointIsActive = 0;
@@ -67,6 +87,7 @@ protected:
 
 private:
     void InternUpdate();
+    void LoredropCollision(Vector2 playerPos, Vector2 lorePos, WhichLoredrop loredrop);
     void InternRender();
     void DrawTextbox(Texture2D texture);
 

@@ -6,7 +6,7 @@
 
 ActorHermesBoots::ActorHermesBoots()
 {
-    this->textureOverworld = LoadTexture("assets/graphics/Actors/Item_Ring.png");
+    this->textureOverworld = LoadTexture("assets/graphics/Actors/Item_Boots.png");
 
     this->position = {8361, 3202, (float)this->textureOverworld.width, (float)this->textureOverworld.height};
 
