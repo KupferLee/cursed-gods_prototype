@@ -15,16 +15,12 @@
 
 class item_base {
 protected:
-    std::string name;
-    std::string description;
     Texture2D texture_item;
     Texture2D texture_infos;
 
 public:
     Texture2D GetTexture() { return texture_item; }
     Texture2D GetInfos() {return texture_infos; }
-    std::string GetName() { return name; }
-    std::string GetDescription() {return description; }
     // things all items will have
 };
 
