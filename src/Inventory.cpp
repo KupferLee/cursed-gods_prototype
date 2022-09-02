@@ -26,17 +26,12 @@ void Inventory::PickUpRing() { itemAdd(itemRing); }
 
 void Inventory::Update()
 {
-    /*
+
     // add items for debug
     if(IsKeyPressed(KEY_K))
     {
-        itemAdd(itemRing);
+        itemAdd(itemFlower);
     }
-    if(IsKeyPressed(KEY_J))
-    {
-        itemAdd(itemSword);
-    }
-     */
 
 
     switch (menuState)
