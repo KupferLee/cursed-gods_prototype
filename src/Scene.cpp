@@ -94,7 +94,7 @@ void Scene::UpdateScene()
         player_->SetDoubleJump();
         }
         // teleport to fight
-        if(IsKeyPressed(KEY_P)) player_->SetPosition({8670, 1295});
+        if(IsKeyPressed(KEY_P)) player_->SetPosition({4845, 1650});
     }
 }
 
