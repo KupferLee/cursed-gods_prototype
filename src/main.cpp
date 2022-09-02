@@ -179,12 +179,6 @@ int main() {
                     ClearBackground(WHITE);
                     TestTitle->Update();
                     TestTitle->Render();
-
-                    // draw a start button that should later be added to the scene
-                    DrawTexturePro(button_start,
-                                   {0, 0, (float)button_start.width, (float)button_start.height},
-                                   {(float)GetScreenWidth()/2 - (button_start.width * 5)/2, (float)GetScreenHeight() - 260, (float)button_start.width * 5, (float)button_start.height * 5},
-                                   {0, 0}, 0, WHITE);
                     break;
 
                 case (state_level1): // playing screen
