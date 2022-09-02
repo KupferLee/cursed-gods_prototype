@@ -19,6 +19,7 @@ ActorLoredrop::ActorLoredrop()
     this->loredropEntrance = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Entrance.png");
     this->loredropRing = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Ring.png");
     this->loredropExit = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_ExitCave.png");
+    this->loredropHarpy = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Harpy.png");
 }
 
 void ActorLoredrop::UpdateLore(Vector2 currentPosition)
@@ -75,6 +76,10 @@ void ActorLoredrop::UpdateLore(Vector2 currentPosition)
     {
         this->currentLoredrop = WhichLoredrop::exit;
     }
+    else if (Vector2Distance(currentPosition, this->posDrop_Harpye) < 300)
+    {
+        this->currentLoredrop = WhichLoredrop::harpy;
+    }
 
     else
     {
@@ -101,6 +106,7 @@ void ActorLoredrop::DrawHitbox()
         DrawCircle(this->posDrop_Entrance.x, this->posDrop_Entrance.y, 100, DARKBLUE);
         DrawCircle(this->posDrop_Ring.x, this->posDrop_Ring.y, 50, DARKBLUE);
         DrawCircle(this->posDrop_Exit.x, this->posDrop_Exit.y, 100, DARKBLUE);
+        DrawCircle(this->posDrop_Harpye.x, this->posDrop_Harpye.y, 300, DARKBLUE);
 
     }
 
@@ -151,6 +157,11 @@ void ActorLoredrop::InternRender()
 
         case WhichLoredrop::exit:
             DrawTextbox(this->loredropExit);
+            break;
+
+        case WhichLoredrop::harpy:
+            DrawTextbox(this->loredropHarpy);
+            break;
     }
 
 }

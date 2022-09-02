@@ -20,6 +20,7 @@ enum class WhichLoredrop
     entrance,
     ring,
     exit,
+    harpy,
     none
 };
 
@@ -59,6 +60,7 @@ protected:
     Texture2D loredropEntrance;
     Texture2D loredropRing;
     Texture2D loredropExit;
+    Texture2D loredropHarpy;
 
     // ingame positions of Loredrops
     Vector2 posDrop_Horse = {780, 750};
@@ -71,6 +73,7 @@ protected:
     Vector2 posDrop_Entrance = {1689, 1118};
     Vector2 posDrop_Ring = {1084, 1211};
     Vector2 posDrop_Exit = {2809, 1641};
+    Vector2 posDrop_Harpye = {3679, 3264};
 
     bool isHitboxVisible = false;
     int whichCheckpointIsActive = 0;
