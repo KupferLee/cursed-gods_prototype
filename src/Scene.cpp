@@ -12,6 +12,7 @@
 #include "Scene.h"
 #include "config.h"
 #include <iostream>
+
 Scene::Scene(const std::shared_ptr<player> &player,
              const std::shared_ptr<ProtectedTexture> &map,
              const std::shared_ptr<ProtectedTileset> &tileAtlas,
@@ -93,7 +94,7 @@ void Scene::UpdateScene()
         player_->SetDoubleJump();
         }
         // teleport to fight
-        if(IsKeyPressed(KEY_P)) player_->SetPosition({4954, 2929});
+        if(IsKeyPressed(KEY_P)) player_->SetPosition({8301, 3202});
     }
 }
 

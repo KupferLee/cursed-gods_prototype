@@ -18,6 +18,7 @@
 #include "ActorItemSword.h"
 #include "ActorItemRing.h"
 #include "ActorItemFlower.h"
+#include "ActorHermesBoots.h"
 
 int main() {
     // Raylib initialization
@@ -41,8 +42,10 @@ int main() {
     ActorLoredrop loredrop;
     ActorItemSword itemSword;
     ActorItemFlower itemFlower;
+    ActorHermesBoots hermesBoots;
     ActorItemRing itemRing;
     BattleScreen fightScreen;
+
 
     Texture2D background = LoadTexture("assets/graphics/Backgrounds/Background1.png");
 
@@ -109,8 +112,11 @@ int main() {
                 itemSword.Update();
                 itemRing.Update();
                 itemFlower.Update();
+                hermesBoots.Update();
                 fightScreen.UpdateOverworldHitbox();
 
+
+                // Player Collision with Items
                 if(Vector2Distance(katara->GetMiddlePosition(), itemSword.GetHitbox()) < 20 && itemSword.GetActive() == true)
                 {
                     inventory.PickUpSword();
@@ -127,6 +133,11 @@ int main() {
                 {
                     inventory.PickUpFlower();
                     itemFlower.SetActive(false);
+                }
+
+                if(Vector2Distance(katara->GetMiddlePosition(), hermesBoots.GetHitbox()) < 20 && hermesBoots.GetActive() == true)
+                {
+                    hermesBoots.SetActive(false);
                 }
 
 
@@ -209,6 +220,7 @@ int main() {
                     itemSword.Render();
                     itemRing.Render();
                     itemFlower.Render();
+                    hermesBoots.Render();
 
                     // enemies
                     // over jump n run
