@@ -20,6 +20,8 @@ ActorLoredrop::ActorLoredrop()
     this->loredropRing = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Ring.png");
     this->loredropExit = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_ExitCave.png");
     this->loredropHarpy = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Harpy.png");
+    this->loredropFlower = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Flower.png");
+    this->loredropSword = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Sword.png");
 }
 
 void ActorLoredrop::UpdateLore(Vector2 currentPosition)
@@ -80,6 +82,14 @@ void ActorLoredrop::UpdateLore(Vector2 currentPosition)
     {
         this->currentLoredrop = WhichLoredrop::harpy;
     }
+    else if (Vector2Distance(currentPosition, this->posDrop_Flower) < 25)
+    {
+        this->currentLoredrop = WhichLoredrop::flower;
+    }
+    else if (Vector2Distance(currentPosition, this->posDrop_Sword) < 25)
+    {
+        this->currentLoredrop = WhichLoredrop::sword;
+    }
 
     else
     {
@@ -104,9 +114,11 @@ void ActorLoredrop::DrawHitbox()
         DrawCircle(this->posDrop_final.x, this->posDrop_final.y, 50, DARKBLUE);
 
         DrawCircle(this->posDrop_Entrance.x, this->posDrop_Entrance.y, 100, DARKBLUE);
-        DrawCircle(this->posDrop_Ring.x, this->posDrop_Ring.y, 50, DARKBLUE);
+        DrawCircle(this->posDrop_Ring.x, this->posDrop_Ring.y, 25, DARKBLUE);
         DrawCircle(this->posDrop_Exit.x, this->posDrop_Exit.y, 100, DARKBLUE);
         DrawCircle(this->posDrop_Harpye.x, this->posDrop_Harpye.y, 300, DARKBLUE);
+        DrawCircle(this->posDrop_Flower.x, this->posDrop_Flower.y, 25, DARKBLUE);
+        DrawCircle(this->posDrop_Sword.x, this->posDrop_Sword.y, 25, DARKBLUE);
 
     }
 
@@ -161,6 +173,14 @@ void ActorLoredrop::InternRender()
 
         case WhichLoredrop::harpy:
             DrawTextbox(this->loredropHarpy);
+            break;
+
+        case WhichLoredrop::flower:
+            DrawTextbox(this->loredropFlower);
+            break;
+
+        case WhichLoredrop::sword:
+            DrawTextbox(this->loredropSword);
             break;
     }
 
