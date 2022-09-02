@@ -108,7 +108,7 @@ int main() {
                 inventory.Update();
                 enemyHarpy.Update();
                 enemyRat.Update();
-                loredrop.UpdateLore(katara->GetPosition());
+                loredrop.UpdateLore(katara->GetPosition(), fightScreen.GetEncounterActive());
                 itemSword.Update();
                 itemRing.Update();
                 itemFlower.Update();
@@ -147,8 +147,8 @@ int main() {
                 {
                     gameState = state_title;
                 }
-                // if inventory not open then change to fight on key
-                else if (IsKeyPressed(KEY_F) && inventory.IsOpen() == false || Vector2Distance(katara->GetMiddlePosition(), fightScreen.GetFightPosition()) < 50 && inventory.IsOpen() == false && fightScreen.GetEncounterActive() == true)
+                // if inventory not open then change to fight when in hitbox
+                else if (Vector2Distance(katara->GetMiddlePosition(), fightScreen.GetFightPosition()) < 50 && inventory.IsOpen() == false && fightScreen.GetEncounterActive() == true)
                 {
                     gameState = state_fight;
                     fightScreen.SetEncounterActive(false);
@@ -161,7 +161,7 @@ int main() {
                 break;
 
             case (state_fight):
-                if (IsKeyPressed(KEY_F))
+                if (IsKeyPressed(KEY_ENTER))
                 {
                     gameState = state_level1;
                 }
