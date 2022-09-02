@@ -68,7 +68,7 @@ private:
 
     //constants
     const float fJumpAcc = -7.7f;
-	const float fSideAcc = 0.5; //2.5
+	const float fSideAcc = 0.55; //2.5
     const float fMaxSpeed = 4.f;
     const float fMaxAirSpeed = 22.2;
     const float fFriction = 0.6;

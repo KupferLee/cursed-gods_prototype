@@ -19,6 +19,12 @@ protected:
 
     float frameTime = 0.f;
     int frame = 0;
+
+protected:
+    Texture2D textureOverworld;
+    Vector2 hitboxPosition;
+    bool showHitbox = false;
+    bool isActive = true;
 };
 
 

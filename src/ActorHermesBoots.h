@@ -1,16 +1,15 @@
 //
-// Created by Lee on 21.08.2022.
+// Created by Lee on 02.09.2022.
 //
 
-#ifndef RAYLIBSTARTER_ACTORITEMRING_H
-#define RAYLIBSTARTER_ACTORITEMRING_H
+#ifndef RAYLIBSTARTER_ACTORHERMESBOOTS_H
+#define RAYLIBSTARTER_ACTORHERMESBOOTS_H
 
 #include "Actor.h"
 
-class ActorItemRing : public Actor {
+class ActorHermesBoots : public Actor {
 public:
-    ActorItemRing();
-
+    ActorHermesBoots();
     void Update() override;
     void Update(float) override;
     void Render() override;
@@ -23,4 +22,4 @@ public:
 };
 
 
-#endif //RAYLIBSTARTER_ACTORITEMRING_H
+#endif //RAYLIBSTARTER_ACTORHERMESBOOTS_H
