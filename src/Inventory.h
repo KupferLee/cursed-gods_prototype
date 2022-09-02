@@ -58,6 +58,7 @@ public:
 
     void PickUpSword();
     void PickUpRing();
+    void PickUpFlower();
 
     Inventory();
 };

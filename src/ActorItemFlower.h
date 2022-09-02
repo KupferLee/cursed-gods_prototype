@@ -10,6 +10,17 @@
 class ActorItemFlower : public Actor {
 public:
     ActorItemFlower();
+
+    void Update() override;
+    void Update(float) override;
+    void Render() override;
+    void HandleInput()override;
+
+    Vector2 GetHitbox();
+    void SetActive(bool b);
+    bool GetActive();
+
+
 };
 
 

@@ -6,6 +6,6 @@
 
 item_flower::item_flower()
 {
-    this->texture_item = LoadTexture("assets/graphics/UI/Inventory/Slot_Item.png");
-    this->texture_infos = LoadTexture("assets/graphics/UI/Inventory/Slot_Item.png");
+    this->texture_item = LoadTexture("assets/graphics/UI/Inventory/Slot_Flower.png");
+    this->texture_infos = LoadTexture("assets/graphics/UI/Inventory/Info_Flower.png");
 }

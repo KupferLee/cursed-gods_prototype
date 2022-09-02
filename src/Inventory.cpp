@@ -24,16 +24,10 @@ void Inventory::PickUpSword() { itemAdd(itemSword); }
 
 void Inventory::PickUpRing() { itemAdd(itemRing); }
 
+void Inventory::PickUpFlower() { itemAdd(itemFlower); }
+
 void Inventory::Update()
 {
-
-    // add items for debug
-    if(IsKeyPressed(KEY_K))
-    {
-        itemAdd(itemFlower);
-    }
-
-
     switch (menuState)
     {
         case Closed:

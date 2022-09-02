@@ -20,12 +20,6 @@ public:
     void SetActive(bool b);
     bool GetActive();
 
-protected:
-    Texture2D textureOverworld;
-    Vector2 hitboxPosition;
-    bool showHitbox = false;
-    bool isActive = true;
-
 };
 
 

@@ -17,6 +17,7 @@
 #include "ActorLoredrop.h"
 #include "ActorItemSword.h"
 #include "ActorItemRing.h"
+#include "ActorItemFlower.h"
 
 int main() {
     // Raylib initialization
@@ -39,6 +40,7 @@ int main() {
     ActorRat enemyRat;
     ActorLoredrop loredrop;
     ActorItemSword itemSword;
+    ActorItemFlower itemFlower;
     ActorItemRing itemRing;
     BattleScreen fightScreen;
 
@@ -106,6 +108,7 @@ int main() {
                 loredrop.UpdateLore(katara->GetPosition());
                 itemSword.Update();
                 itemRing.Update();
+                itemFlower.Update();
                 fightScreen.UpdateOverworldHitbox();
 
                 if(Vector2Distance(katara->GetMiddlePosition(), itemSword.GetHitbox()) < 20 && itemSword.GetActive() == true)
@@ -118,6 +121,12 @@ int main() {
                 {
                     inventory.PickUpRing();
                     itemRing.SetActive(false);
+                }
+
+                if(Vector2Distance(katara->GetMiddlePosition(), itemFlower.GetHitbox()) < 20 && itemFlower.GetActive() == true)
+                {
+                    inventory.PickUpFlower();
+                    itemFlower.SetActive(false);
                 }
 
 
@@ -199,6 +208,7 @@ int main() {
                     loredrop.DrawHitbox();
                     itemSword.Render();
                     itemRing.Render();
+                    itemFlower.Render();
 
                     // enemies
                     // over jump n run
