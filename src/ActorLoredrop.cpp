@@ -11,6 +11,7 @@ ActorLoredrop::ActorLoredrop()
     this->loredropBase = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Template.png");
     this->loredropHorse = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Horse.png");
     this->loredropEntrance = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Entrance.png");
+    this->loredropRing = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Ring.png");
     this->loredropCanyonOversight = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Canyon_Oversight.png");
     this->loredropCheckpoint = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Checkpoint.png");
     this->loredropShack = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Hut.png");
@@ -45,6 +46,10 @@ void ActorLoredrop::UpdateLore(Vector2 currentPosition)
     else if (Vector2Distance(currentPosition, this->posDrop_Entrance) < 100)
     {
         this->currentLoredrop = WhichLoredrop::entrance;
+    }
+    else if (Vector2Distance(currentPosition, this->posDrop_Ring) < 25)
+    {
+        this->currentLoredrop = WhichLoredrop::ring;
     }
     else if (Vector2Distance(currentPosition, this->posDrop_Checkpoint) < 50)
     {
@@ -81,6 +86,7 @@ void ActorLoredrop::DrawHitbox()
         DrawCircle(this->posDrop_Horse.x, this->posDrop_Horse.y, 50, DARKBLUE);
         DrawCircle(this->posDrop_Canyon_Oversight.x, this->posDrop_Canyon_Oversight.y, 50, DARKBLUE);
         DrawCircle(this->posDrop_Entrance.x, this->posDrop_Entrance.y, 100, DARKBLUE);
+        DrawCircle(this->posDrop_Ring.x, this->posDrop_Ring.y, 50, DARKBLUE);
         DrawCircle(this->posDrop_Checkpoint.x, this->posDrop_Checkpoint.y, 50, DARKBLUE);
         DrawCircle(this->posDrop_Shack.x, this->posDrop_Shack.y, 50, DARKBLUE);
         DrawCircle(this->posDrop_final.x, this->posDrop_final.y, 50, DARKBLUE);
@@ -105,6 +111,10 @@ void ActorLoredrop::InternRender()
 
         case WhichLoredrop::entrance:
             DrawTextbox(this->loredropEntrance);
+            break;
+
+        case WhichLoredrop::ring:
+            DrawTextbox(this->loredropRing);
             break;
 
         case WhichLoredrop::canyonOversight:

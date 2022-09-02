@@ -14,6 +14,7 @@ enum class WhichLoredrop
     horse,
     canyonOversight,
     entrance,
+    ring,
     checkpoint,
     shack,
     abillity,
@@ -50,6 +51,7 @@ protected:
     Texture2D loredropHorse;
     Texture2D loredropCanyonOversight;
     Texture2D loredropEntrance;
+    Texture2D loredropRing;
     Texture2D loredropCheckpoint;
     Texture2D loredropShack;
     Texture2D loredropAbillity;
@@ -59,6 +61,7 @@ protected:
     Vector2 posDrop_Horse = {780, 750};
     Vector2 posDrop_Canyon_Oversight = {2400, 910};
     Vector2 posDrop_Entrance = {1689, 1118};
+    Vector2 posDrop_Ring = {1084, 1211};
     Vector2 posDrop_Checkpoint  = {2725, 3357};
     Vector2 posDrop_Shack = {2050, 3325};
     Vector2 posDrop_abillity = {8360,3180};
