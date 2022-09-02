@@ -150,12 +150,15 @@ void Scene::RenderScene() {
                               RED);
 
             }
+
+            for(auto &index : spawnpoints)
+            {
+                DrawCircleV({index.x,index.y}, 50, BLUE);
+            }
         }
-        for(auto &index : spawnpoints)
-        {
-            DrawCircleV({index.x,index.y}, 50, BLUE);
-        }
-        }
+
+
+    }
     if(player_ != nullptr){
     player_->Render();
     }
