@@ -89,7 +89,7 @@ int main() {
     std::unique_ptr<Scene> TestGameover = std::make_unique<Scene>(gameoverTex,
                                                                gameovermusic);
     // Main game loop
-    while (!WindowShouldClose()) // Detect window close button or ESC key
+    while (!inventory.ShouldWindowClose() && !WindowShouldClose()) // Detect window close button or ESC key or exit with options
     {
         // Updates that are made by frame are coded here
         // ...
@@ -143,9 +143,11 @@ int main() {
 
                 // State Wechsel
                 // if in options und press enter
-                if (IsKeyPressed(KEY_ENTER) && inventory.GetCurrentState() == 2)
+                if (inventory.ShouldGoTitle())
                 {
                     gameState = state_title;
+                    inventory.SetReturnTitle(false);
+                    katara->SetPosition({730, 700});
                 }
                 // if inventory not open then change to fight when in hitbox
                 else if (Vector2Distance(katara->GetMiddlePosition(), fightScreen.GetFightPosition()) < 50 && inventory.IsOpen() == false && fightScreen.GetEncounterActive() == true)
