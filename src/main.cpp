@@ -266,18 +266,9 @@ int main() {
                     // Draw Buttons
                     DrawTexturePro(button_resume,
                                    {0, 0, (float)button_resume.width, (float)button_resume.height},
-                                   {(float)GetScreenWidth()/2 - (button_resume.width * 5) - 50, (float)GetScreenHeight() - 200, (float)button_resume.width * 5, (float)button_resume.height * 5},
+                                   {(float)GetScreenWidth()/2 - (button_resume.width * 5)/2, (float)GetScreenHeight() - 200, (float)button_resume.width * 5, (float)button_resume.height * 5},
                                    {0, 0}, 0, WHITE);
-
-                    DrawTexturePro(button_exit,
-                                   {0, 0, (float)button_exit.width, (float)button_exit.height},
-                                   {(float)GetScreenWidth()/2 + 50, (float)GetScreenHeight() - 200, (float)button_exit.width * 5, (float)button_exit.height * 5},
-                                   {0, 0}, 0, WHITE);
-
-                    DrawTexturePro(button_marker,
-                                   {0, 0, (float)button_marker.width, (float)button_marker.height},
-                                   {(float)GetScreenWidth()/2 + 50, (float)GetScreenHeight() - 200, (float)button_marker.width * 5, (float)button_marker.height * 5},
-                                   {0, 0}, 0, WHITE);
+                    
                     break;
 
                 default:
