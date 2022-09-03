@@ -6,6 +6,7 @@
 #define RAYLIBSTARTER_GAMEOBJECT_H
 #include <vector>
 #include <raylib.h>
+#include <raymath.h>
 
 
 class GameObject {

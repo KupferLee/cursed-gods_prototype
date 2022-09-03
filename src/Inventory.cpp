@@ -4,15 +4,17 @@
 
 #include "Inventory.h"
 
+
 Inventory::Inventory()
 {
     this->textureItempageBase = LoadTexture("assets/graphics/UI/Inventory/Itemslots_Base.png");
     this->textureOptionsBase = LoadTexture("assets/graphics/UI/Inventory/Options_Base.png");
     this->textureCharacterspriteBase = LoadTexture("assets/graphics/UI/Inventory/Charactersprite_Base_Platzhalter.png");
-    this->textureLoredropsBase = LoadTexture("assets/graphics/UI/Inventory/Loredrops_Base_Platzhalter.png");
     this->itemSelect = LoadTexture("assets/graphics/UI/Inventory/Slot_Select.png");
     this->iconBook = LoadTexture("assets/graphics/UI/Inventory/Icon.png");
     this->optionsSelect = LoadTexture("assets/graphics/UI/Inventory/Options_Select.png");
+
+    this->iToOpen = LoadTexture("assets/graphics/UI/Buttons/I_To_Open.png");
 
     // load empty item slot to get width and height for set slots
     this->textureItem = LoadTexture("assets/graphics/UI/Inventory/Slot_Item.png");
@@ -142,6 +144,11 @@ void Inventory::Render()
                    {10, 10, (float)this->iconBook.width/2 * scaleFactor, (float)this->iconBook.height*scaleFactor},
                    {0, 0}, 0, WHITE);
 
+    if (isButtonI == true)
+    {
+        DrawButtonPromt();
+    }
+
     // draw Inventory
     switch (menuState)
     {
@@ -249,6 +256,26 @@ void Inventory::DrawPage(Texture2D texture)
     DrawTexturePro(texture,
                    {0, 0, (float)texture.width, (float)texture.height},
                    {(float)inventoryPosition.x, (float)inventoryPosition.y, (float)texture.width * this->scaleFactor, (float)texture.height * this->scaleFactor},
+                   {0, 0}, 0, WHITE);
+}
+
+void Inventory::UpdateButtonPromt(Vector2 playerPosition)
+{
+    if (Vector2Distance(playerPosition, {1078, 1200}) < 20 && menuState == Closed)
+    {
+        isButtonI = true;
+    }
+    else
+    {
+        isButtonI = false;
+    }
+}
+
+void Inventory::DrawButtonPromt()
+{
+    DrawTexturePro(iToOpen,
+                   {0, 0, (float)iToOpen.width, (float)iToOpen.height},
+                   {(float)10 + iconBook.width*scaleFactor/2, (float)40, (float)this->iToOpen.width * scaleFactor, (float)this->iToOpen.height*scaleFactor},
                    {0, 0}, 0, WHITE);
 }
 

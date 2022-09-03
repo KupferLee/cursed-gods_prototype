@@ -70,6 +70,8 @@ protected:
     Texture2D loredropStatue;
     Texture2D statueZeus;
 
+    Texture2D eToInteract;
+
     // ingame positions of Loredrops
     Vector2 posDrop_Horse = {780, 750};
     Vector2 posDrop_Canyon_Oversight = {2400, 910};

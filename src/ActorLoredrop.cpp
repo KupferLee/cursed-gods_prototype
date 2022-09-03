@@ -27,6 +27,8 @@ ActorLoredrop::ActorLoredrop()
     this->loredropFight = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Fight.png");
     this->loredropStatue = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Statue.png");
 
+    this->eToInteract = LoadTexture("assets/graphics/UI/Buttons/E_To_Interact.png");
+
 }
 
 void ActorLoredrop::UpdateLore(Vector2 currentPosition, bool isFightActive)
@@ -228,8 +230,11 @@ void ActorLoredrop::InternRender()
         case WhichLoredrop::statue:
             DrawTexturePro(this->statueZeus,
                            {0, 0, (float)this->statueZeus.width, (float)this->statueZeus.height},
-                           {(float)GetScreenWidth()/2 - statueZeus.width/2*2, (float)GetScreenHeight()- statueZeus.height*2, (float)statueZeus.width*2, (float)statueZeus.height*2},
+                           {(float)GetScreenWidth()/2 - statueZeus.width, (float)GetScreenHeight()/2 - statueZeus.height + 110, (float)statueZeus.width*2, (float)statueZeus.height*2},
                            {0, 0}, 0, WHITE);
+
+            DrawTextbox(eToInteract);
+
             break;
 
         case WhichLoredrop::answer_statue:
@@ -245,7 +250,7 @@ void ActorLoredrop::DrawTextbox(Texture2D texture)
     // in relation to current texture
     DrawTexturePro(texture,
                    {0, 0, (float)texture.width, (float)texture.height},
-                   {(float)(GetScreenWidth()/2 - this->loredropBase.width/2*this->scaleFactor), (float)(GetScreenHeight() - this->loredropBase.height*this->scaleFactor - this->offset), (float)texture.width*this->scaleFactor, (float)texture.height*this->scaleFactor},
+                   {(float)(GetScreenWidth()/2 - texture.width/2*this->scaleFactor), (float)(GetScreenHeight() - texture.height*this->scaleFactor - this->offset), (float)texture.width*this->scaleFactor, (float)texture.height*this->scaleFactor},
                    {0, 0}, 0, WHITE);
 }
 

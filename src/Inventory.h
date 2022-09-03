@@ -19,6 +19,7 @@ protected:
     bool isOpen = false;
     bool isExit = false;
     bool isTitle = false;
+    bool isButtonI = false;
 
     enum MenuState {Closed, Items, Options, Character, Loredrops };
     MenuState menuState = Closed;
@@ -26,9 +27,9 @@ protected:
     Texture2D textureItempageBase;
     Texture2D textureOptionsBase;
     Texture2D textureCharacterspriteBase;
-    Texture2D textureLoredropsBase;
     Texture2D textureItem;
     Texture2D iconBook;
+    Texture2D iToOpen;
 
     Texture2D optionsSelect;
 
@@ -56,6 +57,8 @@ protected:
 
 
 public:
+    Inventory();
+
     void Update() override;
     void Update(float) override;
     void Render() override;
@@ -67,12 +70,12 @@ public:
     void PickUpSword();
     void PickUpRing();
     void PickUpFlower();
+    void UpdateButtonPromt(Vector2 playerPosition);
+    void DrawButtonPromt();
 
     bool ShouldWindowClose();
     bool ShouldGoTitle();
     void SetReturnTitle( bool title );
-
-    Inventory();
 };
 
 

@@ -114,7 +114,7 @@ int main() {
                 itemFlower.Update();
                 hermesBoots.Update();
                 fightScreen.UpdateOverworldHitbox();
-
+                inventory.UpdateButtonPromt(katara->GetMiddlePosition());
 
                 // Player Collision with Items
                 if(Vector2Distance(katara->GetMiddlePosition(), itemSword.GetHitbox()) < 20 && itemSword.GetActive() == true)

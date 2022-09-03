@@ -8,7 +8,7 @@ ActorHermesBoots::ActorHermesBoots()
 {
     this->textureOverworld = LoadTexture("assets/graphics/Actors/Item_Boots.png");
 
-    this->position = {8361, 3202, (float)this->textureOverworld.width, (float)this->textureOverworld.height};
+    this->position = {8360, 3202, (float)this->textureOverworld.width, (float)this->textureOverworld.height};
 
     // middle of hitbox should be middle of texture
     this->hitboxPosition = {position.x + this->textureOverworld.width/2, position.y + this->textureOverworld.height/2};
@@ -41,7 +41,7 @@ void ActorHermesBoots::Render()
 
         if (showHitbox == true)
         {
-            DrawCircle(hitboxPosition.x, hitboxPosition.y, 10, GREEN);
+            DrawCircle(hitboxPosition.x, hitboxPosition.y, 20, GREEN);
         }
     }
 

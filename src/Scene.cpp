@@ -89,12 +89,12 @@ void Scene::UpdateScene()
                 gameover_ = true;
             }
         }
-        if (Vector2Distance(player_->GetPosition(),{8360,3180})<50)
+        if (Vector2Distance(player_->GetPosition(),{8360, 3200}) <20 )
         {
         player_->SetDoubleJump();
         }
         // teleport to fight
-        if(IsKeyPressed(KEY_P)) player_->SetPosition({4845, 1650});
+        if(IsKeyPressed(KEY_P)) player_->SetPosition({4845, 1650}); // fight position
     }
 }
 
