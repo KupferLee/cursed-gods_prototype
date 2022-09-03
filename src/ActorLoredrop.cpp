@@ -11,10 +11,11 @@ ActorLoredrop::ActorLoredrop()
     this->loredropBase = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Template.png");
     this->loredropHorse = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Horse.png");
     this->loredropCanyonOversight = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Canyon_Oversight.png");
-    this->loredropCheckpoint = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Checkpoint.png");
+    this->loredropCheckpoint_1 = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Checkpoint.png");
     this->loredropShack = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Hut.png");
     this->loredropAbillity = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_HermesBoots.png");
     this->loredropFinal = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Towerentry.png");
+    this->statueZeus = LoadTexture("assets/graphics/UI/Textboxes/Zeus_Infos.png");
 
     this->loredropEntrance = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Entrance.png");
     this->loredropRing = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Ring.png");
@@ -22,9 +23,13 @@ ActorLoredrop::ActorLoredrop()
     this->loredropHarpy = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Harpy.png");
     this->loredropFlower = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Flower.png");
     this->loredropSword = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Sword.png");
+    this->loredropCheckpoint_2 = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_SecondCheckpoint.png");
+    this->loredropFight = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Fight.png");
+    this->loredropStatue = LoadTexture("assets/graphics/UI/Textboxes/Loredrop_Statue.png");
+
 }
 
-void ActorLoredrop::UpdateLore(Vector2 currentPosition)
+void ActorLoredrop::UpdateLore(Vector2 currentPosition, bool isFightActive)
 {
     if (IsKeyPressed(KEY_H) && isHitboxVisible == false)
     {
@@ -40,7 +45,6 @@ void ActorLoredrop::UpdateLore(Vector2 currentPosition)
     currentPosition.y += 16;
 
     // show loredrop on/off
-
     if (Vector2Distance(currentPosition, this->posDrop_Horse) < 50)
     {
         this->currentLoredrop = WhichLoredrop::horse;
@@ -49,19 +53,19 @@ void ActorLoredrop::UpdateLore(Vector2 currentPosition)
     {
         this->currentLoredrop = WhichLoredrop::canyonOversight;
     }
-    else if (Vector2Distance(currentPosition, this->posDrop_Checkpoint) < 50)
+    else if (Vector2Distance(currentPosition, this->posDrop_Checkpoint_1) < 50)
     {
-        this->currentLoredrop = WhichLoredrop::checkpoint;
+        this->currentLoredrop = WhichLoredrop::checkpoint_1;
     }
     else if (Vector2Distance(currentPosition, this->posDrop_Shack) < 50)
     {
         this->currentLoredrop = WhichLoredrop::shack;
     }
-    else if (Vector2Distance(currentPosition, this->posDrop_final) < 50)
+    else if (Vector2Distance(currentPosition, this->posDrop_Final) < 50)
     {
         this->currentLoredrop = WhichLoredrop::final;
     }
-    else if (Vector2Distance(currentPosition, this->posDrop_abillity) < 50)
+    else if (Vector2Distance(currentPosition, this->posDrop_Abillity) < 50)
     {
         this->currentLoredrop = WhichLoredrop::abillity;
     }
@@ -90,6 +94,33 @@ void ActorLoredrop::UpdateLore(Vector2 currentPosition)
     {
         this->currentLoredrop = WhichLoredrop::sword;
     }
+    else if (Vector2Distance(currentPosition, this->posDrop_Checkpoint_2) < 50)
+    {
+        this->currentLoredrop = WhichLoredrop::checkpoint_2;
+    }
+    else if (Vector2Distance(currentPosition, this->posDrop_Fight) < 100 && isFightActive == true)
+    {
+        this->currentLoredrop = WhichLoredrop::fight;
+    }
+    // switch between kataras text and zeus info on statue with E
+    else if (Vector2Distance(currentPosition, this->posDrop_Statue) < 25)
+    {
+        if (isStatueInfoActive == true)
+        {
+            this->currentLoredrop = WhichLoredrop::statue;
+
+            if (IsKeyPressed(KEY_E))
+            {
+                this->currentLoredrop = WhichLoredrop::answer_statue;
+                isStatueInfoActive = false;
+            }
+        }
+        else if (isStatueInfoActive == false && IsKeyPressed(KEY_E))
+        {
+            isStatueInfoActive = true;
+        }
+    }
+
 
     else
     {
@@ -109,9 +140,9 @@ void ActorLoredrop::DrawHitbox()
 
         DrawCircle(this->posDrop_Horse.x, this->posDrop_Horse.y, 50, DARKBLUE);
         DrawCircle(this->posDrop_Canyon_Oversight.x, this->posDrop_Canyon_Oversight.y, 50, DARKBLUE);
-        DrawCircle(this->posDrop_Checkpoint.x, this->posDrop_Checkpoint.y, 50, DARKBLUE);
+        DrawCircle(this->posDrop_Checkpoint_1.x, this->posDrop_Checkpoint_1.y, 50, DARKBLUE);
         DrawCircle(this->posDrop_Shack.x, this->posDrop_Shack.y, 50, DARKBLUE);
-        DrawCircle(this->posDrop_final.x, this->posDrop_final.y, 50, DARKBLUE);
+        DrawCircle(this->posDrop_Final.x, this->posDrop_Final.y, 50, DARKBLUE);
 
         DrawCircle(this->posDrop_Entrance.x, this->posDrop_Entrance.y, 100, DARKBLUE);
         DrawCircle(this->posDrop_Ring.x, this->posDrop_Ring.y, 25, DARKBLUE);
@@ -119,6 +150,9 @@ void ActorLoredrop::DrawHitbox()
         DrawCircle(this->posDrop_Harpye.x, this->posDrop_Harpye.y, 300, DARKBLUE);
         DrawCircle(this->posDrop_Flower.x, this->posDrop_Flower.y, 25, DARKBLUE);
         DrawCircle(this->posDrop_Sword.x, this->posDrop_Sword.y, 25, DARKBLUE);
+        DrawCircle(this->posDrop_Checkpoint_2.x, this->posDrop_Checkpoint_2.y, 50, DARKBLUE);
+        DrawCircle(this->posDrop_Fight.x, this->posDrop_Fight.y, 100, DARKBLUE);
+        DrawCircle(this->posDrop_Statue.x, this->posDrop_Statue.y, 25, DARKBLUE);
 
     }
 
@@ -142,8 +176,8 @@ void ActorLoredrop::InternRender()
             DrawTextbox(this->loredropCanyonOversight);
             break;
 
-        case WhichLoredrop::checkpoint:
-            DrawTextbox(this->loredropCheckpoint);
+        case WhichLoredrop::checkpoint_1:
+            DrawTextbox(this->loredropCheckpoint_1);
             break;
 
         case WhichLoredrop::shack:
@@ -181,6 +215,25 @@ void ActorLoredrop::InternRender()
 
         case WhichLoredrop::sword:
             DrawTextbox(this->loredropSword);
+            break;
+
+        case WhichLoredrop::checkpoint_2:
+            DrawTextbox(this->loredropCheckpoint_2);
+            break;
+
+        case WhichLoredrop::fight:
+            DrawTextbox(this->loredropFight);
+            break;
+
+        case WhichLoredrop::statue:
+            DrawTexturePro(this->statueZeus,
+                           {0, 0, (float)this->statueZeus.width, (float)this->statueZeus.height},
+                           {(float)GetScreenWidth()/2 - statueZeus.width/2*2, (float)GetScreenHeight()- statueZeus.height*2, (float)statueZeus.width*2, (float)statueZeus.height*2},
+                           {0, 0}, 0, WHITE);
+            break;
+
+        case WhichLoredrop::answer_statue:
+            DrawTextbox(this->loredropStatue);
             break;
     }
 

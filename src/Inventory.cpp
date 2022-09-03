@@ -12,6 +12,7 @@ Inventory::Inventory()
     this->textureLoredropsBase = LoadTexture("assets/graphics/UI/Inventory/Loredrops_Base_Platzhalter.png");
     this->itemSelect = LoadTexture("assets/graphics/UI/Inventory/Slot_Select.png");
     this->iconBook = LoadTexture("assets/graphics/UI/Inventory/Icon.png");
+    this->optionsSelect = LoadTexture("assets/graphics/UI/Inventory/Options_Select.png");
 
     // load empty item slot to get width and height for set slots
     this->textureItem = LoadTexture("assets/graphics/UI/Inventory/Slot_Item.png");
@@ -56,7 +57,7 @@ void Inventory::Update()
             }
 
             // navigate items
-            if (IsKeyPressed(KEY_S) && currentSlot < 3)
+            if (IsKeyPressed(KEY_S) && currentSlot < currentItem-1)
             {
                 currentSlot++;
             }
@@ -83,6 +84,15 @@ void Inventory::Update()
 
         case Options:
 
+            if (IsKeyPressed(KEY_S) && currentOption < 1)
+            {
+                currentOption = 1;
+            }
+            else if (IsKeyPressed(KEY_W) && currentOption > 0)
+            {
+                currentOption = 0;
+            }
+
             if(IsKeyPressed(KEY_E))
             {
                 menuState = Items;
@@ -93,23 +103,34 @@ void Inventory::Update()
                 isOpen = false;
             }
 
+            if (IsKeyPressed(KEY_ENTER))
+            {
+                if(currentOption == 0)
+                {
+                    menuState = Closed;
+                    isOpen = false;
+                    isTitle = true;
+                }
+                else if (currentOption == 1)
+                {
+                    menuState = Closed;
+                    isOpen = false;
+                    isExit = true;
+                }
+            }
+
             // do other stuff here
             break;
 
-        case Loredrops:
-            if (IsKeyPressed(KEY_Q))
-            {
-                menuState = Character;
-            }
-            else if (IsKeyPressed(KEY_I))
-            {
-                menuState = Closed;
-                isOpen = false;
-            }
-
             // do other stuff here
             break;
 
+    }
+
+    if (IsKeyPressed(KEY_ESCAPE))
+    {
+        menuState = Closed;
+        isOpen = false;
     }
 }
 
@@ -125,10 +146,8 @@ void Inventory::Render()
     switch (menuState)
     {
         case Items: // draw inventory
-            DrawTexturePro(this->textureItempageBase,
-                           {0, 0, (float)this->textureItempageBase.width, (float)this->textureItempageBase.height},
-                           {(float)this->inventoryPosition.x, (float)this->inventoryPosition.y, (float)this->textureItempageBase.width * this->scaleFactor, (float)this->textureItempageBase.height * this->scaleFactor},
-                           {0, 0}, 0, WHITE);
+            DrawPage(this->textureItempageBase);
+
 
             // draw items
             for (int i = 0; i < 4; i++)
@@ -155,33 +174,29 @@ void Inventory::Render()
             }
 
             // draw select
-            DrawTexturePro(this->itemSelect,
-                           {0, 0, (float)this->itemSelect.width, (float)this->itemSelect.height},
-                           {itemsSlotPosition[currentSlot].x, itemsSlotPosition[currentSlot].y, (float)this->itemSelect.width * this->scaleFactor, (float)this->itemSelect.height * this->scaleFactor},
-                           {0, 0}, 0, WHITE);
+            if (currentItem > 0)
+            {
+                DrawTexturePro(this->itemSelect,
+                               {0, 0, (float)this->itemSelect.width, (float)this->itemSelect.height},
+                               {itemsSlotPosition[currentSlot].x, itemsSlotPosition[currentSlot].y, (float)this->itemSelect.width * this->scaleFactor, (float)this->itemSelect.height * this->scaleFactor},
+                               {0, 0}, 0, WHITE);
+            }
+
 
 
             break;
 
         case Options: // draw options
-            DrawTexturePro(this->textureOptionsBase,
-                           {0, 0, (float)this->textureOptionsBase.width, (float)this->textureOptionsBase.height},
-                           {(float)this->inventoryPosition.x, (float)this->inventoryPosition.y, (float)this->textureOptionsBase.width * this->scaleFactor, (float)this->textureOptionsBase.height * this->scaleFactor},
+            DrawPage(this->textureOptionsBase);
+
+            DrawTexturePro(this->optionsSelect,
+                           {0, 0, (float)this->optionsSelect.width, (float)this->optionsSelect.height},
+                           {this->optionSelectPosition[currentOption]},
                            {0, 0}, 0, WHITE);
             break;
 
         case Character: // draw charactersprite
-            DrawTexturePro(this->textureCharacterspriteBase,
-                           {0, 0, (float)this->textureCharacterspriteBase.width, (float)this->textureCharacterspriteBase.height},
-                           {(float)this->inventoryPosition.x, (float)this->inventoryPosition.y, (float)this->textureCharacterspriteBase.width * this->scaleFactor, (float)this->textureCharacterspriteBase.height * this->scaleFactor},
-                           {0, 0}, 0, WHITE);
-            break;
-
-        case Loredrops:
-            DrawTexturePro(this->textureLoredropsBase,
-                           {0, 0, (float)this->textureLoredropsBase.width, (float)this->textureLoredropsBase.height},
-                           {(float)this->inventoryPosition.x, (float)this->inventoryPosition.y, (float)this->textureLoredropsBase.width * this->scaleFactor, (float)this->textureLoredropsBase.height * this->scaleFactor},
-                           {0, 0}, 0, WHITE);
+            DrawPage(textureCharacterspriteBase);
             break;
 
     }
@@ -224,9 +239,26 @@ void Inventory::SetSlots()
 
     this->itemsSlotPosition[3].x = this->itemsSlotPosition[0].x;
     this->itemsSlotPosition[3].y = this->itemsSlotPosition[2].y + this->textureItem.height * this->scaleFactor;
+
+    this->optionSelectPosition[0] = {(float)inventoryPosition.x + 750, (float)inventoryPosition.y + 432, (float)this->optionsSelect.width * scaleFactor, (float)this->optionsSelect.height * scaleFactor};
+    this->optionSelectPosition[1] = {(float)optionSelectPosition[0].x, (float)optionSelectPosition[0].y + optionsSelect.height*scaleFactor - 8, (float)this->optionsSelect.width * scaleFactor, (float)this->optionsSelect.height * scaleFactor};
+}
+
+void Inventory::DrawPage(Texture2D texture)
+{
+    DrawTexturePro(texture,
+                   {0, 0, (float)texture.width, (float)texture.height},
+                   {(float)inventoryPosition.x, (float)inventoryPosition.y, (float)texture.width * this->scaleFactor, (float)texture.height * this->scaleFactor},
+                   {0, 0}, 0, WHITE);
 }
 
 int Inventory::GetCurrentState() { return menuState; }
+
+bool Inventory::ShouldWindowClose() { return isExit; }
+
+bool Inventory::ShouldGoTitle() { return isTitle; }
+
+void Inventory::SetReturnTitle(bool title) { isTitle = title; }
 
 void Inventory::HandleInput() { }
 

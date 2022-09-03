@@ -89,7 +89,7 @@ int main() {
     std::unique_ptr<Scene> TestGameover = std::make_unique<Scene>(gameoverTex,
                                                                gameovermusic);
     // Main game loop
-    while (!WindowShouldClose()) // Detect window close button or ESC key
+    while (!inventory.ShouldWindowClose() && !WindowShouldClose()) // Detect window close button or ESC key or exit with options
     {
         // Updates that are made by frame are coded here
         // ...
@@ -108,7 +108,7 @@ int main() {
                 inventory.Update();
                 enemyHarpy.Update();
                 enemyRat.Update();
-                loredrop.UpdateLore(katara->GetPosition());
+                loredrop.UpdateLore(katara->GetPosition(), fightScreen.GetEncounterActive());
                 itemSword.Update();
                 itemRing.Update();
                 itemFlower.Update();
@@ -143,12 +143,14 @@ int main() {
 
                 // State Wechsel
                 // if in options und press enter
-                if (IsKeyPressed(KEY_ENTER) && inventory.GetCurrentState() == 2)
+                if (inventory.ShouldGoTitle())
                 {
                     gameState = state_title;
+                    inventory.SetReturnTitle(false);
+                    katara->SetPosition({730, 700});
                 }
-                // if inventory not open then change to fight on key
-                else if (IsKeyPressed(KEY_F) && inventory.IsOpen() == false || Vector2Distance(katara->GetMiddlePosition(), fightScreen.GetFightPosition()) < 50 && inventory.IsOpen() == false && fightScreen.GetEncounterActive() == true)
+                // if inventory not open then change to fight when in hitbox
+                else if (Vector2Distance(katara->GetMiddlePosition(), fightScreen.GetFightPosition()) < 50 && inventory.IsOpen() == false && fightScreen.GetEncounterActive() == true)
                 {
                     gameState = state_fight;
                     fightScreen.SetEncounterActive(false);
@@ -161,7 +163,7 @@ int main() {
                 break;
 
             case (state_fight):
-                if (IsKeyPressed(KEY_F))
+                if (IsKeyPressed(KEY_ENTER))
                 {
                     gameState = state_level1;
                 }
@@ -264,18 +266,9 @@ int main() {
                     // Draw Buttons
                     DrawTexturePro(button_resume,
                                    {0, 0, (float)button_resume.width, (float)button_resume.height},
-                                   {(float)GetScreenWidth()/2 - (button_resume.width * 5) - 50, (float)GetScreenHeight() - 200, (float)button_resume.width * 5, (float)button_resume.height * 5},
+                                   {(float)GetScreenWidth()/2 - (button_resume.width * 5)/2, (float)GetScreenHeight() - 200, (float)button_resume.width * 5, (float)button_resume.height * 5},
                                    {0, 0}, 0, WHITE);
 
-                    DrawTexturePro(button_exit,
-                                   {0, 0, (float)button_exit.width, (float)button_exit.height},
-                                   {(float)GetScreenWidth()/2 + 50, (float)GetScreenHeight() - 200, (float)button_exit.width * 5, (float)button_exit.height * 5},
-                                   {0, 0}, 0, WHITE);
-
-                    DrawTexturePro(button_marker,
-                                   {0, 0, (float)button_marker.width, (float)button_marker.height},
-                                   {(float)GetScreenWidth()/2 + 50, (float)GetScreenHeight() - 200, (float)button_marker.width * 5, (float)button_marker.height * 5},
-                                   {0, 0}, 0, WHITE);
                     break;
 
                 default:

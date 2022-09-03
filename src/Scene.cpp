@@ -94,7 +94,7 @@ void Scene::UpdateScene()
         player_->SetDoubleJump();
         }
         // teleport to fight
-        if(IsKeyPressed(KEY_P)) player_->SetPosition({4914, 2943});
+        if(IsKeyPressed(KEY_P)) player_->SetPosition({4845, 1650});
     }
 }
 
@@ -150,12 +150,15 @@ void Scene::RenderScene() {
                               RED);
 
             }
+
+            for(auto &index : spawnpoints)
+            {
+                DrawCircleV({index.x,index.y}, 50, BLUE);
+            }
         }
-        for(auto &index : spawnpoints)
-        {
-            DrawCircleV({index.x,index.y}, 50, BLUE);
-        }
-        }
+
+
+    }
     if(player_ != nullptr){
     player_->Render();
     }

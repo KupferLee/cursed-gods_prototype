@@ -17,6 +17,8 @@ class Inventory : public GameObject {
 protected:
     int scaleFactor = 3;
     bool isOpen = false;
+    bool isExit = false;
+    bool isTitle = false;
 
     enum MenuState {Closed, Items, Options, Character, Loredrops };
     MenuState menuState = Closed;
@@ -28,14 +30,18 @@ protected:
     Texture2D textureItem;
     Texture2D iconBook;
 
+    Texture2D optionsSelect;
+
     // GUI Item select
     Texture2D itemSelect;
     Vector2 itemsSlotPosition[4]; // to determine x and y value for the slots
     int currentSlot = 0;
+    int currentOption = 0;
 
     void SetSlots();
     Vector2 infoPosition;
     Vector2 inventoryPosition;
+    Rectangle optionSelectPosition[2];
 
     // inventory container
     item_ring* itemRing = new item_ring;
@@ -45,6 +51,8 @@ protected:
 
     int currentItem = 0;
     void itemAdd(item_base* item);
+
+    void DrawPage(Texture2D texture);
 
 
 public:
@@ -59,6 +67,10 @@ public:
     void PickUpSword();
     void PickUpRing();
     void PickUpFlower();
+
+    bool ShouldWindowClose();
+    bool ShouldGoTitle();
+    void SetReturnTitle( bool title );
 
     Inventory();
 };
