@@ -268,7 +268,7 @@ int main() {
                                    {0, 0, (float)button_resume.width, (float)button_resume.height},
                                    {(float)GetScreenWidth()/2 - (button_resume.width * 5)/2, (float)GetScreenHeight() - 200, (float)button_resume.width * 5, (float)button_resume.height * 5},
                                    {0, 0}, 0, WHITE);
-                    
+
                     break;
 
                 default:
