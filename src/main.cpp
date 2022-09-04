@@ -27,6 +27,7 @@ int main() {
     SetTargetFPS(60);
     InitAudioDevice();
     SetMasterVolume(0.1f);
+    SetExitKey(KEY_NULL);
 
 
 #ifdef GAME_START_FULLSCREEN

@@ -11,7 +11,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 
-
 add_executable(${PROJECT_NAME} main.cpp player.h player.cpp GameObject.h Actor.h ProtectedTexture.cpp ProtectedTexture.h ProtectedTileset.cpp ProtectedTileset.h Scene.cpp Scene.h item_base.h item_ring.cpp item_ring.h Inventory.cpp Inventory.h InventoryTemplate.h item_sword.cpp item_sword.h BattleActor.cpp BattleActor.h BattlePlayer.cpp BattlePlayer.h BattleRat.cpp BattleRat.h BattleHarpye.cpp BattleHarpye.h BattleScreen.cpp BattleScreen.h DRAW.h Actor.cpp ActorHarpye.cpp ActorHarpye.h ActorLoredrop.cpp ActorLoredrop.h ActorRat.cpp ActorRat.h ActorItemSword.cpp ActorItemSword.h ActorItemRing.cpp ActorItemRing.h item_flower.cpp item_flower.h ActorItemFlower.cpp ActorItemFlower.h ActorHermesBoots.cpp ActorHermesBoots.h)
 
 
@@ -22,8 +21,8 @@ target_include_directories(${PROJECT_NAME} PUBLIC
         "${PROJECT_BINARY_DIR}"
         )
 
-#  Link to Raylib
-target_link_libraries(${PROJECT_NAME} raylib nlohmann_json::nlohmann_json)
+#  Link to Raylib and Nlohmann_Json and other MinGW Libraries
+target_link_libraries(${PROJECT_NAME} raylib nlohmann_json::nlohmann_json -static)
 
 # Copy assets to assets path
 add_custom_target(copy_assets
