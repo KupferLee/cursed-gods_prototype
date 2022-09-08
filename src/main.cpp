@@ -49,6 +49,9 @@ int main() {
 
 
     Texture2D background = LoadTexture("assets/graphics/Backgrounds/Background1.png");
+    Image window_icon = LoadImage("assets/graphics/UI/Windowicon_Katara.png");
+
+    SetWindowIcon(window_icon);
 
     const char* titleTexture = "assets/graphics/UI/title_screen.png";
     std::shared_ptr<ProtectedTexture> titleTex = std::make_shared<ProtectedTexture>(titleTexture);
